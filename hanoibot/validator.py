@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from datetime import date, datetime, time
 
+from .costs import plan_totals
 from .pois import load_pois
 from .tools.travel import travel_minutes
 
@@ -29,7 +30,7 @@ def validate(plan: dict, req: dict, weather_hours: list[dict] | None = None, air
     items = plan.get("items", [])
     if not items:
         violations.append("Lịch trình rỗng.")
-        return {"ok": False, "violations": violations, "warnings": warnings}
+        return {"ok": False, "violations": violations, "warnings": warnings, "totals": plan_totals([], req)}
 
     rain_by_hour = {int(h["time"][11:13]): h for h in (weather_hours or [])}
     prev_end: time | None = None
@@ -91,9 +92,23 @@ def validate(plan: dict, req: dict, weather_hours: list[dict] | None = None, air
         if pid in pois and pid not in seen:
             p = pois[pid]
             reason = p.closed_reason(d)
+            ws, we = _mins(win_start), _mins(win_end)
+            fits = any(min(_mins(b), we) - max(_mins(a), ws) >= 30 for a, b in p.intervals_on(d))
             if reason:
                 warnings.append(f"Không xếp được {p.name}: {reason} vào {d:%d/%m}.")
+            elif not fits:
+                warnings.append(f"Không xếp được {p.name}: chỉ mở {p.hours_text(d)}, không trùng khung {win_start:%H:%M}-{win_end:%H:%M} của bạn.")
             else:
                 violations.append(f"Thiếu điểm người dùng yêu cầu: {p.name} (mở {p.hours_text(d)}).")
 
-    return {"ok": not violations, "violations": violations, "warnings": sorted(set(warnings), key=warnings.index)}
+    totals = plan_totals(items, req)
+    budget = req.get("budget_vnd")
+    if budget and totals["total_vnd"] > int(budget):
+        violations.append(f"Tổng chi phí ước tính {totals['total_vnd']:,}đ vượt ngân sách {int(budget):,}đ "
+                          f"(vé {totals['tickets_vnd']:,} + đi lại {totals['transport_vnd']:,} + ăn {totals['food_vnd']:,}).")
+    max_walk = req.get("max_walk_km")
+    if max_walk and totals["walk_km"] > float(max_walk):
+        violations.append(f"Tổng đi bộ ước tính {totals['walk_km']} km vượt giới hạn {max_walk} km.")
+
+    return {"ok": not violations, "violations": violations, "warnings": sorted(set(warnings), key=warnings.index),
+            "totals": totals}

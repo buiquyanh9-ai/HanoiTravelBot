@@ -1,0 +1,159 @@
+{
+  "summary": {
+    "n": 2,
+    "intent_acc": "2/2",
+    "expect_pass": "2/2",
+    "bot_valid": "1/1",
+    "baseline_valid": "0/1",
+    "baseline_violations_total": 2,
+    "bot_plan_latency_avg_s": 8.6,
+    "lookup_latency_avg_s": 2.77
+  },
+  "results": [
+    {
+      "id": 15,
+      "text": "Is it going to rain this afternoon? Suggest indoor places from 14:00 to 18:00 today.",
+      "expected_intent": "plan",
+      "bot": {
+        "intent": "plan",
+        "answer": "Itinerary for Sunday 22/11/2026:\n• 14:00-15:15  Hoa Lo Prison Relic (open 08:00-17:00; ticket: ~50,000 VND; crowd ~95% (very busy))\n• 15:25-16:55  National Museum of Vietnamese History (open 08:00-12:00, 13:30-17:00; ticket: ~40,000 VND)  ← taxi 10'\n\nThis itinerary is perfect for you as it includes indoor places like the Hoa Lo Prison and the National Museum of History, allowing you to explore significant historical sites without being affected by the weather. You will have a rich cultural experience while staying comfortable.\n\nEstimated cost for 1 person(s): 115,000 VND (tickets 90,000 + transport 25,000 + food 0). About 0.8 km of walking.\n\nData: weather Open-Meteo (ước tính mô hình) at 00:30; AQI 119 – WAQI – trạm United Nations International School of Hanoi, Vietnam (Trường Quốc tế Liên Hợp Quốc Hà Nội) (đo thật); crowd level: BestTime; travel time: TomTom live traffic; taxi/food cost: estimates.",
+        "latency_s": 8.6,
+        "repairs": 0,
+        "check": {
+          "ok": true,
+          "violations": [],
+          "warnings": [],
+          "totals": {
+            "people": 1,
+            "tickets_vnd": 90000,
+            "transport_vnd": 25000,
+            "food_vnd": 0,
+            "total_vnd": 115000,
+            "walk_km": 0.8
+          }
+        },
+        "plan": {
+          "items": [
+            {
+              "kind": "visit",
+              "poi_id": "hoa_lo",
+              "start": "14:00",
+              "end": "15:15",
+              "why": "điểm tham quan trong nhà, tìm hiểu lịch sử",
+              "travel_min": 0,
+              "travel_mode": "none",
+              "travel_km": 0.0,
+              "travel_cost_vnd": 0,
+              "wait_min": 0,
+              "shortened": false
+            },
+            {
+              "kind": "visit",
+              "poi_id": "bt_lich_su",
+              "start": "15:25",
+              "end": "16:55",
+              "why": "bảo tàng trong nhà, khám phá văn hóa lịch sử Việt Nam",
+              "travel_min": 10,
+              "travel_mode": "taxi",
+              "travel_km": 1.66,
+              "travel_cost_vnd": 25000,
+              "wait_min": 0,
+              "shortened": false
+            }
+          ],
+          "summary": "This itinerary is perfect for you as it includes indoor places like the Hoa Lo Prison and the National Museum of History, allowing you to explore significant historical sites without being affected by the weather. You will have a rich cultural experience while staying comfortable."
+        },
+        "req": {
+          "intent": "plan",
+          "date": "2026-11-22",
+          "start": "14:00",
+          "end": "18:00",
+          "poi_ids": [],
+          "must_include": [],
+          "avoid": [],
+          "people": 1,
+          "budget_vnd": null,
+          "max_walk_km": null,
+          "preferences": "indoor places",
+          "replan_from": null,
+          "intent_llm": "weather",
+          "lang": "en"
+        },
+        "gather_s": 1.44,
+        "n_llm": 3
+      },
+      "intent_ok": true,
+      "missing_expect": [],
+      "totals": {
+        "people": 1,
+        "tickets_vnd": 90000,
+        "transport_vnd": 25000,
+        "food_vnd": 0,
+        "total_vnd": 115000,
+        "walk_km": 0.8
+      },
+      "baseline": {
+        "ok": false,
+        "violations": [
+          "Mục 2: Di tích Nhà tù Hỏa Lò KHÔNG mở trong 16:15-17:30. Giờ mở ngày này: 08:00-17:00.",
+          "Mục 2: chỉ có 15 phút để đi từ Bảo tàng Dân tộc học Việt Nam tới Di tích Nhà tù Hỏa Lò, cần khoảng 20 phút."
+        ],
+        "latency_s": 8.37,
+        "plan": {
+          "items": [
+            {
+              "kind": "visit",
+              "poi_id": "bt_dan_toc_hoc",
+              "start": "14:00",
+              "end": "16:00",
+              "why": "Khám phá văn hóa và lịch sử dân tộc Việt Nam tại Bảo tàng Dân tộc học."
+            },
+            {
+              "kind": "visit",
+              "poi_id": "hoa_lo",
+              "start": "16:15",
+              "end": "17:30",
+              "why": "Tìm hiểu về lịch sử và di tích Nhà tù Hỏa Lò."
+            }
+          ],
+          "summary": "Chuyến tham quan bắt đầu tại Bảo tàng Dân tộc học, nơi bạn có thể tìm hiểu về văn hóa và lịch sử dân tộc Việt Nam. Sau đó, bạn sẽ đến Nhà tù Hỏa Lò để khám phá những câu chuyện lịch sử thú vị."
+        }
+      }
+    },
+    {
+      "id": 16,
+      "text": "What time does the Temple of Literature open on Monday?",
+      "expected_intent": "hours",
+      "bot": {
+        "intent": "hours",
+        "answer": "Opening hours on Monday 23/11/2026 (table checked on 21 Nov 2026):\n• Temple of Literature: 08:00-17:00 [confidence: low]\n  Adult ticket: ~30,000 VND\n  Source: https://www.greensm.com/vn-vi/news/ve-vao-van-mieu\n\nRecent news to check yourself (via Tavily):\n  - [Temple of Literature] Hé lộ hình ảnh đầu tiên lễ kỷ niệm 950 năm Quốc Tử Giám (2026-11-12) https://baovanhoa.vn/he-lo-nhung-hinh-anh-dau-tien-le-ky-niem-cap-quoc-gia-950-nam-quoc-tu-giam-quoc-hoc-viet-nam.html\n  - [Temple of Literature] Văn Miếu-Quốc Tử Giám 950 năm với trải nghiệm văn hóa mới ở Hà Nội (?) https://www.facebook.com/groups/715775398763444/posts/3020955318245429",
+        "latency_s": 2.77,
+        "repairs": null,
+        "check": null,
+        "plan": null,
+        "req": {
+          "intent": "hours",
+          "date": "2026-11-23",
+          "start": "08:00",
+          "end": "21:00",
+          "poi_ids": [
+            "van_mieu"
+          ],
+          "must_include": [],
+          "avoid": [],
+          "people": 1,
+          "budget_vnd": null,
+          "max_walk_km": null,
+          "preferences": "",
+          "replan_from": null,
+          "lang": "en"
+        },
+        "gather_s": null,
+        "n_llm": 1
+      },
+      "intent_ok": true,
+      "missing_expect": [],
+      "totals": {}
+    }
+  ]
+}

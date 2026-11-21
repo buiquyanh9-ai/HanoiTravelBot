@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hanoi Travel Bot</title>
+<style>
+  :root { --bg:#f6f5f1; --card:#fff; --ink:#1d1d1b; --muted:#6b6b66; --accent:#b4382c; --line:#e3e1da; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#171715; --card:#22221f; --ink:#ecebe6; --muted:#a3a29b; --accent:#e0675a; --line:#34332f; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 16px; display:flex; flex-direction:column; min-height:100vh; }
+  h1 { font-size: 20px; margin: 8px 0 2px; } p.sub { color:var(--muted); margin:0 0 12px; font-size:13px; }
+  #log { flex:1; display:flex; flex-direction:column; gap:10px; padding-bottom:12px; }
+  .msg { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .me { align-self:flex-end; border-color:var(--accent); max-width:85%; }
+  .meta { color:var(--muted); font-size:12px; margin-top:4px; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .chips button { border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:999px; padding:4px 10px; font-size:13px; cursor:pointer; }
+  form { display:flex; gap:8px; position:sticky; bottom:0; background:var(--bg); padding:8px 0; }
+  textarea { flex:1; resize:none; height:46px; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; background:var(--card); color:var(--ink); }
+  form button { background:var(--accent); color:#fff; border:0; border-radius:10px; padding:0 16px; font:inherit; cursor:pointer; }
+  form button:disabled { opacity:.5; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Trợ lý du lịch Hà Nội</h1>
+  <p class="sub">Lịch trình do AI chọn điểm; giờ mở cửa, giờ giấc, chi phí do code tính và kiểm. Thời tiết là ước tính mô hình.</p>
+  <div class="chips" id="chips"></div>
+  <div id="log"></div>
+  <form id="f">
+    <textarea id="q" placeholder="Ví dụ: Chủ nhật đi với bố mẹ, thích lịch sử, ngân sách 350k" required></textarea>
+    <button id="send">Gửi</button>
+  </form>
+</main>
+<script>
+const examples = ["Lăng Bác hôm nay mở mấy giờ?", "Bây giờ Hồ Gươm có mưa không?",
+  "Chiều nay 14h-18h đi đâu trong nhà, ngân sách 300k cho 2 người?", "Plan my day tomorrow in Hanoi, I love history"];
+const log = document.getElementById("log"), q = document.getElementById("q"), btn = document.getElementById("send");
+for (const e of examples) { const b = document.createElement("button"); b.type = "button"; b.textContent = e; b.onclick = () => { q.value = e; q.focus(); }; document.getElementById("chips").append(b); }
+function add(text, cls, meta) {
+  const d = document.createElement("div"); d.className = "msg " + (cls || ""); d.textContent = text;
+  if (meta) { const m = document.createElement("div"); m.className = "meta"; m.textContent = meta; d.append(m); }
+  log.append(d); d.scrollIntoView({behavior: "smooth", block: "end"});
+}
+document.getElementById("f").onsubmit = async (ev) => {
+  ev.preventDefault(); const msg = q.value.trim(); if (!msg) return;
+  add(msg, "me"); q.value = ""; btn.disabled = true;
+  try {
+    const r = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: msg})});
+    const j = await r.json();
+    add(j.answer || j.error || "Lỗi", "", j.latency_s != null ? `${j.latency_s}s · ${j.n_llm} lần gọi LLM · ${j.intent}` : "");
+  } catch (e) { add("Không kết nối được máy chủ: " + e, ""); }
+  btn.disabled = false; q.focus();
+};
+q.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); document.getElementById("f").requestSubmit(); } });
+</script>
+</body>
+</html>

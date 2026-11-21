@@ -1,17 +1,34 @@
-"""Thời gian di chuyển giữa các điểm (taxi/xe máy). Tính sẵn bằng ước lượng khoảng cách, không gọi API lúc chạy.
+"""Di chuyển giữa các điểm: chọn đi bộ hay taxi, thời gian, quãng đường, chi phí ước tính.
 
-MVP: khoảng cách đường chim bay x hệ số đường phố 1.4, tốc độ trung bình nội đô 18 km/h, cộng 5 phút gọi xe/gửi xe.
-Có TOMTOM_API_KEY thì sau này thay bằng thời gian có tính tắc đường thật.
+MVP: khoảng cách đường chim bay x 1.4 (hệ số đường phố).
+- < 0.8 km: đi bộ 4.5 km/h
+- còn lại: taxi/xe công nghệ, 18 km/h nội đô + 5 phút gọi xe
+Chi phí taxi ước tính: max(20.000đ, 15.000đ/km) mỗi chặng, 1 xe cho tối đa 4 người.
+Có TOMTOM_API_KEY thì sau này thay thời gian bằng số liệu giao thông thật.
 """
 from __future__ import annotations
 
 import math
+from dataclasses import dataclass
 
 from ..pois import Poi
+from . import traffic
 
 ROAD_FACTOR = 1.4
 AVG_KMH = 18.0
+WALK_KMH = 4.5
+WALK_MAX_KM = 0.8
 OVERHEAD_MIN = 5
+TAXI_VND_PER_KM = 15000
+TAXI_MIN_VND = 20000
+
+
+@dataclass
+class Leg:
+    mode: str      # "walk" | "taxi" | "none"
+    km: float
+    minutes: int
+    cost_vnd: int  # cho cả nhóm
 
 
 def distance_km(a: Poi, b: Poi) -> float:
@@ -22,13 +39,25 @@ def distance_km(a: Poi, b: Poi) -> float:
     return 2 * r * math.asin(math.sqrt(h))
 
 
+def leg(a: Poi | None, b: Poi, people: int = 1) -> Leg:
+    if a is None or a.id == b.id:
+        return Leg("none", 0.0, 0, 0)
+    km = round(distance_km(a, b) * ROAD_FACTOR, 2)
+    if km < WALK_MAX_KM:
+        return Leg("walk", km, max(3, round(km / WALK_KMH * 60)), 0)
+    cars = max(1, math.ceil(people / 4))
+    live = traffic.lookup(a.id, b.id)  # TomTom nếu đã kích hoạt cho lượt này
+    if live:
+        minutes, km, _delay = live
+        minutes += OVERHEAD_MIN
+    else:
+        minutes = round(km / AVG_KMH * 60) + OVERHEAD_MIN
+    cost = max(TAXI_MIN_VND, round(km * TAXI_VND_PER_KM, -3)) * cars
+    return Leg("taxi", km, minutes, int(cost))
+
+
 def travel_minutes(a: Poi, b: Poi) -> int:
-    if a.id == b.id:
-        return 0
-    km = distance_km(a, b) * ROAD_FACTOR
-    if km < 0.8:  # gần thì đi bộ ~4.5 km/h
-        return max(3, round(km / 4.5 * 60))
-    return round(km / AVG_KMH * 60) + OVERHEAD_MIN
+    return leg(a, b).minutes
 
 
 def matrix(pois: list[Poi]) -> dict[str, dict[str, int]]:

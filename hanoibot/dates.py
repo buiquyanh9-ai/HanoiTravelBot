@@ -7,9 +7,10 @@ from datetime import date, datetime, timedelta
 from .textutil import fold
 
 WEEKDAY_WORDS = {
-    0: [r"thu hai", r"thu 2", r"\bt2\b"], 1: [r"thu ba", r"thu 3", r"\bt3\b"], 2: [r"thu tu", r"thu 4", r"\bt4\b"],
-    3: [r"thu nam", r"thu 5", r"\bt5\b"], 4: [r"thu sau", r"thu 6", r"\bt6\b"], 5: [r"thu bay", r"thu 7", r"\bt7\b"],
-    6: [r"chu nhat", r"\bcn\b"],
+    0: [r"thu hai", r"thu 2", r"\bt2\b", r"\bmonday\b"], 1: [r"thu ba", r"thu 3", r"\bt3\b", r"\btuesday\b"],
+    2: [r"thu tu", r"thu 4", r"\bt4\b", r"\bwednesday\b"], 3: [r"thu nam", r"thu 5", r"\bt5\b", r"\bthursday\b"],
+    4: [r"thu sau", r"thu 6", r"\bt6\b", r"\bfriday\b"], 5: [r"thu bay", r"thu 7", r"\bt7\b", r"\bsaturday\b"],
+    6: [r"chu nhat", r"\bcn\b", r"\bsunday\b"],
 }
 
 
@@ -24,7 +25,7 @@ def resolve_date(text: str, now: datetime) -> date | None:
             return d if m.group(3) or d >= today else date(yy + 1, mm, dd)
         except ValueError:
             pass
-    next_week = bool(re.search(r"tuan (sau|toi)", q))
+    next_week = bool(re.search(r"tuan (sau|toi)|next week", q))
     for wd, pats in WEEKDAY_WORDS.items():
         if any(re.search(p, q) for p in pats):
             delta = (wd - today.weekday()) % 7
@@ -32,10 +33,11 @@ def resolve_date(text: str, now: datetime) -> date | None:
             if next_week and d.isocalendar()[1] == today.isocalendar()[1]:
                 d += timedelta(days=7)
             return d
-    if re.search(r"ngay kia|\bngay mot\b", q):
+    if re.search(r"ngay kia|\bngay mot\b|day after tomorrow", q):
         return today + timedelta(days=2)
-    if re.search(r"(ngay mai|\bmai\b(?! chau))", q):
+    if re.search(r"(ngay mai|\bmai\b(?! chau)|\btomorrow\b)", q):
         return today + timedelta(days=1)
-    if re.search(r"hom nay|bay gio|chieu nay|sang nay|toi nay|luc nay", q):
+    if re.search(r"hom nay|bay gio|chieu nay|sang nay|toi nay|luc nay|\btoday\b|\btonight\b|"
+                 r"\bthis (morning|afternoon|evening)\b|\bnow\b", q):
         return today
     return None

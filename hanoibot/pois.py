@@ -27,6 +27,13 @@ class Poi:
     confidence: str
     notes: str
     sources: list[str] = field(default_factory=list)
+    name_en: str = ""
+    ticket_vnd: int = 0
+    walk_km_onsite: float = 0.0
+    address: str = ""
+
+    def display(self, lang: str = "vi") -> str:
+        return self.name_en if lang == "en" and self.name_en else self.name
 
     def intervals_on(self, d: date) -> list[tuple[time, time]]:
         """Các khung giờ mở trong ngày d (rỗng = đóng cả ngày)."""
@@ -53,9 +60,13 @@ class Poi:
         t = dt.time()
         return any(a <= t <= b for a, b in self.intervals_on(dt.date()))
 
-    def hours_text(self, d: date) -> str:
+    def hours_text(self, d: date, lang: str = "vi") -> str:
         iv = self.intervals_on(d)
         if not iv:
+            if lang == "en":
+                from .i18n import REASON_EN
+                r = self.closed_reason(d) or ""
+                return f"CLOSED ({REASON_EN.get(r, r)})"
             return f"ĐÓNG CỬA ({self.closed_reason(d)})"
         return ", ".join(f"{a:%H:%M}-{b:%H:%M}" for a, b in iv)
 

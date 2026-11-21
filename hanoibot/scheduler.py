@@ -10,7 +10,7 @@ from datetime import date, time
 
 from .pois import load_pois
 from .textutil import fold
-from .tools.travel import travel_minutes
+from .tools.travel import leg
 
 MIN_VISIT = 30  # rút ngắn tối đa xuống 30 phút nếu khung mở còn lại ngắn hơn thời lượng đề xuất
 MAX_WAIT = 90   # chờ quá 90 phút để điểm mở cửa thì coi là không hợp
@@ -52,6 +52,8 @@ def schedule(stops: list[dict], req: dict) -> dict:
             why = st.get("why", "")
             if kind not in ("meal", "rest") or fold(why).startswith("di chuyen"):
                 continue  # di chuyển do code tính, bỏ mục LLM tự chèn
+            if meal_label(cur) == "Nghỉ, ăn nhẹ":
+                minutes = min(minutes, 30)  # ngoài giờ ăn chính chỉ nghỉ ngắn
             if cur + minutes > end_win:
                 continue
             area = re.sub(r"^(ăn (trưa|tối|sáng)|nghỉ( ngơi)?)\s*(tại|ở)?\s*", "", why, flags=re.I).strip()
@@ -71,7 +73,8 @@ def schedule(stops: list[dict], req: dict) -> dict:
         if reason:
             dropped.append(f"Không đi được {p.name}: {reason} ({p.hours_text(d)}).")
             continue
-        arrive = cur + (travel_minutes(here, p) if here else 0)
+        lg = leg(here, p, int(req.get("people") or 1))
+        arrive = cur + lg.minutes
         placed = False
         for a, b in p.intervals_on(d):
             s = max(arrive, _m(a))
@@ -80,7 +83,8 @@ def schedule(stops: list[dict], req: dict) -> dict:
             e = min(s + minutes, _m(b), end_win)
             if e - s >= min(MIN_VISIT, minutes):
                 items.append({"kind": "visit", "poi_id": pid, "start": _fmt(s), "end": _fmt(e), "why": st.get("why", ""),
-                              "travel_min": arrive - cur, "wait_min": s - arrive, "shortened": e - s < minutes})
+                              "travel_min": lg.minutes, "travel_mode": lg.mode, "travel_km": lg.km,
+                              "travel_cost_vnd": lg.cost_vnd, "wait_min": s - arrive, "shortened": e - s < minutes})
                 cur, here, placed = e, p, True
                 seen.add(pid)
                 break
