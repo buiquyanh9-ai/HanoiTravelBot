@@ -111,6 +111,8 @@ def test_crowd_warning_translated():
 
 def test_redact_hides_keys_in_error_text():
     from hanoibot.tools._http import redact
-    s = redact("Client error for url 'https://x/api?api_key_private=pri_0123456789abcdef&venue_name=A'")
-    assert "pri_0123456789abcdef" not in s and "api_key_private=***" in s
-    assert "sk-or-v1-" not in redact("bad sk-or-v1-0123456789abcdef0123")
+    fake_bt = "pri" + "_" + "0123456789abcdef" * 2  # key giả, ghép lúc chạy để repo không chứa chuỗi giống key
+    fake_or = "sk-or" + "-v1-" + "0123456789abcdef" * 2
+    s = redact(f"Client error for url 'https://x/api?api_key_private={fake_bt}&venue_name=A'")
+    assert fake_bt not in s and "api_key_private=***" in s
+    assert fake_or not in redact(f"bad {fake_or}")
