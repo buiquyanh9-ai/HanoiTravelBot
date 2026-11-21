@@ -38,6 +38,9 @@
 const examples = ["Lăng Bác hôm nay mở mấy giờ?", "Bây giờ Hồ Gươm có mưa không?",
   "Chiều nay 14h-18h đi đâu trong nhà, ngân sách 300k cho 2 người?", "Plan my day tomorrow in Hanoi, I love history"];
 const log = document.getElementById("log"), q = document.getElementById("q"), btn = document.getElementById("send");
+let session = "";
+try { session = sessionStorage.getItem("htb_session") || ""; } catch (e) {}
+if (!session) { session = Math.random().toString(36).slice(2) + Date.now().toString(36); try { sessionStorage.setItem("htb_session", session); } catch (e) {} }
 for (const e of examples) { const b = document.createElement("button"); b.type = "button"; b.textContent = e; b.onclick = () => { q.value = e; q.focus(); }; document.getElementById("chips").append(b); }
 function add(text, cls, meta) {
   const d = document.createElement("div"); d.className = "msg " + (cls || ""); d.textContent = text;
@@ -48,7 +51,7 @@ document.getElementById("f").onsubmit = async (ev) => {
   ev.preventDefault(); const msg = q.value.trim(); if (!msg) return;
   add(msg, "me"); q.value = ""; btn.disabled = true;
   try {
-    const r = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: msg})});
+    const r = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: msg, session})});
     const j = await r.json();
     add(j.answer || j.error || "Lỗi", "", j.latency_s != null ? `${j.latency_s}s · ${j.n_llm} lần gọi LLM · ${j.intent}` : "");
   } catch (e) { add("Không kết nối được máy chủ: " + e, ""); }

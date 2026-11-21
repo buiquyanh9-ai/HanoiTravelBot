@@ -4,7 +4,8 @@
     "note": "Giờ mở cửa gom từ web ngày 21/11/2026. confidence: high = trang chính thức; medium = nhiều nguồn khớp nhau; low = nguồn mâu thuẫn hoặc chưa tìm được nguồn chính thức. Cần gọi điện/kiểm trang chính thức để nâng lên high.",
     "weekday_keys": "mon tue wed thu fri sat sun",
     "ticket_vnd": "Giá vé người lớn dạng số để tính ngân sách; nguồn mâu thuẫn thì lấy mức CAO (an toàn cho ngân sách).",
-    "walk_km_onsite": "Ước lượng quãng đi bộ trong khuôn viên/khu vực khi tham quan theo thời lượng khuyến nghị; chưa đo thực địa."
+    "walk_km_onsite": "Ước lượng quãng đi bộ trong khuôn viên/khu vực khi tham quan theo thời lượng khuyến nghị; chưa đo thực địa.",
+    "child_ticket_vnd": "Vé trẻ em: Văn Miếu miễn phí dưới 15 tuổi, Hoàng thành dưới 16 tuổi, Vườn thú trẻ ≤1,3m 20-30k (lấy 30k). null = chưa có nguồn, tính như người lớn."
   },
   "pois": [
     {
@@ -64,7 +65,8 @@
       "name_en": "Ho Chi Minh Mausoleum",
       "ticket_vnd": 0,
       "walk_km_onsite": 0.8,
-      "address": "2 Hùng Vương, Ba Đình, Hà Nội, Việt Nam"
+      "address": "2 Hùng Vương, Ba Đình, Hà Nội, Việt Nam",
+      "child_ticket_vnd": 0
     },
     {
       "id": "van_mieu",
@@ -128,7 +130,8 @@
       "name_en": "Temple of Literature",
       "ticket_vnd": 30000,
       "walk_km_onsite": 0.6,
-      "address": "58 Quốc Tử Giám, Đống Đa, Hà Nội, Việt Nam"
+      "address": "58 Quốc Tử Giám, Đống Đa, Hà Nội, Việt Nam",
+      "child_ticket_vnd": 0
     },
     {
       "id": "hoang_thanh",
@@ -187,7 +190,8 @@
       "name_en": "Imperial Citadel of Thang Long",
       "ticket_vnd": 100000,
       "walk_km_onsite": 1.0,
-      "address": "19C Hoàng Diệu, Ba Đình, Hà Nội, Việt Nam"
+      "address": "19C Hoàng Diệu, Ba Đình, Hà Nội, Việt Nam",
+      "child_ticket_vnd": 0
     },
     {
       "id": "bt_dan_toc_hoc",
@@ -246,7 +250,8 @@
       "name_en": "Vietnam Museum of Ethnology",
       "ticket_vnd": 40000,
       "walk_km_onsite": 0.8,
-      "address": "Nguyễn Văn Huyên, Cầu Giấy, Hà Nội, Việt Nam"
+      "address": "Nguyễn Văn Huyên, Cầu Giấy, Hà Nội, Việt Nam",
+      "child_ticket_vnd": null
     },
     {
       "id": "vuon_thu",
@@ -311,7 +316,8 @@
       "name_en": "Hanoi Zoo (Thu Le Park)",
       "ticket_vnd": 50000,
       "walk_km_onsite": 1.5,
-      "address": "Công viên Thủ Lệ, Kim Mã, Ba Đình, Hà Nội, Việt Nam"
+      "address": "Công viên Thủ Lệ, Kim Mã, Ba Đình, Hà Nội, Việt Nam",
+      "child_ticket_vnd": 30000
     },
     {
       "id": "hoa_lo",
@@ -376,7 +382,8 @@
       "name_en": "Hoa Lo Prison Relic",
       "ticket_vnd": 50000,
       "walk_km_onsite": 0.3,
-      "address": "1 Hỏa Lò, Hoàn Kiếm, Hà Nội, Việt Nam"
+      "address": "1 Hỏa Lò, Hoàn Kiếm, Hà Nội, Việt Nam",
+      "child_ticket_vnd": null
     },
     {
       "id": "bt_lich_su",
@@ -459,7 +466,8 @@
       "name_en": "National Museum of Vietnamese History",
       "ticket_vnd": 40000,
       "walk_km_onsite": 0.5,
-      "address": "1 Tràng Tiền, Hoàn Kiếm, Hà Nội, Việt Nam"
+      "address": "1 Tràng Tiền, Hoàn Kiếm, Hà Nội, Việt Nam",
+      "child_ticket_vnd": null
     },
     {
       "id": "ho_guom",
@@ -521,7 +529,8 @@
       "name_en": "Hoan Kiem Lake & walking street",
       "ticket_vnd": 0,
       "walk_km_onsite": 1.7,
-      "address": ""
+      "address": "",
+      "child_ticket_vnd": 0
     },
     {
       "id": "pho_co",
@@ -583,7 +592,8 @@
       "name_en": "Hanoi Old Quarter",
       "ticket_vnd": 0,
       "walk_km_onsite": 1.5,
-      "address": ""
+      "address": "",
+      "child_ticket_vnd": 0
     }
   ]
 }

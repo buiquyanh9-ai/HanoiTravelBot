@@ -16,6 +16,7 @@ python -m hanoibot.cli                  # chat trên terminal
 python -m pytest -q                     # 24 test offline, không cần mạng
 python -m evals.run_evals               # 16 kịch bản, gọi API thật, so với baseline chỉ dùng LLM
 python -m evals.stability --k 3         # độ ổn định pass@k / pass^k
+python -m evals.user_qa                 # 12 ca theo hành vi người dùng qua HTTP: nhiều lượt chat, ngày sai, ngân sách nhóm...
 python -m scripts.check_hours           # đối chiếu giờ mở cửa với BestTime
 ```
 
@@ -60,10 +61,15 @@ tin nhắn -> chặn injection (luật ViGuard có chuẩn hoá: bỏ dấu, tá
 | Lịch trình đúng ràng buộc: **bot** | **10/10** |
 | Lịch trình đúng ràng buộc: LLM tự viết giờ (baseline) | 1–2/10, tổng 21–23 vi phạm |
 | Độ ổn định: pass^3 (mỗi kịch bản chạy 3 lần, đạt cả 3) | 16/16 |
+| QA theo hành vi người dùng qua HTTP (sau review Codex #7) | 12/12 (trước khi sửa: 7/12) |
 | Thời gian lập một lịch trình | ~12 s, 3–5 lần gọi LLM |
 | Thời gian trả lời câu tra cứu giờ mở cửa / thời tiết (khi đã có cache) | ~0 s |
 
 ## Giới hạn
+
+- Ngữ cảnh nhiều lượt chat chỉ lưu trong RAM của máy chủ, hết hạn sau 2 giờ. Bot hiểu được câu chỉnh sửa (bỏ/thêm điểm, thêm người, đổi ngân sách), nhưng chưa hiểu câu tham chiếu phức tạp kiểu "cái thứ hai".
+- Ngân sách: code bỏ dần mục tốn tiền nhất cho tới khi vừa. Nếu vẫn không đủ, bot nói rõ ngân sách không đủ.
+- Thời tiết: dự báo tối đa 16 ngày, tìm địa danh qua Open-Meteo Geocoding. AQI chỉ có cho hôm nay.
 
 - Giờ mở cửa của Lăng Bác và Văn Miếu có độ tin cậy **thấp**, vì các nguồn mâu thuẫn nhau. Bot có cảnh báo; cần gọi điện xác nhận.
 - Bộ eval nhỏ, mỗi kịch bản chạy 1 lần. Chưa đo độ dao động giữa các lần chạy bằng pass^k.

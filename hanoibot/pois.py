@@ -31,6 +31,7 @@ class Poi:
     ticket_vnd: int = 0
     walk_km_onsite: float = 0.0
     address: str = ""
+    child_ticket_vnd: int | None = None
 
     def display(self, lang: str = "vi") -> str:
         return self.name_en if lang == "en" and self.name_en else self.name
@@ -96,13 +97,13 @@ def mentioned_ids(text: str) -> set[str]:
 
 
 ALIASES = {
-    "lang_bac": ["lang bac", "lang chu tich", "lang ho chi minh"],
-    "van_mieu": ["van mieu", "quoc tu giam"],
-    "hoang_thanh": ["hoang thanh", "thang long"],
-    "bt_dan_toc_hoc": ["dan toc hoc"],
-    "vuon_thu": ["vuon thu", "thu le", "so thu"],
+    "lang_bac": ["lang bac", "lang chu tich", "lang ho chi minh", "mausoleum"],
+    "van_mieu": ["van mieu", "quoc tu giam", "temple of literature"],
+    "hoang_thanh": ["hoang thanh", "thang long", "citadel"],
+    "bt_dan_toc_hoc": ["dan toc hoc", "ethnology"],
+    "vuon_thu": ["vuon thu", "thu le", "so thu", "zoo"],
     "hoa_lo": ["hoa lo"],
-    "bt_lich_su": ["lich su quoc gia", "bao tang lich su"],
-    "ho_guom": ["ho guom", "ho hoan kiem", "pho di bo", "ngoc son"],
-    "pho_co": ["pho co"],
+    "bt_lich_su": ["lich su quoc gia", "bao tang lich su", "history museum", "museum of vietnamese history"],
+    "ho_guom": ["ho guom", "ho hoan kiem", "pho di bo", "ngoc son", "hoan kiem lake", "sword lake"],
+    "pho_co": ["pho co", "old quarter"],
 }

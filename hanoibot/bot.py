@@ -16,7 +16,7 @@ from datetime import date, datetime, timedelta
 from email.utils import parsedate_to_datetime
 
 from .config import HANOI_CENTER, now_hanoi
-from .dates import resolve_date
+from .dates import invalid_date, resolve_date
 from .guard import normalized as injection_rules
 from .i18n import DAYS, MEAL_EN, detect_lang, en_text, money, t
 from .llm import LLMError, chat_json
@@ -27,7 +27,8 @@ from .tools.air import get_air
 from .tools import traffic
 from .tools.crowd import get_crowd, level, pct_at
 from .tools.travel import matrix
-from .tools.weather import get_weather, hourly_for_date
+from .tools.weather import FORECAST_DAYS, daily_for_date, geocode, get_weather, hourly_for_date
+from .costs import trim_to_budget
 from .tools.web import web_search
 from .validator import validate
 
@@ -60,13 +61,17 @@ Schema:
  "start": "HH:MM", "end": "HH:MM",  // khung giờ khách rảnh; mặc định 08:00-21:00
  "poi_ids": [],                     // điểm khách nhắc tới, CHỈ dùng id trong danh mục
  "must_include": [], "avoid": [],   // id phải có / phải bỏ
- "people": 1,                       // số người đi
+ "people": 1,                       // tổng số người đi (gồm cả trẻ em)
+ "children": 0,                     // số trẻ em trong nhóm (dưới 15 tuổi)
+ "place": null,                     // địa danh khách hỏi nếu KHÔNG thuộc danh mục (ví dụ "Ba Vì"), không thì null
  "budget_vnd": null,                // ngân sách tổng (VND) nếu khách nói, ví dụ "350k" -> 350000
  "max_walk_km": null,               // giới hạn đi bộ (km) nếu khách nói; "ngại/ít đi bộ" -> 2
  "preferences": "",                 // sở thích, người đi cùng, sức khoẻ, ghét đông...
  "replan_from": null}               // id điểm khách ĐANG đứng nếu khách đang giữa chuyến và muốn đổi kế hoạch
 intent: plan = muốn lịch trình / gợi ý đi đâu / đổi kế hoạch; hours = hỏi giờ mở cửa / có mở không;
-weather = hỏi thời tiết, mưa, không khí; info = hỏi thông tin, giá vé một điểm; other = ngoài du lịch Hà Nội."""
+weather = hỏi thời tiết, mưa, không khí; info = hỏi thông tin, giá vé một điểm; other = ngoài du lịch Hà Nội.
+Nếu có "Yêu cầu trước" và tin nhắn mới là CHỈNH SỬA (bỏ/thêm điểm, đổi giờ, thêm người, đổi ngân sách, "còn ... thì sao"),
+hãy giữ nguyên các trường cũ và chỉ đổi phần khách nhắc tới."""
 
 
 def _defaults(req: dict, text: str, now: datetime, lang: str) -> dict:
@@ -78,9 +83,27 @@ def _defaults(req: dict, text: str, now: datetime, lang: str) -> dict:
     d_code = resolve_date(text, now)  # code thắng model khi câu có mốc ngày rõ
     if d_code:
         req["date_llm"], req["date"] = req["date"], d_code.isoformat()
-    req["start"] = req.get("start") or "08:00"
-    req["end"] = req.get("end") or "21:00"
-    req["people"] = max(1, int(req.get("people") or 1))
+    bad = invalid_date(text, now)
+    try:
+        d_req = date.fromisoformat(str(req["date"])[:10])
+        req["date"] = d_req.isoformat()
+        if d_req < now.date():
+            req["_error"] = ("past_date", {"d": d_req.strftime("%d/%m/%Y")})
+    except ValueError:
+        req["date"] = now.date().isoformat()
+        bad = bad or str(req.get("date_llm") or req.get("date"))
+    if bad:
+        req["_error"] = ("bad_date", {"d": bad})
+    hhmm = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")
+    req["start"] = req.get("start") if hhmm.match(str(req.get("start") or "")) else "08:00"
+    req["end"] = req.get("end") if hhmm.match(str(req.get("end") or "")) else "21:00"
+    if req["end"] <= req["start"] and not req.get("_error"):
+        req["_error"] = ("bad_window", {"a": req["start"], "b": req["end"]})
+    try:
+        req["people"] = max(1, min(50, int(req.get("people") or 1)))
+        req["children"] = max(0, min(int(req.get("children") or 0), req["people"]))
+    except (TypeError, ValueError):
+        req["people"], req["children"] = 1, 0
     for k in ("poi_ids", "must_include", "avoid"):
         req[k] = [p for p in (req.get(k) or []) if p in pois]
     if req.get("replan_from") not in pois:
@@ -90,6 +113,7 @@ def _defaults(req: dict, text: str, now: datetime, lang: str) -> dict:
         named = mentioned_ids(text) | _mentioned_en(text)
         req["must_include"] = [p for p in dict.fromkeys(req["must_include"] + req["poi_ids"])
                                if p in named and p != req.get("replan_from") and p not in req["avoid"]]
+        _apply_edits(req, text)
     if req["date"] == now.date().isoformat():  # không xếp vào giờ đã qua
         nxt = (now + timedelta(minutes=15 - now.minute % 15)).strftime("%H:%M")
         if req["start"] < nxt:
@@ -103,26 +127,81 @@ def fast_route(text: str, now: datetime, lang: str) -> dict | None:
     if re.search(PLAN_WORDS, q):
         return None
     ids = sorted(mentioned_ids(text) | _mentioned_en(text))
-    if re.search(WEATHER_WORDS, q) and not re.search(HOURS_WORDS, q.replace("open-meteo", "")):
+    other_place = re.search(r"\b(o|tai|in|at|khu|vung|huyen|quan|xa)\s+(?!ha noi|hanoi|ho guom|hoan kiem|day\b|nha\b)[a-z]", q)
+    if re.search(WEATHER_WORDS, q) and not re.search(HOURS_WORDS, q.replace("open-meteo", "")) \
+            and (ids or not other_place):
         return _defaults({"intent": "weather", "poi_ids": ids}, text, now, lang)
     if ids and re.search(HOURS_WORDS, q):
         return _defaults({"intent": "hours", "poi_ids": ids}, text, now, lang)
     return None
 
 
-def parse_request(text: str, now: datetime, lang: str) -> tuple[dict, dict | None]:
-    fast = fast_route(text, now, lang)
+def parse_request(text: str, now: datetime, lang: str, prev: dict | None = None) -> tuple[dict, dict | None]:
+    fast = None if prev and prev.get("intent") == "plan" and not _looks_standalone(text) else fast_route(text, now, lang)
     if fast:
         return fast, None
     pois = load_pois()
     catalog = ", ".join(f"{p.id}={p.name} / {p.name_en}" for p in pois.values())
     user = (f"Bây giờ: {now:%Y-%m-%d %H:%M} ({DAYS['vi'][now.weekday()]}), Hà Nội.\nDanh mục: {catalog}\n"
             f"Tin nhắn: {text}")
+    if prev:
+        keep = {k: prev.get(k) for k in ("intent", "date", "start", "end", "poi_ids", "must_include", "avoid", "people",
+                                         "children", "budget_vnd", "max_walk_km", "preferences", "replan_from")}
+        user += "\nYêu cầu trước: " + json.dumps(keep, ensure_ascii=False)
     req, meta = chat_json(INTENT_SYSTEM, user, max_tokens=400, temperature=0)
     # Câu có từ xin gợi ý/lịch trình thì là "plan", kể cả khi có hỏi kèm thời tiết/giờ mở cửa
     if req.get("intent") in ("weather", "hours", "info") and re.search(PLAN_WORDS, fold(text)):
         req["intent_llm"], req["intent"] = req["intent"], "plan"
-    return _defaults(req, text, now, lang), meta
+    req = _defaults(req, text, now, lang)
+    if prev and req["intent"] == "plan":
+        _carry(req, prev, text, now)
+    return req, meta
+
+
+REMOVE_VERB = r"\b(bo|bot|khong (di|muon|can|thich)|tru|loai|huy|remove|skip|drop|without|no)\b"
+ADD_VERB = r"\b(them|bo sung|cong them|di them|add|include|plus|thay bang|instead)\b"
+
+
+def _apply_edits(req: dict, text: str) -> None:
+    """Code tách vế câu: vế có 'bỏ/không đi/remove' -> loại điểm; vế có 'thêm/add' -> thêm điểm.
+    Không chỉ dựa vào LLM (review Codex #7: 'Bỏ Hỏa Lò đi' vẫn giữ Hỏa Lò)."""
+    for clause in re.split(r"\b(?:va|and|roi|nhung|but|con)\b|[,;.]", fold(text)):
+        ids = mentioned_ids(clause) | _mentioned_en(clause)
+        if not ids:
+            continue
+        if re.search(REMOVE_VERB, clause):
+            req["avoid"] = list(dict.fromkeys(req.get("avoid", []) + sorted(ids)))
+            req["must_include"] = [p for p in req.get("must_include", []) if p not in ids]
+        elif re.search(ADD_VERB, clause):
+            req["must_include"] = list(dict.fromkeys(req.get("must_include", []) + sorted(ids)))
+            req["avoid"] = [p for p in req.get("avoid", []) if p not in ids]
+            req["_added"] = list(dict.fromkeys(req.get("_added", []) + sorted(ids)))
+
+
+def _looks_standalone(text: str) -> bool:
+    """Câu tra cứu độc lập (có tên điểm + hỏi giờ, hoặc hỏi thời tiết) thì không cần ngữ cảnh."""
+    q = fold(text)
+    return bool(re.search(WEATHER_WORDS, q) or (mentioned_ids(text) and re.search(HOURS_WORDS, q)))
+
+
+def _carry(req: dict, prev: dict, text: str, now: datetime) -> None:
+    """Giữ thông tin cũ khi tin nhắn mới chỉ chỉnh một phần (code đảm bảo, không chỉ dựa vào LLM)."""
+    q = fold(text)
+    defaults = {"people": 1, "children": 0, "budget_vnd": None, "max_walk_km": None, "preferences": ""}
+    for k, dv in defaults.items():
+        if req.get(k) in (dv, None, "") and prev.get(k) not in (dv, None, ""):
+            req[k] = prev[k]
+    if resolve_date(text, now) is None and not re.search(r"hom nay|today", q) and prev.get("date"):
+        req["date"] = prev["date"]
+    if not re.search(r"\d{1,2} ?(h|gio|:)|sang|chieu|toi|morning|afternoon|evening", q):
+        req["start"], req["end"] = prev.get("start", req["start"]), prev.get("end", req["end"])
+    added = set(req.get("_added", []))  # khách vừa nói "thêm" thì bỏ khỏi danh sách loại cũ
+    req["avoid"] = list(dict.fromkeys([p for p in prev.get("avoid", []) if p not in added] + req.get("avoid", [])))
+    req["must_include"] = [p for p in dict.fromkeys(prev.get("must_include", []) + req.get("must_include", []))
+                           if p not in req["avoid"]]
+    if req["date"] == now.date().isoformat():
+        nxt = (now + timedelta(minutes=15 - now.minute % 15)).strftime("%H:%M")
+        req["start"] = max(req["start"], nxt)
 
 
 # ---------- 2. Dữ liệu song song ----------
@@ -219,18 +298,36 @@ def answer_hours(req: dict, now: datetime, news: dict | None = None) -> str:
     return "\n".join(lines)
 
 
-def answer_weather(ctx: dict, req: dict) -> str:
+def answer_weather(ctx: dict, req: dict, now: datetime | None = None, loc: dict | None = None) -> str:
+    """Thời tiết đúng NƠI (loc từ geocode, mặc định Hoàn Kiếm) và đúng NGÀY khách hỏi."""
     lang = req["lang"]
-    w, a = ctx["weather"], ctx["air"]
-    if "current" not in w:
+    now = now or now_hanoi()
+    w = ctx["weather"]
+    place = (loc or {}).get("name") or ("Hoan Kiem" if lang == "en" else "khu Hoàn Kiếm")
+    if "hourly" not in w:
         return f"Weather unavailable ({w.get('_error')})." if lang == "en" else f"Không lấy được thời tiết ({w.get('_error')})."
-    c = w["current"]
+    d = date.fromisoformat(req["date"])
     stale = (" [STALE DATA]" if lang == "en" else " [DỮ LIỆU CŨ do API lỗi]") if w.get("_stale") else ""
+    rain = "rain" if lang == "en" else "mưa"
+    if d != now.date():  # ngày khác hôm nay: tóm tắt dự báo theo giờ của đúng ngày đó
+        day = daily_for_date(w, req["date"])
+        if not day:
+            return t("weather_far", lang, d=d.strftime("%d/%m/%Y"))
+        hs = [h for h in hourly_for_date(w, req["date"]) if req["start"] <= h["time"][11:16] <= req["end"]][::2][:8]
+        head = (f"Forecast for {place} on {DAYS['en'][d.weekday()]} {d:%d/%m/%Y} – Open-Meteo (model estimate){stale}" if lang == "en"
+                else f"Dự báo {place} {DAYS['vi'][d.weekday()]} {d:%d/%m/%Y} – Open-Meteo (ước tính mô hình){stale}")
+        lines = [head, f"• {day['tmin']}–{day['tmax']}°C, {rain} max {day['rain_prob_max']}%, {day['rain_mm']} mm"]
+        if hs:
+            lines.append("• " + "; ".join(f"{h['time'][11:13]}h {h['temp']}°C {rain} {h['rain_prob']}%" for h in hs))
+        lines.append("• AQI: " + ("only available for today" if lang == "en" else "chỉ có cho hôm nay (không dự báo)"))
+        return "\n".join(lines)
+    a = ctx["air"]
+    c = w["current"]
     if lang == "en":
-        lines = [f"Weather around Hoan Kiem at {w['model_time'][11:16]} – Open-Meteo (model estimate){stale}",
+        lines = [f"Weather in {place} at {w['model_time'][11:16]} – Open-Meteo (model estimate){stale}",
                  f"• {c['temp']}°C (feels {c['feels_like']}°C), humidity {c['humidity']}%, wind {c['wind_kmh']} km/h, rain {c['rain_mm']} mm"]
     else:
-        lines = [f"Thời tiết khu Hoàn Kiếm lúc {w['model_time'][11:16]} – {w['source']}{stale}",
+        lines = [f"Thời tiết {place} lúc {w['model_time'][11:16]} – {w['source']}{stale}",
                  f"• {c['desc']}, {c['temp']}°C (cảm giác {c['feels_like']}°C), độ ẩm {c['humidity']}%, gió {c['wind_kmh']} km/h, mưa {c['rain_mm']} mm"]
     if a.get("aqi") is not None:
         if lang == "en":
@@ -242,7 +339,6 @@ def answer_weather(ctx: dict, req: dict) -> str:
     nxt = [h for h in hourly_for_date(w, req["date"]) if h["time"][11:16] >= req["start"]][:6]
     if nxt:
         lab = "Next hours" if lang == "en" else "Các giờ tới"
-        rain = "rain" if lang == "en" else "mưa"
         lines.append(f"• {lab}: " + "; ".join(f"{h['time'][11:13]}h {h['temp']}°C {rain} {h['rain_prob']}%" for h in nxt))
     return "\n".join(lines)
 
@@ -359,6 +455,10 @@ def make_plan(req: dict, ctx: dict, now: datetime, use_validator: bool = True) -
         sched = schedule(proposal.get("stops", []), req)
         check = validate({"items": sched["items"]}, req, w_hours, ctx["air"], now)
 
+    trimmed, removed, fits = trim_to_budget(sched["items"], req)
+    if removed:
+        sched["items"] = trimmed
+        sched["dropped"] = sched["dropped"] + [f"Bỏ bớt {x} để vừa ngân sách." for x in removed]
     summary, meta = write_summary(sched, req, ctx["crowd"])
     calls.append(meta)
     plan = {"items": sched["items"], "summary": summary}
@@ -371,6 +471,10 @@ def make_plan(req: dict, ctx: dict, now: datetime, use_validator: bool = True) -
             if pct and pct >= 85:
                 check["warnings"].append(
                     f"{pois[it['poi_id']].name} lúc {it['start'][:2]}h thường rất đông (~{pct}% so với giờ đông nhất tuần).")
+    closed_asked += [x for x in sched["dropped"] if x.startswith("Bỏ bớt")]
+    if not fits:
+        check["warnings"].append(f"Ngân sách {int(req['budget_vnd']):,}đ không đủ: lịch tối thiểu vẫn tốn "
+                                 f"{check['totals']['total_vnd']:,}đ.".replace(",", "."))
     rest = [x for x in check["warnings"] if x not in closed_asked]
     check["warnings"] = closed_asked + sorted(rest, key=lambda x: not x.startswith("Không xếp được"))
     return {"plan": plan, "check": check, "repairs": attempts, "llm_calls": calls, "date": d.isoformat(),
@@ -463,20 +567,44 @@ def render_plan(res: dict, ctx: dict, req: dict) -> str:
 
 
 # ---------- Điểm vào ----------
-def handle(text: str, now: datetime | None = None, use_validator: bool = True) -> dict:
+BOOKING = (r"\b(dat|mua|giu)\b(?:(?!lich|lo trinh).){0,25}\b(ve|ban|phong|cho ngoi|tour)\b|\bthanh toan\b|"
+           r"\bbook(ing)?\b|\bbuy (a |\d+ )?tickets?\b|\breserv(e|ation)\b|\bpay for\b")
+NEAR_ME = r"\b(gan day|gan toi|gan minh|quanh day|xung quanh (toi|minh|day)|cho toi dang o|near me|nearby|around here|close to me)\b"
+
+
+def handle(text: str, now: datetime | None = None, use_validator: bool = True, session: dict | None = None) -> dict:
+    """session: dict do người gọi giữ giữa các lượt (CLI/web) để hiểu tin nhắn chỉnh sửa như "bỏ Hỏa Lò đi"."""
     now = now or now_hanoi()
     t0 = time.perf_counter()
-    lang = detect_lang(text)
+    text = (text or "").strip()
+    lang = detect_lang(text) if text else "vi"
+    if not text:
+        return {"answer": t("internal", lang), "intent": "empty", "lang": lang, "latency_s": 0.0, "llm_calls": []}
     blocked = guard_input(text, lang)
     if blocked:
         return {"answer": blocked, "intent": "blocked", "lang": lang, "latency_s": 0.0, "llm_calls": []}
+    q = fold(text)
+    if re.search(BOOKING, q):
+        return {"answer": t("no_booking", lang), "intent": "refused", "lang": lang, "latency_s": 0.0, "llm_calls": []}
+    bad = invalid_date(text, now)
+    if bad:
+        return {"answer": t("bad_date", lang, d=bad), "intent": "bad_input", "lang": lang, "latency_s": 0.0, "llm_calls": []}
+    prev = (session or {}).get("last_req")
     try:
-        req, m_intent = parse_request(text, now, lang)
+        req, m_intent = parse_request(text, now, lang, prev)
     except LLMError as e:
         return {"answer": t("llm_down", lang, e=e), "intent": "error", "lang": lang,
                 "latency_s": round(time.perf_counter() - t0, 2), "llm_calls": []}
     out: dict = {"req": req, "intent": req["intent"], "lang": lang, "llm_calls": [m_intent] if m_intent else [],
                  "fast_route": m_intent is None}
+    if req.get("_error"):
+        key, kw = req["_error"]
+        out.update(answer=t(key, lang, **kw), intent="bad_input", latency_s=round(time.perf_counter() - t0, 2))
+        return out
+    if req["intent"] in ("plan", "other", "info") and re.search(NEAR_ME, q) and not req.get("replan_from") \
+            and not req.get("poi_ids") and not req.get("place"):
+        out.update(answer=t("need_location", lang), intent="clarify", latency_s=round(time.perf_counter() - t0, 2))
+        return out
     try:
         if req["intent"] == "other":
             out["answer"] = t("other", lang)
@@ -485,18 +613,39 @@ def handle(text: str, now: datetime | None = None, use_validator: bool = True) -
             with ThreadPoolExecutor(max_workers=2) as ex:
                 news = dict(zip(ids, ex.map(_safe_news, ids)))
             out["answer"] = answer_hours(req, now, news)
+        elif req["intent"] == "weather":
+            out["answer"] = _weather_reply(req, now)
         else:
             ctx = gather(req, now)
             out["gather_s"] = ctx["gather_s"]
-            if req["intent"] == "weather":
-                out["answer"] = answer_weather(ctx, req)
-            else:
-                res = make_plan(req, ctx, now, use_validator=use_validator)
-                out.update(plan=res["plan"], check=res["check"], repairs=res["repairs"])
-                out["llm_calls"] += res["llm_calls"]
-                out["answer"] = render_plan(res, ctx, req)
+            res = make_plan(req, ctx, now, use_validator=use_validator)
+            out.update(plan=res["plan"], check=res["check"], repairs=res["repairs"])
+            out["llm_calls"] += res["llm_calls"]
+            out["answer"] = render_plan(res, ctx, req)
     except LLMError as e:
         out["answer"] = t("llm_down", lang, e=e)
         out["intent"] = "error"
+    if session is not None and req["intent"] in ("plan", "hours", "weather", "info"):
+        session["last_req"] = {k: v for k, v in req.items() if not k.startswith("_")}
     out["latency_s"] = round(time.perf_counter() - t0, 2)
     return out
+
+
+def _weather_reply(req: dict, now: datetime) -> str:
+    lang = req["lang"]
+    d = date.fromisoformat(req["date"])
+    if (d - now.date()).days >= FORECAST_DAYS:
+        return t("weather_far", lang, d=d.strftime("%d/%m/%Y"))
+    loc = None
+    place = (req.get("place") or "").strip()
+    if place and not mentioned_ids(place) and fold(place) not in ("ha noi", "hanoi", "hoan kiem", "ho guom"):
+        loc = geocode(place)
+        if not loc:
+            return t("place_not_found", lang, p=place)
+        lat, lon = loc["lat"], loc["lon"]
+    else:
+        lat, lon = HANOI_CENTER
+    with ThreadPoolExecutor(max_workers=2) as ex:
+        fw, fa = ex.submit(get_weather, lat, lon), ex.submit(get_air, lat, lon)
+        ctx = {"weather": fw.result(), "air": fa.result()}
+    return answer_weather(ctx, req, now, loc)

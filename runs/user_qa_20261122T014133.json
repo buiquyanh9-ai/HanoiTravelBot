@@ -1,0 +1,130 @@
+[
+  {
+    "id": "U1 ngân sách nhóm",
+    "ok": true,
+    "turns": [
+      "Chủ nhật này nhóm 3 người, tổng ngân sách 150k, đi từ 8h tới 12h, thích lịch sử"
+    ],
+    "answers": [
+      "Lịch trình Chủ nhật 22/11/2026:\n• 08:00-09:30  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00; vé: Miễn phí)\n\nLịch trình cuối cùng của bạn sẽ bắt đầu tại Lăng Chủ tịch Hồ Chí Minh, nơi bạn có thể tìm hiểu về lịch sử và cuộc đời của vị lãnh tụ vĩ đại của dân tộc. Mặc dù chúng tôi đã bỏ bớt một số điểm để phù hợp với ngân sách, nhưng điểm đến này vẫn sẽ mang lại cho bạn những trải nghiệm ý nghĩa và sâu sắc.\n\nChi phí ước tính cho 3 người: 0đ (vé 0đ + đi lại 0đ + ăn uống 0đ). Đi bộ khoảng 0.8 km.\n\nLưu ý:\n  - Bỏ bớt Di tích Nhà tù Hỏa Lò để vừa ngân sách.\n  - Bỏ bớt Ăn trưa – Khu vực gần Nhà tù Hỏa Lò có nhiều quán ăn ngon. để vừa ngân sách.\n  - Giờ mở cửa Lăng Chủ tịch Hồ Chí Minh có độ tin cậy THẤP, nên gọi xác nhận trước.\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 01:30; AQI 121 (kém cho nhóm nhạy cảm) – WAQI – trạm United Nations International School of Hanoi, Vietnam (Trường Quốc tế Liên Hợp Quốc Hà Nội) (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông hiện tại; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U2 nhiều lượt: bỏ điểm",
+    "ok": false,
+    "turns": [
+      "Thứ Bảy này đi Văn Miếu và Hỏa Lò, từ 8h đến 12h nhé",
+      "Bỏ Hỏa Lò đi"
+    ],
+    "answers": [
+      "Lịch trình Thứ Ba 24/11/2026:\n• 08:00-09:15  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 30.000đ; HSSV, người trên 60 tuổi 15.000đ; trẻ dưới 15 tuổi miễn phí; đông ~35% (vừa))\n• 09:27-10:42  Di tích Nhà tù Hỏa Lò (mở 08:00-17:00; vé: 30.000-50.000đ (nguồn mâu thuẫn); đông ~50% (vừa))  ← taxi 12'\n\nLịch trình cuối cùng của bạn bắt đầu tại Văn Miếu - Quốc Tử Giám, nơi có không gian yên tĩnh và lịch sử phong phú, sau đó là Di tích Nhà tù Hỏa Lò, nơi bạn có thể tìm hiểu về lịch sử đau thương của dân tộc. Cả hai điểm đều có mức độ đông khá thấp, giúp bạn dễ dàng tham quan và tận hưởng.\n\nChi phí ước tính cho 1 người: 104.000đ (vé 80.000đ + đi lại 24.000đ + ăn uống 0đ). Đi bộ khoảng 0.9 km.\n\nLưu ý:\n  - Văn Miếu - Quốc Tử Giám (ngoài trời) lúc 8h: dự báo 87% mưa.\n  - Giờ mở cửa Văn Miếu - Quốc Tử Giám có độ tin cậy THẤP, nên gọi xác nhận trước.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Hé lộ hình ảnh đầu tiên lễ kỷ niệm 950 năm Quốc Tử Giám (2026-11-12) https://baovanhoa.vn/he-lo-nhung-hinh-anh-dau-tien-le-ky-niem-cap-quoc-gia-950-nam-quoc-tu-giam-quoc-hoc-viet-nam.html\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu-Quốc Tử Giám 950 năm với trải nghiệm văn hóa mới ở Hà Nội (?) https://www.facebook.com/groups/715775398763444/posts/3020955318245429\n  - [Di tích Nhà tù Hỏa Lò] Bên trong không gian lần đầu mở đón khách của Nhà tù Hỏa Lò - Báo VnExpress Du lịch (2026-11-17) https://vnexpress.net/ben-trong-khong-gian-lan-dau-mo-don-khach-cua-nha-tu-hoa-lo-5145394.html\n  - [Di tích Nhà tù Hỏa Lò] Di tích Nhà tù Hỏa Lò — Hà Nội | CityGuide (2026-11-17) https://cityguide.vn/vn/hanoi/dia-diem/nha-tu-hoa-lo\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 01:30; AQI 121 (kém cho nhóm nhạy cảm) – WAQI – trạm United Nations International School of Hanoi, Vietnam (Trường Quốc tế Liên Hợp Quốc Hà Nội) (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính.",
+      "Lịch trình Thứ Ba 24/11/2026:\n• 08:00-09:15  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 30.000đ; HSSV, người trên 60 tuổi 15.000đ; trẻ dưới 15 tuổi miễn phí; đông ~35% (vừa))\n• 09:27-10:42  Di tích Nhà tù Hỏa Lò (mở 08:00-17:00; vé: 30.000-50.000đ (nguồn mâu thuẫn); đông ~50% (vừa))  ← taxi 12'\n\nLịch trình cuối cùng của bạn bắt đầu tại Văn Miếu - Quốc Tử Giám, nơi có không khí yên tĩnh và lịch sử phong phú, tiếp theo là Di tích Nhà tù Hỏa Lò, nơi bạn có thể tìm hiểu về lịch sử đau thương của dân tộc. Cả hai điểm đều có mức đông khá thấp, giúp bạn dễ dàng tham quan và tận hưởng.\n\nChi phí ước tính cho 1 người: 104.000đ (vé 80.000đ + đi lại 24.000đ + ăn uống 0đ). Đi bộ khoảng 0.9 km.\n\nLưu ý:\n  - Văn Miếu - Quốc Tử Giám (ngoài trời) lúc 8h: dự báo 87% mưa.\n  - Giờ mở cửa Văn Miếu - Quốc Tử Giám có độ tin cậy THẤP, nên gọi xác nhận trước.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Hé lộ hình ảnh đầu tiên lễ kỷ niệm 950 năm Quốc Tử Giám (2026-11-12) https://baovanhoa.vn/he-lo-nhung-hinh-anh-dau-tien-le-ky-niem-cap-quoc-gia-950-nam-quoc-tu-giam-quoc-hoc-viet-nam.html\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu-Quốc Tử Giám 950 năm với trải nghiệm văn hóa mới ở Hà Nội (?) https://www.facebook.com/groups/715775398763444/posts/3020955318245429\n  - [Di tích Nhà tù Hỏa Lò] Bên trong không gian lần đầu mở đón khách của Nhà tù Hỏa Lò - Báo VnExpress Du lịch (2026-11-17) https://vnexpress.net/ben-trong-khong-gian-lan-dau-mo-don-khach-cua-nha-tu-hoa-lo-5145394.html\n  - [Di tích Nhà tù Hỏa Lò] Di tích Nhà tù Hỏa Lò — Hà Nội | CityGuide (2026-11-17) https://cityguide.vn/vn/hanoi/dia-diem/nha-tu-hoa-lo\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 01:30; AQI 121 (kém cho nhóm nhạy cảm) – WAQI – trạm United Nations International School of Hanoi, Vietnam (Trường Quốc tế Liên Hợp Quốc Hà Nội) (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U3 nhiều lượt: thêm người",
+    "ok": true,
+    "turns": [
+      "Chủ nhật này 8h-12h đi Văn Miếu và Hoàng thành",
+      "Thêm 2 người nữa, tổng 3 người"
+    ],
+    "answers": [
+      "Lịch trình Chủ nhật 22/11/2026:\n• 08:00-09:00  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00; vé: Miễn phí)\n• 09:12-10:27  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 30.000đ; HSSV, người trên 60 tuổi 15.000đ; trẻ dưới 15 tuổi miễn phí; đông ~65% (đông))  ← taxi 12'\n• 10:36-12:00  Hoàng thành Thăng Long (mở 08:00-17:00; vé: Người lớn 70.000-100.000đ (nguồn mâu thuẫn); dưới 16 tuổi miễn phí; đông ~70% (đông))  ← taxi 9'\n\nLịch trình cuối cùng của bạn bắt đầu với Lăng Chủ tịch Hồ Chí Minh, nơi bạn có thể tìm hiểu về lịch sử và văn hóa Việt Nam. Tiếp theo, bạn sẽ đến Văn Miếu - Quốc Tử Giám, nơi có thể đông đúc nhưng vẫn rất đáng để tham quan. Cuối cùng, bạn sẽ khám phá Hoàng thành Thăng Long, một di sản văn hóa quan trọng, nơi cũng có thể đông khách.\n\nChi phí ước tính cho 1 người: 176.000đ (vé 130.000đ + đi lại 46.000đ + ăn uống 0đ). Đi bộ khoảng 2.3 km.\n\nLưu ý:\n  - Giờ mở cửa Lăng Chủ tịch Hồ Chí Minh có độ tin cậy THẤP, nên gọi xác nhận trước.\n  - Giờ mở cửa Văn Miếu - Quốc Tử Giám có độ tin cậy THẤP, nên gọi xác nhận trước.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Hé lộ hình ảnh đầu tiên lễ kỷ niệm 950 năm Quốc Tử Giám (2026-11-12) https://baovanhoa.vn/he-lo-nhung-hinh-anh-dau-tien-le-ky-niem-cap-quoc-gia-950-nam-quoc-tu-giam-quoc-hoc-viet-nam.html\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu-Quốc Tử Giám 950 năm với trải nghiệm văn hóa mới ở Hà Nội (?) https://www.facebook.com/groups/715775398763444/posts/3020955318245429\n  - [Hoàng thành Thăng Long] Nghệ thuật đa sắc màu tỏa sáng tại Hoàng thành Thăng Long (2026-11-17) https://baomoi.com/nghe-thuat-da-sac-mau-toa-sang-tai-hoang-thanh-thang-long-c56536000.epi\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 01:30; AQI 121 (kém cho nhóm nhạy cảm) – WAQI – trạm United Nations International School of Hanoi, Vietnam (Trường Quốc tế Liên Hợp Quốc Hà Nội) (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông hiện tại; chi phí taxi/ăn uống: ước tính.",
+      "Lịch trình Chủ nhật 22/11/2026:\n• 08:00-09:00  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00; vé: Miễn phí)\n• 09:12-10:27  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 30.000đ; HSSV, người trên 60 tuổi 15.000đ; trẻ dưới 15 tuổi miễn phí; đông ~65% (đông))  ← taxi 12'\n• 10:36-12:00  Hoàng thành Thăng Long (mở 08:00-17:00; vé: Người lớn 70.000-100.000đ (nguồn mâu thuẫn); dưới 16 tuổi miễn phí; đông ~70% (đông))  ← taxi 9'\n\nLịch trình cuối cùng của bạn bắt đầu với Lăng Chủ tịch Hồ Chí Minh, nơi bạn có thể tìm hiểu về lịch sử và văn hóa Việt Nam. Tiếp theo, bạn sẽ đến Văn Miếu - Quốc Tử Giám, một điểm đến có thể đông đúc, nhưng sẽ mang lại cho bạn trải nghiệm thú vị về nền giáo dục cổ truyền. Cuối cùng, bạn sẽ khám phá Hoàng thành Thăng Long, nơi có nhiều di tích lịch sử quan trọng.\n\nChi phí ước tính cho 3 người: 436.000đ (vé 390.000đ + đi lại 46.000đ + ăn uống 0đ). Đi bộ khoảng 2.3 km.\n\nLưu ý:\n  - Giờ mở cửa Lăng Chủ tịch Hồ Chí Minh có độ tin cậy THẤP, nên gọi xác nhận trước.\n  - Giờ mở cửa Văn Miếu - Quốc Tử Giám có độ tin cậy THẤP, nên gọi xác nhận trước.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Hé lộ hình ảnh đầu tiên lễ kỷ niệm 950 năm Quốc Tử Giám (2026-11-12) https://baovanhoa.vn/he-lo-nhung-hinh-anh-dau-tien-le-ky-niem-cap-quoc-gia-950-nam-quoc-tu-giam-quoc-hoc-viet-nam.html\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu-Quốc Tử Giám 950 năm với trải nghiệm văn hóa mới ở Hà Nội (?) https://www.facebook.com/groups/715775398763444/posts/3020955318245429\n  - [Hoàng thành Thăng Long] Nghệ thuật đa sắc màu tỏa sáng tại Hoàng thành Thăng Long (2026-11-17) https://baomoi.com/nghe-thuat-da-sac-mau-toa-sang-tai-hoang-thanh-thang-long-c56536000.epi\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 01:30; AQI 121 (kém cho nhóm nhạy cảm) – WAQI – trạm United Nations International School of Hanoi, Vietnam (Trường Quốc tế Liên Hợp Quốc Hà Nội) (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông hiện tại; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U4 ngày không tồn tại",
+    "ok": true,
+    "turns": [
+      "Ngày 31/02 đi Văn Miếu được không?"
+    ],
+    "answers": [
+      "Ngày 31/02 không tồn tại. Bạn kiểm tra lại ngày giúp mình (ví dụ 28/02 hoặc 01/03)."
+    ]
+  },
+  {
+    "id": "U5 ngày đã qua",
+    "ok": true,
+    "turns": [
+      "Lên lịch ngày 01/01/2026 đi Hỏa Lò"
+    ],
+    "answers": [
+      "Ngày 01/01/2026 đã qua. Mình chỉ lên lịch cho hôm nay hoặc các ngày tới."
+    ]
+  },
+  {
+    "id": "U6 không đoán vị trí",
+    "ok": true,
+    "turns": [
+      "Gần đây có chỗ nào chơi không?"
+    ],
+    "answers": [
+      "Bạn đang ở khu nào (ví dụ Hồ Gươm, Văn Miếu, Lăng Bác)? Mình không tự lấy vị trí của bạn."
+    ]
+  },
+  {
+    "id": "U7 thời tiết nơi khác, quá xa",
+    "ok": true,
+    "turns": [
+      "Thời tiết ở Ba Vì 90 ngày nữa thế nào?"
+    ],
+    "answers": [
+      "Chưa có dự báo cho 20/02/2027: dự báo chỉ có tối đa 16 ngày tới. Mình không đoán thời tiết xa hơn."
+    ]
+  },
+  {
+    "id": "U8 thời tiết nơi khác, ngày mai",
+    "ok": true,
+    "turns": [
+      "Ngày mai thời tiết ở Ba Vì thế nào?"
+    ],
+    "answers": [
+      "Dự báo Ba Vì Thứ Hai 23/11/2026 – Open-Meteo (ước tính mô hình)\n• 16.3–26.0°C, mưa max 7%, 0 mm\n• 08h 18.7°C mưa 0%; 10h 22.1°C mưa 0%; 12h 24.3°C mưa 0%; 14h 25.9°C mưa 1%; 16h 25.5°C mưa 2%; 18h 22.7°C mưa 0%; 20h 21.3°C mưa 0%\n• AQI: chỉ có cho hôm nay (không dự báo)"
+    ]
+  },
+  {
+    "id": "U9 không đặt vé",
+    "ok": true,
+    "turns": [
+      "Đặt giúp mình 2 vé vào Hoàng thành chiều nay"
+    ],
+    "answers": [
+      "Mình không đặt vé, đặt bàn hay thanh toán được. Bạn mua vé tại quầy hoặc kênh chính thức của điểm tham quan; mình có thể cho giờ mở cửa và giá vé tham khảo."
+    ]
+  },
+  {
+    "id": "U10 nhóm có trẻ em",
+    "ok": true,
+    "turns": [
+      "Chủ nhật này 8h-12h gia đình 4 người gồm 2 bé 10 tuổi đi Văn Miếu và Hoàng thành"
+    ],
+    "answers": [
+      "Lịch trình Chủ nhật 22/11/2026:\n• 08:00-09:00  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00; vé: Miễn phí)\n• 09:12-10:27  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 30.000đ; HSSV, người trên 60 tuổi 15.000đ; trẻ dưới 15 tuổi miễn phí; đông ~65% (đông))  ← taxi 12'\n• 10:36-12:00  Hoàng thành Thăng Long (mở 08:00-17:00; vé: Người lớn 70.000-100.000đ (nguồn mâu thuẫn); dưới 16 tuổi miễn phí; đông ~70% (đông))  ← taxi 9'\n\nLịch trình cuối cùng của bạn bắt đầu tại Lăng Chủ tịch Hồ Chí Minh, nơi bạn có thể tìm hiểu về lịch sử và văn hóa Việt Nam. Tiếp theo, bạn sẽ đến Văn Miếu - Quốc Tử Giám, một địa điểm có thể đông đúc nhưng rất đáng để tham quan. Cuối cùng, bạn sẽ khám phá Hoàng thành Thăng Long, nơi có nhiều di sản văn hóa quý giá.\n\nChi phí ước tính cho 4 người: 306.000đ (vé 260.000đ + đi lại 46.000đ + ăn uống 0đ). Đi bộ khoảng 2.3 km.\n\nLưu ý:\n  - Giờ mở cửa Lăng Chủ tịch Hồ Chí Minh có độ tin cậy THẤP, nên gọi xác nhận trước.\n  - Giờ mở cửa Văn Miếu - Quốc Tử Giám có độ tin cậy THẤP, nên gọi xác nhận trước.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Hé lộ hình ảnh đầu tiên lễ kỷ niệm 950 năm Quốc Tử Giám (2026-11-12) https://baovanhoa.vn/he-lo-nhung-hinh-anh-dau-tien-le-ky-niem-cap-quoc-gia-950-nam-quoc-tu-giam-quoc-hoc-viet-nam.html\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu-Quốc Tử Giám 950 năm với trải nghiệm văn hóa mới ở Hà Nội (?) https://www.facebook.com/groups/715775398763444/posts/3020955318245429\n  - [Hoàng thành Thăng Long] Nghệ thuật đa sắc màu tỏa sáng tại Hoàng thành Thăng Long (2026-11-17) https://baomoi.com/nghe-thuat-da-sac-mau-toa-sang-tai-hoang-thanh-thang-long-c56536000.epi\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 01:30; AQI 121 (kém cho nhóm nhạy cảm) – WAQI – trạm United Nations International School of Hanoi, Vietnam (Trường Quốc tế Liên Hợp Quốc Hà Nội) (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông hiện tại; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U11 đầu vào lỗi",
+    "ok": true,
+    "turns": [
+      "???!!! 🙃🙃",
+      "asdkjh qweoiu zxcmnb"
+    ],
+    "answers": [
+      "Mình chỉ hỗ trợ du lịch Hà Nội: giờ mở cửa, thời tiết, thông tin điểm tham quan và lên lịch trình.",
+      "Mình chỉ hỗ trợ du lịch Hà Nội: giờ mở cửa, thời tiết, thông tin điểm tham quan và lên lịch trình."
+    ]
+  },
+  {
+    "id": "U12 tiếng Anh nhiều lượt",
+    "ok": true,
+    "turns": [
+      "Plan Sunday 8am-12pm, I like museums",
+      "Remove the zoo and add Hoa Lo"
+    ],
+    "answers": [
+      "Itinerary for Sunday 22/11/2026:\n• 08:00-09:00  Ho Chi Minh Mausoleum (open 08:00-11:00; ticket: free)\n• 09:12-10:27  Temple of Literature (open 08:00-17:00; ticket: ~30,000 VND; crowd ~65% (busy))  ← taxi 12'\n• 10:41-12:00  National Museum of Vietnamese History (open 08:00-12:00, 13:30-17:00; ticket: ~40,000 VND)  ← taxi 14'\n\nThis itinerary is perfect for you as it includes visits to significant cultural sites like the Ho Chi Minh Mausoleum and the National Museum of History, which align with your interest in museums. Please note that the Temple of Literature may be quite busy during your visit.\n\nEstimated cost for 1 person(s): 139,000 VND (tickets 70,000 + transport 69,000 + food 0). About 1.8 km of walking.\n\nNotes:\n  - Opening hours of Ho Chi Minh Mausoleum are LOW confidence – call ahead to confirm.\n  - Opening hours of Temple of Literature are LOW confidence – call ahead to confirm.\n\nData: weather Open-Meteo (model estimate) at 01:30; AQI 121 – WAQI station (measured); crowd level: BestTime; travel time: TomTom live traffic; taxi/food cost: estimates.",
+      "Itinerary for Sunday 22/11/2026:\n• 08:00-09:15  Hoa Lo Prison Relic (open 08:00-17:00; ticket: ~50,000 VND; crowd ~30% (quiet))\n• 09:30-10:30  Ho Chi Minh Mausoleum (open 08:00-11:00; ticket: free)  ← taxi 15'\n\nThis itinerary is perfect for you as it includes a visit to the Hoa Lo Prison Museum, which aligns with your interest in museums. You will also have the opportunity to visit the Ho Chi Minh Mausoleum, a significant historical site. Please note that the Hoa Lo Prison may have a moderate crowd, but it should still be an enjoyable experience.\n\nEstimated cost for 1 person(s): 89,000 VND (tickets 50,000 + transport 39,000 + food 0). About 1.1 km of walking.\n\nNotes:\n  - Opening hours of Ho Chi Minh Mausoleum are LOW confidence – call ahead to confirm.\n\nRecent news to check yourself (via Tavily):\n  - [Hoa Lo Prison Relic] Bên trong không gian lần đầu mở đón khách của Nhà tù Hỏa Lò - Báo VnExpress Du lịch (2026-11-17) https://vnexpress.net/ben-trong-khong-gian-lan-dau-mo-don-khach-cua-nha-tu-hoa-lo-5145394.html\n  - [Hoa Lo Prison Relic] Di tích Nhà tù Hỏa Lò — Hà Nội | CityGuide (2026-11-17) https://cityguide.vn/vn/hanoi/dia-diem/nha-tu-hoa-lo\n\nData: weather Open-Meteo (model estimate) at 01:30; AQI 121 – WAQI station (measured); crowd level: BestTime; travel time: TomTom live traffic; taxi/food cost: estimates."
+    ]
+  }
+]

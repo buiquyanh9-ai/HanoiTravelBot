@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import threading
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from .bot import handle
@@ -15,6 +17,23 @@ from .config import ROOT
 
 INDEX = (ROOT / "hanoibot" / "static" / "index.html").read_bytes()
 MAX_BODY = 8_000
+SESSIONS: dict[str, dict] = {}  # ngữ cảnh nhiều lượt, chỉ trong RAM, hết hạn sau 2 giờ
+SESSION_TTL = 2 * 3600
+_lock = threading.Lock()
+
+
+def _session(sid: str) -> dict | None:
+    if not sid:
+        return None
+    now = time.time()
+    with _lock:
+        for k in [k for k, v in SESSIONS.items() if now - v["ts"] > SESSION_TTL]:
+            del SESSIONS[k]
+        if len(SESSIONS) > 1000:
+            SESSIONS.pop(next(iter(SESSIONS)))
+        s = SESSIONS.setdefault(sid, {"ts": now})
+        s["ts"] = now
+        return s
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -46,12 +65,19 @@ class Handler(BaseHTTPRequestHandler):
         if n <= 0 or n > MAX_BODY:
             return self._json(400, {"error": "body rỗng hoặc quá lớn"})
         try:
-            msg = str(json.loads(self.rfile.read(n).decode("utf-8")).get("message", "")).strip()
-        except (ValueError, UnicodeDecodeError):
-            return self._json(400, {"error": "JSON không hợp lệ"})
+            body = json.loads(self.rfile.read(n).decode("utf-8"))
+            msg = str(body.get("message", "")).strip()
+            sid = str(body.get("session", ""))[:64]
+        except (ValueError, UnicodeDecodeError, AttributeError):
+            return self._json(400, {"error": "JSON không hợp lệ", "answer": "Yêu cầu không hợp lệ, bạn gửi lại nhé."})
         if not msg:
-            return self._json(400, {"error": "thiếu message"})
-        out = handle(msg)
+            return self._json(400, {"error": "thiếu message", "answer": "Bạn chưa nhập câu hỏi."})
+        try:
+            out = handle(msg, session=_session(sid))
+        except Exception as e:  # không để rơi kết nối: luôn trả JSON
+            print(f"handle error: {type(e).__name__}")
+            return self._json(500, {"answer": "Xin lỗi, có lỗi khi xử lý câu này. Bạn thử diễn đạt lại nhé.",
+                                    "intent": "error"})
         self._json(200, {"answer": out["answer"], "intent": out.get("intent"), "lang": out.get("lang"),
                          "latency_s": out.get("latency_s"), "n_llm": len(out.get("llm_calls", []))})
 

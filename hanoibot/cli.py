@@ -7,6 +7,7 @@ from .bot import handle
 def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8")
     print("Trợ lý du lịch Hà Nội (MVP). Gõ 'thoat' để dừng.")
+    session: dict = {}  # giữ ngữ cảnh giữa các lượt
     while True:
         try:
             text = input("\nBạn: ").strip()
@@ -16,7 +17,7 @@ def main() -> None:
             break
         if not text:
             continue
-        out = handle(text)
+        out = handle(text, session=session)
         print(f"\nBot ({out['latency_s']}s, {len(out['llm_calls'])} lần gọi LLM):\n{out['answer']}")
 
 

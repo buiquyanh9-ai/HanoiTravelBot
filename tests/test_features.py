@@ -70,7 +70,7 @@ def test_fast_route_skips_llm_for_clear_lookups():
 
 def test_web_server_health_and_chat(monkeypatch):
     import hanoibot.server as server
-    monkeypatch.setattr(server, "handle", lambda msg: {"answer": f"echo:{msg}", "intent": "hours", "lang": "vi",
+    monkeypatch.setattr(server, "handle", lambda msg, **kw: {"answer": f"echo:{msg}", "intent": "hours", "lang": "vi",
                                                        "latency_s": 0.01, "llm_calls": []})
     srv = ThreadingHTTPServer(("127.0.0.1", 0), server.Handler)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
@@ -126,3 +126,35 @@ def test_guard_uses_viguard_rules_and_keeps_benign():
     for ok in ["Bỏ qua Hỏa Lò được không?", "Có hướng dẫn đi xe buýt tới Lăng Bác không?",
                "Gửi lịch trình qua email giúp mình", "Can you ignore the zoo and plan only museums?"]:
         assert guard_input(ok) is None, ok
+
+
+def test_user_input_edge_cases_offline():
+    import re
+    from datetime import date
+    from hanoibot.bot import BOOKING, handle
+    from hanoibot.dates import invalid_date, resolve_date
+    from hanoibot.textutil import fold
+    assert invalid_date("Ngày 31/02 đi Văn Miếu", NOW) == "31/02"
+    assert invalid_date("ngày 28/02", NOW) is None
+    assert resolve_date("Thời tiết ở Ba Vì 90 ngày nữa", NOW) == date(2027, 2, 20)
+    assert re.search(BOOKING, fold("Đặt giúp mình 2 vé vào Hoàng thành"))
+    assert not re.search(BOOKING, fold("Đặt lịch trình đi Văn Miếu giúp mình"))
+    # các câu này trả lời bằng code, không gọi LLM
+    assert "không tồn tại" in handle("Ngày 31/02 đi Văn Miếu được không?", now=NOW)["answer"]
+    assert "không đặt vé" in handle("Mua giúp 2 vé Hoàng thành", now=NOW)["answer"]
+
+
+def test_clause_edits_remove_and_add():
+    from hanoibot.bot import _apply_edits
+    r = {"avoid": [], "must_include": ["hoa_lo", "vuon_thu"]}
+    _apply_edits(r, "Remove the zoo and add Hoa Lo")
+    assert "vuon_thu" in r["avoid"] and "hoa_lo" in r["must_include"]
+    r = {"avoid": [], "must_include": ["hoa_lo", "van_mieu"]}
+    _apply_edits(r, "Bỏ Hỏa Lò đi")
+    assert r["must_include"] == ["van_mieu"] and r["avoid"] == ["hoa_lo"]
+
+
+def test_weekday_word_boundaries():
+    from datetime import date
+    from hanoibot.dates import resolve_date
+    assert resolve_date("Thứ Bảy này đi Văn Miếu", NOW) == date(2026, 11, 28)  # không bị nhầm thành thứ Ba
