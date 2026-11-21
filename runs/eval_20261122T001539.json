@@ -1,0 +1,187 @@
+{
+  "summary": {
+    "n": 2,
+    "intent_acc": "2/2",
+    "expect_pass": "2/2",
+    "bot_valid": "1/1",
+    "baseline_valid": "0/1",
+    "baseline_violations_total": 3,
+    "bot_plan_latency_avg_s": 11.84,
+    "lookup_latency_avg_s": 3.09
+  },
+  "results": [
+    {
+      "id": 2,
+      "text": "Mai mình muốn đi Lăng Bác, Bảo tàng Dân tộc học và Hỏa Lò, xếp giúp lịch nhé.",
+      "expected_intent": "plan",
+      "bot": {
+        "intent": "plan",
+        "answer": "Lịch trình Thứ Hai 23/11/2026:\n• 08:00-09:15  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 30.000đ; HSSV, người trên 60 tuổi 15.000đ; trẻ dưới 15 tuổi miễn phí)\n• 09:26-10:41  Di tích Nhà tù Hỏa Lò (mở 08:00-17:00; vé: 30.000-50.000đ (nguồn mâu thuẫn))\n• 10:41-11:41  Ăn trưa – khu phố cổ.\n• 11:51-13:21  Khu phố cổ Hà Nội (mở 00:00-23:59; vé: Miễn phí)\n\nLịch trình cuối cùng rất phù hợp với khách vì bao gồm những điểm tham quan nổi tiếng như Văn Miếu - Quốc Tử Giám và Di tích Nhà tù Hỏa Lò, giúp khách hiểu rõ hơn về văn hóa và lịch sử Hà Nội. Khách sẽ đánh đổi thời gian di chuyển giữa các điểm tham quan, nhưng bù lại sẽ có cơ hội thưởng thức ẩm thực tại khu phố cổ và khám phá vẻ đẹp của thành phố.\n\nLưu ý:\n  - Không xếp được Lăng Chủ tịch Hồ Chí Minh: nghỉ cố định ngày này trong tuần vào 23/11.\n  - Không xếp được Bảo tàng Dân tộc học Việt Nam: nghỉ cố định ngày này trong tuần vào 23/11.\n  - Giờ mở cửa Văn Miếu - Quốc Tử Giám có độ tin cậy THẤP, nên gọi xác nhận trước.\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 00:00; AQI 101 (kém cho nhóm nhạy cảm) – Open-Meteo Air Quality (ước tính mô hình); mức đông: chưa có nguồn (thiếu key BestTime); thời gian di chuyển: ước lượng theo khoảng cách.",
+        "latency_s": 11.84,
+        "repairs": 0,
+        "check": {
+          "ok": true,
+          "violations": [],
+          "warnings": [
+            "Không xếp được Lăng Chủ tịch Hồ Chí Minh: nghỉ cố định ngày này trong tuần vào 23/11.",
+            "Không xếp được Bảo tàng Dân tộc học Việt Nam: nghỉ cố định ngày này trong tuần vào 23/11.",
+            "Giờ mở cửa Văn Miếu - Quốc Tử Giám có độ tin cậy THẤP, nên gọi xác nhận trước."
+          ]
+        },
+        "plan": {
+          "items": [
+            {
+              "kind": "visit",
+              "poi_id": "van_mieu",
+              "start": "08:00",
+              "end": "09:15",
+              "why": "Khám phá di sản văn hóa và lịch sử của Việt Nam.",
+              "travel_min": 0,
+              "wait_min": 0,
+              "shortened": false
+            },
+            {
+              "kind": "visit",
+              "poi_id": "hoa_lo",
+              "start": "09:26",
+              "end": "10:41",
+              "why": "Tìm hiểu về lịch sử và văn hóa trong nhà tù Hỏa Lò.",
+              "travel_min": 11,
+              "wait_min": 0,
+              "shortened": false
+            },
+            {
+              "kind": "meal",
+              "poi_id": null,
+              "start": "10:41",
+              "end": "11:41",
+              "why": "Ăn trưa – khu phố cổ."
+            },
+            {
+              "kind": "visit",
+              "poi_id": "pho_co",
+              "start": "11:51",
+              "end": "13:21",
+              "why": "Tham quan khu phố cổ và trải nghiệm không khí Hà Nội.",
+              "travel_min": 10,
+              "wait_min": 0,
+              "shortened": false
+            }
+          ],
+          "summary": "Lịch trình cuối cùng rất phù hợp với khách vì bao gồm những điểm tham quan nổi tiếng như Văn Miếu - Quốc Tử Giám và Di tích Nhà tù Hỏa Lò, giúp khách hiểu rõ hơn về văn hóa và lịch sử Hà Nội. Khách sẽ đánh đổi thời gian di chuyển giữa các điểm tham quan, nhưng bù lại sẽ có cơ hội thưởng thức ẩm thực tại khu phố cổ và khám phá vẻ đẹp của thành phố."
+        },
+        "req": {
+          "intent": "plan",
+          "date": "2026-11-23",
+          "start": "08:00",
+          "end": "21:00",
+          "poi_ids": [
+            "lang_bac",
+            "bt_dan_toc_hoc",
+            "hoa_lo"
+          ],
+          "must_include": [
+            "lang_bac",
+            "bt_dan_toc_hoc",
+            "hoa_lo"
+          ],
+          "avoid": [],
+          "preferences": "",
+          "replan_from": null,
+          "date_llm": "2026-11-23"
+        },
+        "gather_s": 0.01,
+        "n_llm": 3
+      },
+      "intent_ok": true,
+      "missing_expect": [],
+      "baseline": {
+        "ok": false,
+        "violations": [
+          "Mục 4: Bảo tàng Dân tộc học Việt Nam KHÔNG mở trong 12:30-14:30. Giờ mở ngày này: ĐÓNG CỬA (nghỉ cố định ngày này trong tuần).",
+          "Mục 4: chỉ có 15 phút để đi từ Văn Miếu - Quốc Tử Giám tới Bảo tàng Dân tộc học Việt Nam, cần khoảng 24 phút.",
+          "Mục 5: chỉ có 15 phút để đi từ Bảo tàng Dân tộc học Việt Nam tới Hồ Hoàn Kiếm và khu phố đi bộ, cần khoảng 32 phút."
+        ],
+        "latency_s": 21.09,
+        "plan": {
+          "items": [
+            {
+              "kind": "visit",
+              "poi_id": "hoa_lo",
+              "start": "08:00",
+              "end": "09:15",
+              "why": "Tham quan di tích Nhà tù Hỏa Lò, tìm hiểu về lịch sử Việt Nam."
+            },
+            {
+              "kind": "visit",
+              "poi_id": "van_mieu",
+              "start": "09:30",
+              "end": "11:00",
+              "why": "Khám phá Văn Miếu - Quốc Tử Giám, nơi thờ Khổng Tử và là trường đại học đầu tiên của Việt Nam."
+            },
+            {
+              "kind": "meal",
+              "poi_id": null,
+              "start": "11:15",
+              "end": "12:15",
+              "why": "Ăn trưa khu phố cổ Hà Nội."
+            },
+            {
+              "kind": "visit",
+              "poi_id": "bt_dan_toc_hoc",
+              "start": "12:30",
+              "end": "14:30",
+              "why": "Tham quan Bảo tàng Dân tộc học Việt Nam, tìm hiểu về văn hóa các dân tộc Việt Nam."
+            },
+            {
+              "kind": "visit",
+              "poi_id": "ho_guom",
+              "start": "14:45",
+              "end": "15:45",
+              "why": "Tham quan Hồ Hoàn Kiếm, nơi có nhiều truyền thuyết và cảnh đẹp."
+            },
+            {
+              "kind": "visit",
+              "poi_id": "pho_co",
+              "start": "16:00",
+              "end": "17:30",
+              "why": "Dạo chơi khu phố cổ Hà Nội, trải nghiệm văn hóa và ẩm thực địa phương."
+            }
+          ],
+          "summary": "Lịch trình này bao gồm các điểm tham quan bắt buộc như Nhà tù Hỏa Lò, Văn Miếu và Bảo tàng Dân tộc học. Các điểm được sắp xếp hợp lý để giảm thiểu thời gian di chuyển và đảm bảo không chồng giờ. Bữa trưa được chừa ra tại khu phố cổ để khách có thể thưởng thức ẩm thực địa phương."
+        }
+      }
+    },
+    {
+      "id": 7,
+      "text": "Thứ Sáu tuần này Lăng Bác có mở không?",
+      "expected_intent": "hours",
+      "bot": {
+        "intent": "hours",
+        "answer": "Giờ mở cửa Thứ Sáu 27/11/2026 (bảng dữ liệu kiểm ngày 21/11/2026):\n• Lăng Chủ tịch Hồ Chí Minh: ĐÓNG CỬA (nghỉ cố định ngày này trong tuần) [độ tin cậy: low]\n  Vé: Miễn phí. Ghi chú: Chỉ mở buổi sáng, nghỉ thứ Hai và thứ Sáu (Tuổi Trẻ). Khung giờ 08:00-11:00 là giờ mùa đông thường thấy, CHƯA xác nhận từ Ban Quản lý Lăng. Mở lại sau tu bổ từ 3/11/2026 (VietnamPlus).\n  Nguồn: https://news.tuoitre.vn/president-ho-chi-minh-mausoleum-to-close-for-periodic-maintenance-from-september-4-10326080923215558.htm",
+        "latency_s": 3.09,
+        "repairs": null,
+        "check": null,
+        "plan": null,
+        "req": {
+          "intent": "hours",
+          "date": "2026-11-27",
+          "start": "08:00",
+          "end": "21:00",
+          "poi_ids": [
+            "lang_bac"
+          ],
+          "must_include": [],
+          "avoid": [],
+          "preferences": "",
+          "replan_from": null,
+          "date_llm": "2026-11-25"
+        },
+        "gather_s": null,
+        "n_llm": 1
+      },
+      "intent_ok": true,
+      "missing_expect": []
+    }
+  ]
+}
