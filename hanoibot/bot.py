@@ -17,6 +17,7 @@ from email.utils import parsedate_to_datetime
 
 from .config import HANOI_CENTER, now_hanoi
 from .dates import resolve_date
+from .guard import normalized as injection_rules
 from .i18n import DAYS, MEAL_EN, detect_lang, en_text, money, t
 from .llm import LLMError, chat_json
 from .pois import ALIASES, load_pois, mentioned_ids
@@ -46,7 +47,7 @@ WEATHER_WORDS = r"(thoi tiet|mua khong|co mua|troi mua|khong khi|aqi|nhiet do|bu
 def guard_input(text: str, lang: str = "vi") -> str | None:
     if len(text) > 1500:
         return t("too_long", lang)
-    if INJECTION.search(fold(text)):
+    if INJECTION.search(fold(text)) or injection_rules(text)[0]:  # luật ViGuard: chống bỏ dấu, tách chữ, chữ giả dạng...
         return t("blocked", lang)
     return None
 
@@ -133,6 +134,8 @@ def _recent_news(poi_id: str) -> list[dict]:
         title = fold(it.get("title") or "")
         if not any(a in title for a in ALIASES.get(poi_id, [])):
             continue  # chỉ giữ tin đúng địa điểm
+        if injection_rules((it.get("title") or "") + " " + (it.get("snippet") or ""))[0]:
+            continue  # nội dung web là dữ liệu chưa tin cậy: có dấu hiệu injection thì bỏ
         try:
             pub = parsedate_to_datetime(it["published"]).date().isoformat() if it.get("published") else "?"
         except (TypeError, ValueError):

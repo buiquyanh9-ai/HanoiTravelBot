@@ -15,6 +15,8 @@ python -m hanoibot.server --port 8000   # giao diện web: http://127.0.0.1:8000
 python -m hanoibot.cli                  # chat trên terminal
 python -m pytest -q                     # 24 test offline, không cần mạng
 python -m evals.run_evals               # 16 kịch bản, gọi API thật, so với baseline chỉ dùng LLM
+python -m evals.stability --k 3         # độ ổn định pass@k / pass^k
+python -m scripts.check_hours           # đối chiếu giờ mở cửa với BestTime
 ```
 
 Lần cài đặt đầu tiên: `py -3.12 -m venv .venv`, rồi `pip install -r requirements.txt`. Chép `.env.example` thành `.env` và điền key.
@@ -22,7 +24,7 @@ Lần cài đặt đầu tiên: `py -3.12 -m venv .venv`, rồi `pip install -r 
 ## Luồng xử lý
 
 ```text
-tin nhắn -> chặn injection, đoán ngôn ngữ vi/en
+tin nhắn -> chặn injection (luật ViGuard có chuẩn hoá: bỏ dấu, tách chữ, chữ giả dạng...), đoán ngôn ngữ vi/en
   ├─ câu tra cứu rõ ràng (giờ mở cửa, thời tiết) -> rule nhận diện, không gọi LLM (~0 s)
   └─ còn lại -> LLM tách ý định thành JSON; code tính ngày (dates.py) và chỉ ép "phải đi" với điểm khách gọi đúng tên
        ├─ hours/info -> bảng giờ data/pois.json + tin mới (Tavily) liên quan đúng địa điểm
@@ -46,7 +48,7 @@ tin nhắn -> chặn injection, đoán ngôn ngữ vi/en
 | Mức đông | BestTime: dự báo theo giờ, cộng mức đông hiện tại nếu điểm đang mở | Dự báo; không có dữ liệu thì bot báo không có, không đoán |
 | Thời gian đi ô tô | TomTom Matrix Routing v2: 1 lần gọi cho mọi cặp điểm; hôm nay lấy giao thông hiện tại, ngày khác lấy dự báo | Thật hoặc dự báo |
 | Đi bộ, chi phí taxi, ăn uống | Công thức trong `tools/travel.py` và `costs.py` | Ước tính, có ghi rõ trong câu trả lời |
-| Tin đóng cửa, sự kiện | Tavily, 14 ngày gần nhất, chỉ giữ tin có tên đúng địa điểm | Người dùng tự kiểm |
+| Tin đóng cửa, sự kiện | Tavily, 14 ngày gần nhất, chỉ giữ tin có tên đúng địa điểm; tin có dấu hiệu injection bị bỏ | Người dùng tự kiểm |
 | LLM | OpenRouter `gpt-4o-mini`; lỗi thì chuyển sang OpenRouter key 2, rồi Gemini | |
 
 ## Kết quả eval gần nhất (22/11/2026, 16 kịch bản, API thật)
@@ -56,7 +58,8 @@ tin nhắn -> chặn injection, đoán ngôn ngữ vi/en
 | Hiểu đúng loại câu hỏi | 16/16 |
 | Câu trả lời có đủ thông tin kỳ vọng (ngày, đóng cửa, tiếng Anh, ngân sách ≤ 350k, đi bộ ≤ 2 km) | 16/16 |
 | Lịch trình đúng ràng buộc: **bot** | **10/10** |
-| Lịch trình đúng ràng buộc: LLM tự viết giờ (baseline) | 2/10, tổng 23 vi phạm |
+| Lịch trình đúng ràng buộc: LLM tự viết giờ (baseline) | 1–2/10, tổng 21–23 vi phạm |
+| Độ ổn định: pass^3 (mỗi kịch bản chạy 3 lần, đạt cả 3) | 16/16 |
 | Thời gian lập một lịch trình | ~12 s, 3–5 lần gọi LLM |
 | Thời gian trả lời câu tra cứu giờ mở cửa / thời tiết (khi đã có cache) | ~0 s |
 
