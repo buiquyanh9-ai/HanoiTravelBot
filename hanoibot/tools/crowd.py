@@ -18,10 +18,20 @@ URL = "https://besttime.app/api/v1"
 
 
 def _post(path: str, poi: Poi) -> dict:
-    r = httpx.post(f"{URL}{path}", params={"api_key_private": BESTTIME_API_KEY_PRIVATE,
-                                           "venue_name": poi.name, "venue_address": poi.address}, timeout=30)
-    r.raise_for_status()
-    return r.json()
+    """Thử tên tiếng Việt, 404 thì thử tên tiếng Anh. Lỗi trả về KHÔNG chứa URL (URL có key)."""
+    last = None
+    for name in dict.fromkeys([poi.name, poi.name_en]):
+        if not name:
+            continue
+        r = httpx.post(f"{URL}{path}", params={"api_key_private": BESTTIME_API_KEY_PRIVATE,
+                                               "venue_name": name, "venue_address": poi.address}, timeout=30)
+        if r.status_code == 404:
+            last = 404
+            continue
+        if r.status_code >= 400:
+            raise RuntimeError(f"BestTime HTTP {r.status_code}")
+        return r.json()
+    raise RuntimeError(f"BestTime HTTP {last}: không tìm thấy địa điểm")
 
 
 def _supported(poi: Poi) -> str | None:

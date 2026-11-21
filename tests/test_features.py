@@ -107,3 +107,10 @@ def test_english_dates():
 def test_crowd_warning_translated():
     s = en_text("Di tích Nhà tù Hỏa Lò lúc 14h thường rất đông (~95% so với giờ đông nhất tuần).")
     assert s == "Hoa Lo Prison Relic at 14:00 is usually very busy (~95% of the weekly peak)."
+
+
+def test_redact_hides_keys_in_error_text():
+    from hanoibot.tools._http import redact
+    s = redact("Client error for url 'https://x/api?api_key_private=pri_0123456789abcdef&venue_name=A'")
+    assert "pri_0123456789abcdef" not in s and "api_key_private=***" in s
+    assert "sk-or-v1-" not in redact("bad sk-or-v1-0123456789abcdef0123")

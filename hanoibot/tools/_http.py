@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import time
 from typing import Any, Callable
 
@@ -54,5 +55,14 @@ def cached(key: str, ttl_s: int, fetch: Callable[[], dict]) -> dict:
         return {**data, "_stale": False, "_from_cache": False}
     except Exception as e:
         if old:
-            return {**old, "_stale": True, "_error": str(e)}
-        return {"_error": str(e), "_stale": True, "_fetched_at": None}
+            return {**old, "_stale": True, "_error": redact(str(e))}
+        return {"_error": redact(str(e)), "_stale": True, "_fetched_at": None}
+
+
+_SECRET_PARAM = re.compile(r"((?:api_key_private|api_key|key|token|apikey)=)[^&\s'\"]+", re.I)
+_SECRET_TOKEN = re.compile(r"\b(pri_[0-9a-f]{12,}|pub_[0-9a-f]{12,}|sk-or-v1-[0-9a-f]{12,}|tvly-[\w-]{8,}|fc-[0-9a-f]{12,}|AIza[\w-]{20,})")
+
+
+def redact(text: str) -> str:
+    """Che key/token trong chuỗi lỗi (httpx đưa nguyên URL có query string vào thông báo lỗi)."""
+    return _SECRET_TOKEN.sub("***", _SECRET_PARAM.sub(r"\1***", text))

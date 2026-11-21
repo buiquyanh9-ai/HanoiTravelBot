@@ -1,0 +1,182 @@
+{
+  "checked": "2026-11-22",
+  "rows": [
+    {
+      "poi": "lang_bac",
+      "status": "không có dữ liệu BestTime",
+      "reason": "BestTime HTTP 404: không tìm thấy địa điểm"
+    },
+    {
+      "poi": "van_mieu",
+      "name": "Văn Miếu - Quốc Tử Giám",
+      "confidence": "low",
+      "bt_venue": "Temple Of Literature",
+      "status": "khớp",
+      "diffs": []
+    },
+    {
+      "poi": "hoang_thanh",
+      "name": "Hoàng thành Thăng Long",
+      "confidence": "medium",
+      "bt_venue": "Imperial Citadel of Thang Long",
+      "status": "LỆCH 1 ngày",
+      "diffs": [
+        {
+          "day": "mon",
+          "table": [],
+          "besttime": [
+            [
+              8,
+              17
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "poi": "bt_dan_toc_hoc",
+      "name": "Bảo tàng Dân tộc học Việt Nam",
+      "confidence": "medium",
+      "bt_venue": "Vietnam Museum of Ethnology",
+      "status": "gần khớp (±1h)",
+      "diffs": []
+    },
+    {
+      "poi": "vuon_thu",
+      "name": "Vườn thú Hà Nội (Công viên Thủ Lệ)",
+      "confidence": "medium",
+      "bt_venue": "Hanoi Zoo",
+      "status": "LỆCH 7 ngày",
+      "diffs": [
+        {
+          "day": "mon",
+          "table": [
+            [
+              8,
+              18
+            ]
+          ],
+          "besttime": [
+            [
+              6,
+              22
+            ]
+          ]
+        },
+        {
+          "day": "tue",
+          "table": [
+            [
+              8,
+              18
+            ]
+          ],
+          "besttime": [
+            [
+              6,
+              22
+            ]
+          ]
+        },
+        {
+          "day": "wed",
+          "table": [
+            [
+              8,
+              18
+            ]
+          ],
+          "besttime": [
+            [
+              6,
+              22
+            ]
+          ]
+        },
+        {
+          "day": "thu",
+          "table": [
+            [
+              8,
+              18
+            ]
+          ],
+          "besttime": [
+            [
+              6,
+              22
+            ]
+          ]
+        },
+        {
+          "day": "fri",
+          "table": [
+            [
+              8,
+              18
+            ]
+          ],
+          "besttime": [
+            [
+              6,
+              22
+            ]
+          ]
+        },
+        {
+          "day": "sat",
+          "table": [
+            [
+              8,
+              18
+            ]
+          ],
+          "besttime": [
+            [
+              6,
+              22
+            ]
+          ]
+        },
+        {
+          "day": "sun",
+          "table": [
+            [
+              8,
+              18
+            ]
+          ],
+          "besttime": [
+            [
+              6,
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "poi": "hoa_lo",
+      "name": "Di tích Nhà tù Hỏa Lò",
+      "confidence": "medium",
+      "bt_venue": "Hoa Lo Prison Relic",
+      "status": "khớp",
+      "diffs": []
+    },
+    {
+      "poi": "bt_lich_su",
+      "status": "không có dữ liệu BestTime",
+      "reason": "BestTime HTTP 404: không tìm thấy địa điểm"
+    },
+    {
+      "poi": "ho_guom",
+      "status": "không có dữ liệu BestTime",
+      "reason": "khu vực công cộng, BestTime chỉ phủ địa điểm cụ thể"
+    },
+    {
+      "poi": "pho_co",
+      "status": "không có dữ liệu BestTime",
+      "reason": "khu vực công cộng, BestTime chỉ phủ địa điểm cụ thể"
+    }
+  ]
+}

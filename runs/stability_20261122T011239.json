@@ -1,0 +1,315 @@
+{
+  "summary": {
+    "k": 3,
+    "n": 16,
+    "pass_at_k": "16/16",
+    "pass_hat_k": "16/16",
+    "run_pass_rate": 1.0
+  },
+  "rows": [
+    {
+      "id": 1,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 10.64
+        },
+        {
+          "fails": [],
+          "latency_s": 10.19
+        },
+        {
+          "fails": [],
+          "latency_s": 10.39
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 9.19
+        },
+        {
+          "fails": [],
+          "latency_s": 9.59
+        },
+        {
+          "fails": [],
+          "latency_s": 10.89
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 10.16
+        },
+        {
+          "fails": [],
+          "latency_s": 8.04
+        },
+        {
+          "fails": [],
+          "latency_s": 8.48
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 9.32
+        },
+        {
+          "fails": [],
+          "latency_s": 8.57
+        },
+        {
+          "fails": [],
+          "latency_s": 9.33
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 8.64
+        },
+        {
+          "fails": [],
+          "latency_s": 8.64
+        },
+        {
+          "fails": [],
+          "latency_s": 8.77
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 4.61
+        },
+        {
+          "fails": [],
+          "latency_s": 3.91
+        },
+        {
+          "fails": [],
+          "latency_s": 2.73
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 8.98
+        },
+        {
+          "fails": [],
+          "latency_s": 9.66
+        },
+        {
+          "fails": [],
+          "latency_s": 9.34
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 19.66
+        },
+        {
+          "fails": [],
+          "latency_s": 17.89
+        },
+        {
+          "fails": [],
+          "latency_s": 9.28
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 8.74
+        },
+        {
+          "fails": [],
+          "latency_s": 8.87
+        },
+        {
+          "fails": [],
+          "latency_s": 8.28
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 17.5
+        },
+        {
+          "fails": [],
+          "latency_s": 11.04
+        },
+        {
+          "fails": [],
+          "latency_s": 9.58
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 6.87
+        },
+        {
+          "fails": [],
+          "latency_s": 7.45
+        },
+        {
+          "fails": [],
+          "latency_s": 7.69
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "passes": 3,
+      "k": 3,
+      "runs": [
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        },
+        {
+          "fails": [],
+          "latency_s": 0.0
+        }
+      ]
+    }
+  ]
+}
