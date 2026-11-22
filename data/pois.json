@@ -1,11 +1,12 @@
 {
   "_meta": {
-    "verified_at": "2026-11-21",
-    "note": "Giờ mở cửa gom từ web ngày 21/11/2026. confidence: high = trang chính thức; medium = nhiều nguồn khớp nhau; low = nguồn mâu thuẫn hoặc chưa tìm được nguồn chính thức. Cần gọi điện/kiểm trang chính thức để nâng lên high.",
+    "verified_at": "2026-11-22",
+    "note": "Giờ mở cửa gom từ web ngày 21/11/2026. confidence: high = trang chính thức; medium = nhiều nguồn khớp nhau; low = nguồn mâu thuẫn hoặc chưa tìm được nguồn chính thức. Cần gọi điện/kiểm trang chính thức để nâng lên high. Cập nhật 22/11/2026: giá vé, giờ và lưu ý tham quan (tips) theo nguồn chính thức do Codex tra (zz_chat #2-#6); chỗ nguồn cũ/mâu thuẫn được ghi rõ trong notes/tips.",
     "weekday_keys": "mon tue wed thu fri sat sun",
     "ticket_vnd": "Giá vé người lớn dạng số để tính ngân sách; nguồn mâu thuẫn thì lấy mức CAO (an toàn cho ngân sách).",
     "walk_km_onsite": "Ước lượng quãng đi bộ trong khuôn viên/khu vực khi tham quan theo thời lượng khuyến nghị; chưa đo thực địa.",
-    "child_ticket_vnd": "Vé trẻ em: Văn Miếu miễn phí dưới 15 tuổi, Hoàng thành dưới 16 tuổi, Vườn thú trẻ ≤1,3m 20-30k (lấy 30k). null = chưa có nguồn, tính như người lớn."
+    "tips": "Lưu ý khi tham quan đã kiểm chứng (có nguồn trong sources); bot không để LLM tự viết lưu ý.",
+    "ticket_rules": "Miễn/giảm vé: max_age (tuổi tối đa), card (hs/sv/hssv: cần thẻ), max_height_m (theo chiều cao – bot không đoán chiều cao, chỉ nêu điều kiện), proof (giấy tờ cần mang). Chưa biết tuổi/thẻ thì tính như người lớn (an toàn cho ngân sách) và nêu điều kiện."
   },
   "pois": [
     {
@@ -38,13 +39,13 @@
         "sat": [
           [
             "08:00",
-            "11:00"
+            "11:30"
           ]
         ],
         "sun": [
           [
             "08:00",
-            "11:00"
+            "11:30"
           ]
         ]
       },
@@ -56,9 +57,14 @@
         ]
       ],
       "ticket": "Miễn phí",
-      "confidence": "low",
-      "notes": "Chỉ mở buổi sáng, nghỉ thứ Hai và thứ Sáu (Tuổi Trẻ). Khung giờ 08:00-11:00 là giờ mùa đông thường thấy, CHƯA xác nhận từ Ban Quản lý Lăng. Mở lại sau tu bổ từ 3/11/2026 (VietnamPlus).",
+      "ticket_en": "Free",
+      "confidence": "medium",
+      "notes": "Lịch Ban Quản lý Lăng (btllang.bqp.vn): mùa lạnh 01/11–31/03 T3/T4/T5 08:00–11:00, T7/CN/lễ 08:00–11:30; mùa nóng 01/04–31/10 T3/T4/T5 07:30–10:30, T7/CN/lễ 07:30–11:00; nghỉ T2/T6 trừ 19/5, 2/9, mùng 1 Tết. VTV 03/11/2026 xác nhận mùa lạnh T7/CN đến 11:30. Ngày lễ dùng giờ T7/CN (bảng chưa mô hình ngày lễ). Thông báo gốc 09/06/2026: tu bổ 04/09–02/11, mở lại 03/11/2026.",
       "sources": [
+        "https://vtv.vn/lang-bac-mo-cua-tro-lai-100261103190708835.htm",
+        "https://btllang.bqp.vn/tin-tuc/tin-tu-bo-tu-lenh-lang/16007-thong-bao-ke-hoach-tu-bo-dinh-ky-lang-chu-tich-ho-chi-minh-nam-2026.html",
+        "https://btllang.bqp.vn/lich-vieng.html",
+        "https://btllang.bqp.vn/thong-tin-them.html",
         "https://news.tuoitre.vn/president-ho-chi-minh-mausoleum-to-close-for-periodic-maintenance-from-september-4-10326080923215558.htm",
         "https://www.vietnamplus.vn/lang-chu-tich-ho-chi-minh-mo-cua-tro-lai-de-don-nhan-dan-khach-quoc-te-post1146009.vnp"
       ],
@@ -66,7 +72,58 @@
       "ticket_vnd": 0,
       "walk_km_onsite": 0.8,
       "address": "2 Hùng Vương, Ba Đình, Hà Nội, Việt Nam",
-      "child_ticket_vnd": 0
+      "tips": [
+        "Trang phục chỉnh tề, không quá ngắn; giữ yên lặng và xếp hàng theo hướng dẫn.",
+        "Qua kiểm tra an ninh, gửi hành lý; điện thoại và máy ảnh du lịch phải tắt nguồn, máy quay chuyên dụng gửi riêng.",
+        "Không mang đồ ăn, nước uống vào; không tiếp nhận trẻ dưới 2 tuổi.",
+        "Nghỉ thứ Hai, thứ Sáu (trừ 19/5, 2/9 và mùng 1 Tết vẫn mở); mùa nóng (01/04–31/10) mở sớm hơn từ 07:30."
+      ],
+      "tips_en": [
+        "Dress neatly (nothing too short); stay quiet and queue as instructed.",
+        "Security check and bag deposit; phones and tourist cameras must be switched off, professional cameras deposited separately.",
+        "No food or drinks; children under 2 are not admitted.",
+        "Closed Mondays and Fridays (except 19 May, 2 Sep and the first day of Tet); in the hot season (1 Apr–31 Oct) it opens earlier, from 07:30."
+      ],
+      "ticket_rules": [],
+      "seasonal_hours": [
+        {
+          "from": "04-01",
+          "to": "10-31",
+          "label": "mùa nóng",
+          "hours": {
+            "tue": [
+              [
+                "07:30",
+                "10:30"
+              ]
+            ],
+            "wed": [
+              [
+                "07:30",
+                "10:30"
+              ]
+            ],
+            "thu": [
+              [
+                "07:30",
+                "10:30"
+              ]
+            ],
+            "sat": [
+              [
+                "07:30",
+                "11:00"
+              ]
+            ],
+            "sun": [
+              [
+                "07:30",
+                "11:00"
+              ]
+            ]
+          }
+        }
+      ]
     },
     {
       "id": "van_mieu",
@@ -121,17 +178,44 @@
         ]
       },
       "closed_ranges": [],
-      "ticket": "Người lớn 30.000đ; HSSV, người trên 60 tuổi 15.000đ; trẻ dưới 15 tuổi miễn phí",
-      "confidence": "low",
-      "notes": "Giá vé từ Green SM (03/2025). Giờ mở cửa chưa tìm được nguồn chính thức 2026. Năm 2026 kỷ niệm 950 năm Quốc Tử Giám, có thể có sự kiện. Đối chiếu BestTime 22/11/2026: khớp giờ mở cửa.",
+      "ticket": "Người lớn 70.000đ; HSSV trường Việt Nam có thẻ 35.000đ; dưới 16 tuổi miễn phí (trang chính thức)",
+      "ticket_en": "Adults 70,000 VND; students with a Vietnamese school card 35,000 VND; under 16 free (official site)",
+      "confidence": "high",
+      "notes": "Giờ và giá theo vanmieu.gov.vn (kiểm 22/11/2026); chưa thấy thông báo riêng mùa đông 2026. Tour đêm 18:30–22:00 T4/T7/CN là chương trình riêng. Năm 2026 kỷ niệm 950 năm Quốc Tử Giám, có thể có sự kiện.",
       "sources": [
+        "https://vanmieu.gov.vn/vi/visitor-information",
         "https://www.greensm.com/vn-vi/news/ve-vao-van-mieu"
       ],
       "name_en": "Temple of Literature",
-      "ticket_vnd": 30000,
+      "ticket_vnd": 70000,
       "walk_km_onsite": 0.6,
       "address": "58 Quốc Tử Giám, Đống Đa, Hà Nội, Việt Nam",
-      "child_ticket_vnd": 0
+      "tips": [
+        "Mặc lịch sự vì là nơi thờ tự; giữ yên tĩnh.",
+        "Không chạm hay viết lên bia đá, hiện vật; không hút thuốc.",
+        "Tour đêm (18:30–22:00 thứ Tư, thứ Bảy, Chủ nhật) là chương trình riêng, xem chi tiết trên vanmieu.gov.vn."
+      ],
+      "tips_en": [
+        "Dress modestly – it is a place of worship; keep quiet.",
+        "Do not touch or write on the stone steles or artefacts; no smoking.",
+        "The night tour (18:30–22:00 Wed, Sat, Sun) is a separate programme; see vanmieu.gov.vn."
+      ],
+      "ticket_rules": [
+        {
+          "label": "Dưới 16 tuổi",
+          "label_en": "Under 16",
+          "max_age": 15,
+          "price": 0,
+          "proof": "giấy tờ chứng minh tuổi"
+        },
+        {
+          "label": "HSSV trường Việt Nam có thẻ",
+          "label_en": "Students with a Vietnamese school card",
+          "card": "hssv",
+          "price": 35000,
+          "proof": "thẻ HSSV"
+        }
+      ]
     },
     {
       "id": "hoang_thanh",
@@ -142,6 +226,12 @@
       "indoor": false,
       "visit_minutes": 90,
       "hours": {
+        "mon": [
+          [
+            "08:00",
+            "17:00"
+          ]
+        ],
         "tue": [
           [
             "08:00",
@@ -180,10 +270,13 @@
         ]
       },
       "closed_ranges": [],
-      "ticket": "Người lớn 70.000-100.000đ (nguồn mâu thuẫn); dưới 16 tuổi miễn phí",
-      "confidence": "medium",
-      "notes": "2/3 nguồn ghi nghỉ thứ Hai. Một nguồn ghi nghỉ trưa 11:30-14:00. Đôi khi đóng vì sự kiện nhà nước. Đối chiếu BestTime 22/11/2026: BestTime ghi mở cả thứ Hai 8-17, mâu thuẫn với bảng (nghỉ thứ Hai) – cần gọi xác nhận.",
+      "ticket": "Người lớn 100.000đ (từ 01/01/2025); HSSV từ 16 tuổi có thẻ trường Việt Nam 50.000đ; dưới 16 tuổi miễn phí khi có giấy tờ (không có giấy tờ: cao dưới 1,3m)",
+      "ticket_en": "Adults 100,000 VND (since 1 Jan 2025); students 16+ with a Vietnamese school card 50,000 VND; under 16 free with ID (without ID: under 1.3 m tall)",
+      "confidence": "high",
+      "notes": "Thông báo chính thức 01/01/2025 (hoangthanhthanglong.vn): 08:00–17:00 tất cả các ngày, người lớn 100.000đ, dưới 16 tuổi miễn khi có giấy tờ. Một số bài du lịch cũ ghi nghỉ thứ Hai/nghỉ trưa – không có nguồn chính thức, không áp dụng. Có thể đóng đột xuất khi có sự kiện nhà nước.",
       "sources": [
+        "https://hoangthanhthanglong.vn/tang-gia-ve-tham-quan-tai-khu-trung-tam-hoang-thanh-thang-long-ha-noi/",
+        "https://hoangthanhthanglong.vn/mot-so-quy-dinh-danh-cho-khach-tham-quan-di-san-the-gioi-hoang-thanh-thang-long/",
         "https://www.vietnamtourism.com/vi/hoang-thanh-thang-long-cam-nang-ay-u-ve-di-san-unesco-giua",
         "https://hoangthanhthanglong.vn/en/?p=4584"
       ],
@@ -191,7 +284,32 @@
       "ticket_vnd": 100000,
       "walk_km_onsite": 1.0,
       "address": "19C Hoàng Diệu, Ba Đình, Hà Nội, Việt Nam",
-      "child_ticket_vnd": 0
+      "tips": [
+        "Đi theo sơ đồ tham quan, không chạm vào hiện vật.",
+        "Không bay flycam; quay phim, dựng phim phải xin phép trước.",
+        "Có thể đóng đột xuất khi có sự kiện nhà nước."
+      ],
+      "tips_en": [
+        "Follow the visitor map and do not touch artefacts.",
+        "No drones; filming productions need prior permission.",
+        "May close at short notice for state events."
+      ],
+      "ticket_rules": [
+        {
+          "label": "Dưới 16 tuổi (có giấy tờ; không có giấy tờ thì cao dưới 1,3m)",
+          "label_en": "Under 16 (with ID; without ID: under 1.3 m tall)",
+          "max_age": 15,
+          "price": 0,
+          "proof": "giấy tờ chứng minh tuổi"
+        },
+        {
+          "label": "HSSV từ 16 tuổi có thẻ trường Việt Nam",
+          "label_en": "Students 16+ with a Vietnamese school card",
+          "card": "hssv",
+          "price": 50000,
+          "proof": "thẻ HSSV"
+        }
+      ]
     },
     {
       "id": "bt_dan_toc_hoc",
@@ -240,10 +358,14 @@
         ]
       },
       "closed_ranges": [],
-      "ticket": "Người lớn 40.000đ (tham khảo)",
-      "confidence": "medium",
-      "notes": "Nghỉ thứ Hai và Tết Nguyên đán (nhiều nguồn khớp). Ngừng bán vé khoảng 30-45 phút trước giờ đóng.",
+      "ticket": "Người lớn 40.000đ; sinh viên 20.000đ; học sinh 10.000đ; dưới 6 tuổi miễn phí (trang chính thức)",
+      "ticket_en": "Adults 40,000 VND; university students 20,000; pupils 10,000; under 6 free (official site)",
+      "confidence": "high",
+      "notes": "Giờ 08:30–17:30, nghỉ thứ Hai và Tết; giá theo vme.org.vn (kiểm 22/11/2026, không ghi ngày hiệu lực riêng 2026). Ngừng bán vé khoảng 30–45 phút trước giờ đóng.",
       "sources": [
+        "https://vme.org.vn/vi/p/ve-vao-cong-9.html",
+        "https://vme.org.vn/vi/c/category-60/tham-quan-p1.html",
+        "https://vme.org.vn/en/p/museum-regulations-13.html",
         "https://www.vietnamtourism.com/vi/bao-tang-dan-toc-hoc-viet-nam-tai-ha-noi-ve-gio-mo-cua-va-nh",
         "https://vinpearl.com/vi/bao-tang-dan-toc-hoc-viet-nam"
       ],
@@ -251,7 +373,38 @@
       "ticket_vnd": 40000,
       "walk_km_onsite": 0.8,
       "address": "Nguyễn Văn Huyên, Cầu Giấy, Hà Nội, Việt Nam",
-      "child_ticket_vnd": null
+      "tips": [
+        "Gửi hành lý; không mang đồ ăn, nước uống vào khu trưng bày.",
+        "Không chạm hiện vật, không dùng đèn flash.",
+        "Ngừng bán vé khoảng 30–45 phút trước giờ đóng cửa."
+      ],
+      "tips_en": [
+        "Deposit bags; no food or drinks in the galleries.",
+        "Do not touch exhibits; no flash photography.",
+        "Ticket sales stop about 30–45 min before closing."
+      ],
+      "ticket_rules": [
+        {
+          "label": "Dưới 6 tuổi",
+          "label_en": "Under 6",
+          "max_age": 5,
+          "price": 0
+        },
+        {
+          "label": "Học sinh",
+          "label_en": "Pupils",
+          "card": "hs",
+          "price": 10000,
+          "proof": "thẻ học sinh"
+        },
+        {
+          "label": "Sinh viên",
+          "label_en": "University students",
+          "card": "sv",
+          "price": 20000,
+          "proof": "thẻ sinh viên"
+        }
+      ]
     },
     {
       "id": "vuon_thu",
@@ -265,51 +418,54 @@
         "mon": [
           [
             "08:00",
-            "18:00"
+            "16:00"
           ]
         ],
         "tue": [
           [
             "08:00",
-            "18:00"
+            "16:00"
           ]
         ],
         "wed": [
           [
             "08:00",
-            "18:00"
+            "16:00"
           ]
         ],
         "thu": [
           [
             "08:00",
-            "18:00"
+            "16:00"
           ]
         ],
         "fri": [
           [
             "08:00",
-            "18:00"
+            "16:00"
           ]
         ],
         "sat": [
           [
             "08:00",
-            "18:00"
+            "16:00"
           ]
         ],
         "sun": [
           [
             "08:00",
-            "18:00"
+            "16:00"
           ]
         ]
       },
       "closed_ranges": [],
-      "ticket": "Người lớn 30.000-50.000đ (nguồn mâu thuẫn)",
-      "confidence": "medium",
-      "notes": "Giờ mở khớp ở 2 nguồn. Có kế hoạch chuyển sang mô hình bán hoang dã ở ngoại thành (Tiền Phong), cần kiểm tình trạng hoạt động. Đối chiếu BestTime 22/11/2026: BestTime ghi 6-22h, có thể là giờ công viên Thủ Lệ chứ không phải khu vườn thú.",
+      "ticket": "Cao trên 1,3m 50.000đ; từ 1,3m trở xuống 30.000đ (trang chính thức)",
+      "ticket_en": "Over 1.3 m 50,000 VND; 1.3 m or under 30,000 VND (official site)",
+      "confidence": "high",
+      "notes": "Mùa đông công viên mở 07:30–22:00 nhưng khu XEM THÚ chỉ 08:00–16:00 (vuonthuhanoi.com, kiểm 22/11/2026); bảng dùng giờ xem thú. Có kế hoạch chuyển sang mô hình bán hoang dã ở ngoại thành (Tiền Phong).",
       "sources": [
+        "https://vuonthuhanoi.com/",
+        "https://vuonthuhanoi.com/huong-dan-tham-quan/",
         "https://vinpearl.com/vi/cong-vien-thu-le-hanoi",
         "https://tienphong.vn/nang-cap-cong-vien-thu-le-theo-mo-hinh-cong-vien-dong-vat-ban-hoang-da-tai-ngoai-thanh-post1865742.tpo"
       ],
@@ -317,7 +473,22 @@
       "ticket_vnd": 50000,
       "walk_km_onsite": 1.5,
       "address": "Công viên Thủ Lệ, Kim Mã, Ba Đình, Hà Nội, Việt Nam",
-      "child_ticket_vnd": 30000
+      "tips": [
+        "Khu xem thú chỉ mở 08:00–16:00 dù công viên mở tới 22:00.",
+        "Không cho thú ăn, không đứng sát rào; luôn trông trẻ nhỏ."
+      ],
+      "tips_en": [
+        "Animal areas are open only 08:00–16:00 even though the park stays open until 22:00.",
+        "Do not feed the animals or lean on fences; keep children close."
+      ],
+      "ticket_rules": [
+        {
+          "label": "Cao từ 1,3m trở xuống",
+          "label_en": "1.3 m tall or under",
+          "max_height_m": 1.3,
+          "price": 30000
+        }
+      ]
     },
     {
       "id": "hoa_lo",
@@ -372,10 +543,14 @@
         ]
       },
       "closed_ranges": [],
-      "ticket": "30.000-50.000đ (nguồn mâu thuẫn)",
-      "confidence": "medium",
-      "notes": "Mở cả ngày lễ, Tết. Có tour đêm riêng. Đối chiếu BestTime 22/11/2026: khớp giờ mở cửa.",
+      "ticket": "Người lớn 50.000đ; HSSV có thẻ trường Việt Nam 25.000đ; dưới 16 tuổi miễn phí (trang chính thức)",
+      "ticket_en": "Adults 50,000 VND; students with a Vietnamese school card 25,000 VND; under 16 free (official site)",
+      "confidence": "high",
+      "notes": "Thông báo chính thức 03/03/2025 (hoalo.vn): 08:00–17:00 mọi ngày, không nghỉ trưa, kể cả lễ, Tết; người lớn 50.000đ, HSSV có thẻ trường Việt Nam 25.000đ, dưới 16 tuổi miễn. Tour đêm và audio guide là dịch vụ riêng, lịch/giá 2026 chưa xác nhận.",
       "sources": [
+        "https://sovhtt.hanoi.gov.vn/di-tich-nha-tu-hoa-lo-mo-cua-xuyen-tet-phuc-vu-nhan-dan-va-du-khach/",
+        "https://hoalo.vn/Articles/4/26034/thong-tin-ve-gia-ve-tham-quan-ban-ngay.html",
+        "https://hoalo.vn/Home/Ve",
         "https://vinpearl.com/vi/nha-tu-hoa-lo",
         "https://thuvienphapluat.vn/phap-luat-nha-dat/gia-ve-tham-quan-nha-tu-hoa-lo-cach-di-chuyen-den-nha-tu-hoa-lo-2919.html"
       ],
@@ -383,7 +558,30 @@
       "ticket_vnd": 50000,
       "walk_km_onsite": 0.3,
       "address": "1 Hỏa Lò, Hoàn Kiếm, Hà Nội, Việt Nam",
-      "child_ticket_vnd": null
+      "tips": [
+        "Có thuyết minh tự động (audio guide), thu riêng; giá hiện hành chưa xác nhận từ Ban quản lý (nguồn thương mại ghi 35.000–50.000đ).",
+        "Tour đêm bắt đầu 19:00 thứ Sáu, thứ Bảy, Chủ nhật (Sở VHTT 15/02/2026); giờ kết thúc và giá chưa xác nhận (nguồn bán tour ghi 300.000–499.000đ tùy chủ đề) – đặt/xác nhận qua 0822 446 116 hoặc 0825 112 668."
+      ],
+      "tips_en": [
+        "An audio guide is available for a separate fee; current price not confirmed by the management (commercial sites say 35,000–50,000 VND).",
+        "The night tour starts 19:00 Fri, Sat, Sun (Hanoi Dept. of Culture, 15 Feb 2026); end time and price unconfirmed (tour sellers list 300,000–499,000 VND by theme) – book/confirm via 0822 446 116 or 0825 112 668."
+      ],
+      "ticket_rules": [
+        {
+          "label": "Dưới 16 tuổi",
+          "label_en": "Under 16",
+          "max_age": 15,
+          "price": 0,
+          "proof": "giấy tờ chứng minh tuổi"
+        },
+        {
+          "label": "HSSV có thẻ trường Việt Nam",
+          "label_en": "Students with a Vietnamese school card",
+          "card": "hssv",
+          "price": 25000,
+          "proof": "thẻ HSSV trường Việt Nam"
+        }
+      ]
     },
     {
       "id": "bt_lich_su",
@@ -456,10 +654,14 @@
         ]
       },
       "closed_ranges": [],
-      "ticket": "Người lớn 40.000đ; sinh viên 20.000đ (trang chính thức)",
+      "ticket": "Người lớn 40.000đ; sinh viên 20.000đ; học sinh 10.000đ; dưới 6 tuổi miễn phí; giảm 50% cho người cao tuổi, đối tượng ưu đãi (trang chính thức). Một vé dùng cho cả 2 cơ sở",
+      "ticket_en": "Adults 40,000 VND; university students 20,000; pupils 10,000; under 6 free; 50% off for seniors and eligible groups (official site). One ticket covers both sites",
       "confidence": "high",
-      "notes": "Giờ và giá từ trang chính thức baotanglichsu.vn. Nghỉ thứ Hai (nguồn phụ). Có thông báo riêng cho dịp lễ.",
+      "notes": "Giờ 08:00–12:00 và 13:30–17:00, NGHỈ thứ Hai theo baotanglichsu.vn (nguồn chính thức); nếu ngày nghỉ lễ rơi vào thứ Hai thì vẫn mở, Tết có thông báo riêng. Giá người lớn 40.000đ, sinh viên 20.000đ theo trang chính thức.",
       "sources": [
+        "https://baotanglichsu.vn/vi/Articles/3108/ve-va-le-phi",
+        "https://baotanglichsu.vn/vi/Articles/3107/gio-mo-cua",
+        "https://baotanglichsu.vn/VI/Articles/3110/noi-quy",
         "https://baotanglichsu.vn/en/Articles/3196/opening-time",
         "https://baotanglichsu.vn/en/Articles/3197/ticket-price"
       ],
@@ -467,7 +669,40 @@
       "ticket_vnd": 40000,
       "walk_km_onsite": 0.5,
       "address": "1 Tràng Tiền, Hoàn Kiếm, Hà Nội, Việt Nam",
-      "child_ticket_vnd": null
+      "tips": [
+        "Gửi hành lý; không ăn uống, hút thuốc hay chạm vào hiện vật.",
+        "Muốn quay phim, chụp ảnh để khai thác tư liệu thì liên hệ phòng thông tin của bảo tàng trước.",
+        "Một vé dùng cho cả 2 cơ sở (1 Tràng Tiền và 216 Trần Quang Khải), không thu hai lần.",
+        "Phí chụp ảnh 15.000đ/máy, quay phim 30.000đ/máy thu riêng."
+      ],
+      "tips_en": [
+        "Deposit bags; no eating, drinking, smoking or touching exhibits.",
+        "Filming or photography for research/publication needs prior contact with the museum's information office.",
+        "One ticket covers both buildings (1 Trang Tien and 216 Tran Quang Khai).",
+        "Camera fee 15,000 VND per device, video 30,000 VND per device, charged separately."
+      ],
+      "ticket_rules": [
+        {
+          "label": "Dưới 6 tuổi",
+          "label_en": "Under 6",
+          "max_age": 5,
+          "price": 0
+        },
+        {
+          "label": "Học sinh",
+          "label_en": "Pupils",
+          "card": "hs",
+          "price": 10000,
+          "proof": "thẻ học sinh"
+        },
+        {
+          "label": "Sinh viên",
+          "label_en": "University students",
+          "card": "sv",
+          "price": 20000,
+          "proof": "thẻ sinh viên"
+        }
+      ]
     },
     {
       "id": "ho_guom",
@@ -522,15 +757,29 @@
         ]
       },
       "closed_ranges": [],
-      "ticket": "Miễn phí (đền Ngọc Sơn thu vé riêng)",
+      "ticket": "Miễn phí (đền Ngọc Sơn thu vé riêng 50.000đ)",
+      "ticket_en": "Free (Ngoc Son Temple charges 50,000 VND separately)",
       "confidence": "medium",
-      "notes": "Không gian công cộng. Phố đi bộ thường hoạt động tối thứ Sáu đến hết Chủ nhật (chưa kiểm nguồn chính thức).",
-      "sources": [],
+      "notes": "Không gian công cộng. Đền Ngọc Sơn thu riêng 50.000đ/lượt (quy định phí Hà Nội từ 01/01/2024). Phố đi bộ: lịch thường 19h T6–24h CN, mùa hè từ 18h (TTXVN 13/03/2026, dẫn UBND); dịp lễ có thông báo riêng (vd 317/TB-UBND 21/04/2026). Chưa có mốc tháng áp dụng giờ mùa hè.",
+      "sources": [
+        "https://baotintuc.vn/ha-noi-tam-dung-pho-di-bo-ho-hoan-kiem-tu-ngay-133-post911719.html",
+        "https://hanoigo.hanoi.gov.vn/place/pho-di-bo-ho-guom",
+        "https://sovhtt.hanoi.gov.vn/pho-di-bo-ho-guom-hoat-dong-tro-lai-tu-18-3/",
+        "https://hanoi.gov.vn/hoat-dong-cua-hdnd-thanh-pho-ha-noi/quy-dinh-phi-tham-quan-danh-lam-thang-canh-di-tich-lich-su-cong-trinh-van-hoa-tren-dia-ban-thanh-pho-ap-dung-tu-1-1-2024-42861763.htm"
+      ],
       "name_en": "Hoan Kiem Lake & walking street",
       "ticket_vnd": 0,
       "walk_km_onsite": 1.7,
       "address": "",
-      "child_ticket_vnd": 0
+      "tips": [
+        "Phố đi bộ: lịch thường 19h thứ Sáu đến 24h Chủ nhật, mùa hè bắt đầu từ 18h (TTXVN 13/03/2026); dịp lễ và sự kiện có thể đổi giờ hoặc tạm dừng theo thông báo của phường.",
+        "Gửi xe ở rìa khu vực, đi giày thoải mái, giữ vệ sinh chung."
+      ],
+      "tips_en": [
+        "Walking street: usually 19:00 Friday to midnight Sunday, from 18:00 in summer (VNA, 13 Mar 2026); holidays and events may change or pause it.",
+        "Park at the edge of the area, wear comfortable shoes, keep it clean."
+      ],
+      "ticket_rules": []
     },
     {
       "id": "pho_co",
@@ -586,14 +835,25 @@
       },
       "closed_ranges": [],
       "ticket": "Miễn phí",
+      "ticket_en": "Free",
       "confidence": "medium",
       "notes": "Khu dân cư, đi bộ và ăn uống. Hàng quán có giờ riêng.",
-      "sources": [],
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/place/cho-dong-xuan-cho-dem-pho-co"
+      ],
       "name_en": "Hanoi Old Quarter",
       "ticket_vnd": 0,
       "walk_km_onsite": 1.5,
       "address": "",
-      "child_ticket_vnd": 0
+      "tips": [
+        "Tối cuối tuần rất đông, giữ tư trang cẩn thận.",
+        "Mua hàng nên hỏi giá và kiểm hàng trước; chợ đêm có lịch riêng, không mở mọi tối."
+      ],
+      "tips_en": [
+        "Weekend evenings are very crowded; watch your belongings.",
+        "Ask prices and check goods before buying; the night market has its own schedule and is not open every night."
+      ],
+      "ticket_rules": []
     }
   ]
 }

@@ -25,6 +25,22 @@ def invalid_date(text: str, now: datetime) -> str | None:
     return None
 
 
+def ambiguous_next_week(text: str, now: datetime) -> tuple[str, date, date] | None:
+    """'thứ Hai tuần sau' nói vào Chủ nhật: theo tuần lịch là ngày mai, nhiều người lại hiểu là 8 ngày nữa.
+    Trả (cụm từ, ngày đã chọn, ngày còn lại) khi ngày chọn cách hôm nay dưới 7 ngày."""
+    q = fold(text)
+    m = re.search(r"tuan (sau|toi)|next week", q)
+    d = resolve_date(text, now)
+    if not m or not d or (d - now.date()).days >= 7:
+        return None
+    for pats in WEEKDAY_WORDS.values():
+        for p in pats:
+            w = re.search(p, q)
+            if w:
+                return f"{w.group(0)} {m.group(0)}", d, d + timedelta(days=7)
+    return None
+
+
 def resolve_date(text: str, now: datetime) -> date | None:
     q = fold(text)
     today = now.date()

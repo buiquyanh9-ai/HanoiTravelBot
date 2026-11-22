@@ -5,59 +5,354 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hanoi Travel Bot</title>
 <style>
-  :root { --bg:#f6f5f1; --card:#fff; --ink:#1d1d1b; --muted:#6b6b66; --accent:#b4382c; --line:#e3e1da; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#171715; --card:#22221f; --ink:#ecebe6; --muted:#a3a29b; --accent:#e0675a; --line:#34332f; } }
+  :root { --bg:#f6f5f1; --card:#fff; --ink:#1d1d1b; --muted:#6b6b66; --accent:#b4382c; --accent-ink:#fff; --line:#e3e1da;
+          --ok:#2f7d4f; --warn:#a86400; --soft:#f0eee8; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#171715; --card:#22221f; --ink:#ecebe6; --muted:#a3a29b; --accent:#e0675a;
+          --accent-ink:#1a1a18; --line:#34332f; --ok:#6cc58f; --warn:#e3a54a; --soft:#2a2a26; } }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 16px; display:flex; flex-direction:column; min-height:100vh; }
-  h1 { font-size: 20px; margin: 8px 0 2px; } p.sub { color:var(--muted); margin:0 0 12px; font-size:13px; }
-  #log { flex:1; display:flex; flex-direction:column; gap:10px; padding-bottom:12px; }
-  .msg { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; white-space:pre-wrap; overflow-wrap:anywhere; }
+  main { max-width: 880px; margin: 0 auto; padding: 12px 16px 0; display:flex; flex-direction:column; min-height:100vh; }
+  h1 { font-size: 20px; margin: 6px 0 2px; } p.sub { color:var(--muted); margin:0 0 10px; font-size:13px; }
+  nav { display:flex; gap:4px; overflow-x:auto; border-bottom:1px solid var(--line); margin-bottom:12px; scrollbar-width:none; }
+  nav button { border:0; background:none; color:var(--muted); font:inherit; padding:8px 12px; cursor:pointer; white-space:nowrap;
+               border-bottom:2px solid transparent; }
+  nav button[aria-selected="true"] { color:var(--ink); border-color:var(--accent); font-weight:600; }
+  nav .ai { font-size:11px; color:var(--muted); margin-left:4px; }
+  section[hidden] { display:none; }
+  section { flex:1; display:flex; flex-direction:column; }
+  .card, .msg { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+  .msg { white-space:pre-wrap; overflow-wrap:anywhere; }
   .me { align-self:flex-end; border-color:var(--accent); max-width:85%; }
-  .meta { color:var(--muted); font-size:12px; margin-top:4px; }
-  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
-  .chips button { border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:999px; padding:4px 10px; font-size:13px; cursor:pointer; }
-  form { display:flex; gap:8px; position:sticky; bottom:0; background:var(--bg); padding:8px 0; }
-  textarea { flex:1; resize:none; height:46px; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; background:var(--card); color:var(--ink); }
-  form button { background:var(--accent); color:#fff; border:0; border-radius:10px; padding:0 16px; font:inherit; cursor:pointer; }
-  form button:disabled { opacity:.5; }
+  .meta, .muted { color:var(--muted); font-size:12px; }
+  .meta { margin-top:4px; }
+  #log { flex:1; display:flex; flex-direction:column; gap:10px; padding-bottom:12px; }
+  .chips, .acts { display:flex; flex-wrap:wrap; gap:6px; }
+  .chips { margin-bottom:10px; } .acts { margin-top:8px; }
+  .chip { border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:999px; padding:4px 10px; font:inherit; font-size:13px; cursor:pointer; }
+  .acts .chip { border-color:var(--accent); color:var(--accent); }
+  form.send { display:flex; gap:8px; position:sticky; bottom:0; background:var(--bg); padding:8px 0 12px; }
+  textarea, input, select { border:1px solid var(--line); border-radius:8px; padding:7px 9px; font:inherit; background:var(--card); color:var(--ink); min-width:0; }
+  textarea { flex:1; resize:none; height:46px; }
+  .btn { background:var(--accent); color:var(--accent-ink); border:0; border-radius:8px; padding:8px 14px; font:inherit; cursor:pointer; }
+  .btn.ghost { background:none; color:var(--ink); border:1px solid var(--line); }
+  .btn:disabled { opacity:.5; cursor:default; }
+  .pending { color:var(--muted); display:flex; align-items:center; gap:8px; }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--accent); animation: pulse 1s ease-in-out infinite; flex:none; }
+  @keyframes pulse { 50% { opacity:.25; } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation:none; } }
+  .bar { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; margin-bottom:12px; }
+  .bar label { display:flex; align-items:center; gap:6px; font-size:14px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px; padding-bottom:16px; }
+  .place h3 { margin:0 0 4px; font-size:16px; }
+  .place.hl { outline:2px solid var(--accent); }
+  .badges { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:6px; }
+  .b { font-size:12px; padding:1px 7px; border-radius:999px; background:var(--soft); color:var(--muted); }
+  .b.ok { color:var(--ok); } .b.warn { color:var(--warn); }
+  details { margin-top:6px; font-size:13px; } summary { cursor:pointer; color:var(--muted); }
+  details a { color:var(--accent); overflow-wrap:anywhere; }
+  .crowd { display:flex; align-items:flex-end; gap:2px; height:44px; margin-top:6px; }
+  .crowd i { flex:1; background:var(--accent); opacity:.7; border-radius:2px 2px 0 0; min-height:1px; }
+  .crowd-x { display:flex; justify-content:space-between; font-size:11px; color:var(--muted); }
+  .row-btns { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+  table { border-collapse:collapse; width:100%; font-size:14px; }
+  th, td { text-align:left; padding:4px 8px; border-bottom:1px solid var(--line); }
+  .scroll { overflow-x:auto; }
+  .out { white-space:pre-wrap; overflow-wrap:anywhere; margin-top:12px; }
+  .form { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:8px; margin-bottom:12px; }
+  .form label { display:flex; flex-direction:column; gap:3px; font-size:13px; color:var(--muted); }
+  .form .wide { grid-column:1 / -1; }
+  .stops { list-style:none; padding:0; margin:0 0 10px; display:flex; flex-direction:column; gap:6px; }
+  .stops li { display:flex; align-items:center; gap:6px; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 8px; }
+  .stops li span.n { flex:1; min-width:0; overflow-wrap:anywhere; }
+  .stops li input { width:70px; }
+  .icon { border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:6px; width:30px; height:30px; cursor:pointer; font:inherit; }
+  .about h3 { margin:14px 0 4px; font-size:15px; } .about ol, .about ul { margin:4px 0; padding-left:20px; }
 </style>
 </head>
 <body>
 <main>
   <h1>Trợ lý du lịch Hà Nội</h1>
-  <p class="sub">Lịch trình do AI chọn điểm; giờ mở cửa, giờ giấc, chi phí do code tính và kiểm. Thời tiết là ước tính mô hình.</p>
-  <div class="chips" id="chips"></div>
-  <div id="log"></div>
-  <form id="f">
-    <textarea id="q" placeholder="Ví dụ: Chủ nhật đi với bố mẹ, thích lịch sử, ngân sách 350k" required></textarea>
-    <button id="send">Gửi</button>
-  </form>
+  <p class="sub">AI chọn điểm và hiểu câu hỏi; giờ mở cửa, giờ giấc, chi phí do code tính và kiểm. Các tab có nhãn "không AI" trả lời tức thì.</p>
+  <nav id="tabs" role="tablist"></nav>
+
+  <section id="tab-chat" role="tabpanel">
+    <div class="chips" id="chips"></div>
+    <div id="log"></div>
+    <form class="send" id="f">
+      <textarea id="q" placeholder="Ví dụ: Chủ nhật đi với bố mẹ, thích lịch sử, ngân sách 350k" required></textarea>
+      <button class="btn" id="send">Gửi</button>
+    </form>
+  </section>
+
+  <section id="tab-places" role="tabpanel" hidden>
+    <div class="bar">
+      <label>Ngày <input type="date" id="p-date"></label>
+      <label><input type="checkbox" id="p-open"> Mở ngày này</label>
+      <label><input type="checkbox" id="p-indoor"> Trong nhà</label>
+      <label><input type="checkbox" id="p-free"> Miễn phí</label>
+      <input type="search" id="p-q" placeholder="Tìm tên điểm" aria-label="Tìm tên điểm">
+    </div>
+    <div class="muted" id="p-count"></div>
+    <div class="grid" id="p-grid"></div>
+  </section>
+
+  <section id="tab-weather" role="tabpanel" hidden>
+    <form class="bar" id="w-form">
+      <label>Quận/huyện <input id="w-place" list="w-areas" placeholder="Hoàn Kiếm (mặc định)"></label><datalist id="w-areas"></datalist>
+      <label>Ngày <input type="date" id="w-date"></label>
+      <button class="btn">Xem</button>
+    </form>
+    <div class="card out" id="w-text">Chọn nơi và ngày rồi bấm Xem.</div>
+    <div class="scroll"><table id="w-table" hidden><thead><tr><th>Giờ</th><th>Nhiệt độ</th><th>Khả năng mưa</th><th>Trời</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="tab-planner" role="tabpanel" hidden>
+    <div class="form">
+      <label>Ngày <input type="date" id="s-date"></label>
+      <label>Từ <input type="time" id="s-start" value="08:00"></label>
+      <label>Đến <input type="time" id="s-end" value="17:00"></label>
+      <label>Số người <input type="number" id="s-people" min="1" max="50" value="1"></label>
+      <label>Trẻ em (&lt;15) <input type="number" id="s-children" min="0" max="50" value="0"></label>
+      <label>Ngân sách (nghìn đ) <input type="number" id="s-budget" min="0" step="10" placeholder="không giới hạn"></label>
+      <label>Đi bộ tối đa (km) <input type="number" id="s-walk" min="0" step="0.5" placeholder="không giới hạn"></label>
+      <label class="wide">Sở thích (cho "Nhờ AI chọn điểm") <input id="s-pref" placeholder="ví dụ: thích lịch sử, đi cùng bố mẹ, ngại đông"></label>
+    </div>
+    <ul class="stops" id="s-list"></ul>
+    <div class="bar">
+      <select id="s-add" aria-label="Chọn điểm để thêm"></select>
+      <button class="btn ghost" type="button" id="s-add-btn">Thêm điểm</button>
+      <button class="btn ghost" type="button" id="s-meal">Thêm bữa ăn</button>
+    </div>
+    <div class="bar">
+      <button class="btn" type="button" id="s-run">Xếp giờ (không dùng AI)</button>
+      <button class="btn ghost" type="button" id="s-ai">Nhờ AI chọn điểm</button>
+    </div>
+    <div class="card out" id="s-out">Thêm điểm theo thứ tự bạn muốn rồi bấm "Xếp giờ": code tính giờ đến, thời gian chờ mở cửa, chi phí và báo lỗi ngay.</div>
+  </section>
+
+  <section id="tab-about" role="tabpanel" hidden><div class="about" id="about"></div></section>
 </main>
 <script>
-const examples = ["Lăng Bác hôm nay mở mấy giờ?", "Bây giờ Hồ Gươm có mưa không?",
-  "Chiều nay 14h-18h đi đâu trong nhà, ngân sách 300k cho 2 người?", "Plan my day tomorrow in Hanoi, I love history"];
-const log = document.getElementById("log"), q = document.getElementById("q"), btn = document.getElementById("send");
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const today = () => { const d = new Date(Date.now() + 7 * 3600e3); return d.toISOString().slice(0, 10); };  // giờ Hà Nội
 let session = "";
 try { session = sessionStorage.getItem("htb_session") || ""; } catch (e) {}
 if (!session) { session = Math.random().toString(36).slice(2) + Date.now().toString(36); try { sessionStorage.setItem("htb_session", session); } catch (e) {} }
-for (const e of examples) { const b = document.createElement("button"); b.type = "button"; b.textContent = e; b.onclick = () => { q.value = e; q.focus(); }; document.getElementById("chips").append(b); }
-function add(text, cls, meta) {
-  const d = document.createElement("div"); d.className = "msg " + (cls || ""); d.textContent = text;
-  if (meta) { const m = document.createElement("div"); m.className = "meta"; m.textContent = meta; d.append(m); }
+let APP = null, PLACES = [], stops = [];
+
+async function getJSON(url, opt) {
+  const r = await fetch(url, opt); const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || j.answer || ("HTTP " + r.status));
+  return j;
+}
+const post = (url, body) => getJSON(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+
+// ---------- Tab: dựng từ /api/app (cùng nguồn chatbot dùng để trả lời về ứng dụng) ----------
+function showTab(id) {
+  for (const b of $("tabs").children) b.setAttribute("aria-selected", b.dataset.tab === id);
+  for (const s of document.querySelectorAll("section[role=tabpanel]")) s.hidden = s.id !== "tab-" + id;
+  if (id === "places" && !$("p-grid").children.length) loadPlaces();
+}
+async function initApp() {
+  try { APP = await getJSON("/api/app?lang=vi"); } catch (e) { APP = {tabs: [{id: "chat", title: "Trò chuyện", uses_ai: true}]}; }
+  for (const tb of APP.tabs) {
+    const b = el("button", null, tb.title); b.type = "button"; b.dataset.tab = tb.id; b.setAttribute("role", "tab");
+    if (tb.id !== "chat" && tb.id !== "about") b.append(el("span", "ai", tb.uses_ai ? "AI" : "không AI"));
+    b.onclick = () => showTab(tb.id); $("tabs").append(b);
+  }
+  const ab = $("about");
+  for (const tb of APP.tabs || []) {
+    ab.append(el("h3", null, tb.title + (tb.uses_ai ? " (dùng AI)" : " (không dùng AI)")), el("p", null, tb.summary));
+    const ol = el("ol"); for (const s of tb.steps || []) ol.append(el("li", null, s)); ab.append(ol);
+  }
+  for (const [title, arr] of [["Nguồn dữ liệu", APP.data_sources], ["Giới hạn", APP.limits]]) {
+    if (!arr) continue; ab.append(el("h3", null, title)); const ul = el("ul"); for (const s of arr) ul.append(el("li", null, s)); ab.append(ul);
+  }
+  showTab("chat");
+}
+
+// ---------- Trò chuyện ----------
+const examples = ["Ứng dụng này làm được gì?", "Điểm nào miễn phí?", "Lăng Bác hôm nay mở mấy giờ?", "Bây giờ Hồ Gươm có mưa không?",
+  "Chiều nay 14h-18h đi đâu trong nhà, ngân sách 300k cho 2 người?", "Plan my day tomorrow in Hanoi, I love history"];
+const log = $("log"), q = $("q"), btn = $("send");
+for (const e of examples) { const b = el("button", "chip", e); b.type = "button"; b.onclick = () => { q.value = e; q.focus(); }; $("chips").append(b); }
+function add(text, cls, meta, actions) {
+  const d = el("div", "msg " + (cls || ""), text);
+  if (actions && actions.length) {
+    const box = el("div", "acts");
+    for (const a of actions) { const b = el("button", "chip", a.label || a.tab); b.type = "button"; b.onclick = () => doAction(a); box.append(b); }
+    d.append(box);
+  }
+  if (meta) d.append(el("div", "meta", meta));
   log.append(d); d.scrollIntoView({behavior: "smooth", block: "end"});
 }
-document.getElementById("f").onsubmit = async (ev) => {
+const STAGES = [[0, "Đang đọc yêu cầu…"], [2, "Đang lấy thời tiết, giao thông, mức đông…"],
+  [5, "AI đang chọn điểm, code đang xếp giờ và kiểm lịch…"], [12, "Sắp xong, đang viết tóm tắt…"]];
+function pending(box) {
+  const d = el("div", "msg pending"); d.setAttribute("role", "status");
+  const s = el("span"); d.append(el("span", "dot"), s); box.append(d); d.scrollIntoView({behavior: "smooth", block: "end"});
+  const t0 = Date.now();
+  const tick = () => { const sec = Math.floor((Date.now() - t0) / 1000); s.textContent = `${STAGES.filter(([a]) => sec >= a).pop()[1]} ${sec}s`; };
+  tick(); const id = setInterval(tick, 500);
+  return { stop() { clearInterval(id); d.remove(); } };
+}
+$("f").onsubmit = async (ev) => {
   ev.preventDefault(); const msg = q.value.trim(); if (!msg) return;
   add(msg, "me"); q.value = ""; btn.disabled = true;
+  const p = pending(log);
   try {
-    const r = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: msg, session})});
-    const j = await r.json();
-    add(j.answer || j.error || "Lỗi", "", j.latency_s != null ? `${j.latency_s}s · ${j.n_llm} lần gọi LLM · ${j.intent}` : "");
-  } catch (e) { add("Không kết nối được máy chủ: " + e, ""); }
+    const j = await post("/api/chat", {message: msg, session});
+    p.stop();
+    const meta = j.latency_s != null ? `${j.latency_s}s · ${j.n_llm} lần gọi LLM · ${j.intent}${j.reused_weather ? " · dùng lại thời tiết" : ""}` : "";
+    add(j.answer || j.error || "Lỗi", "", meta, j.actions);
+  } catch (e) { p.stop(); add(String(e.message || e), ""); }
   btn.disabled = false; q.focus();
 };
-q.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); document.getElementById("f").requestSubmit(); } });
+q.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("f").requestSubmit(); } });
+
+function doAction(a) {
+  showTab(a.tab);
+  if (a.tab === "places") {
+    const f = a.filter || {};
+    if (f.date) $("p-date").value = f.date;
+    $("p-free").checked = !!f.free; $("p-indoor").checked = !!f.indoor; $("p-open").checked = !!f.open_only;
+    $("p-q").value = ""; loadPlaces(a.poi);
+  } else if (a.tab === "weather") {
+    $("w-place").value = a.place || ""; if (a.date) $("w-date").value = a.date; loadWeather();
+  } else if (a.tab === "planner" && a.plan) {
+    const p = a.plan;
+    $("s-date").value = p.date || today(); $("s-start").value = p.start || "08:00"; $("s-end").value = p.end || "17:00";
+    $("s-people").value = p.people || 1; $("s-children").value = p.children || 0;
+    $("s-budget").value = p.budget_vnd ? Math.round(p.budget_vnd / 1000) : ""; $("s-walk").value = p.max_walk_km || "";
+    $("s-pref").value = p.preferences || "";
+    stops = (p.stops || []).map(s => ({...s})); renderStops(); runSchedule();
+  }
+}
+
+// ---------- Điểm tham quan (không AI) ----------
+async function loadPlaces(focusId) {
+  if (!$("p-date").value) $("p-date").value = today();
+  try {
+    const j = await getJSON(`/api/places?lang=vi&date=${encodeURIComponent($("p-date").value)}`);
+    PLACES = j.places; renderPlaces(focusId); fillAddSelect();
+  } catch (e) { $("p-count").textContent = "Không tải được danh mục: " + e.message; }
+}
+function renderPlaces(focusId) {
+  const g = $("p-grid"); g.replaceChildren();
+  const term = $("p-q").value.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d");
+  const rows = PLACES.filter(p => (!$("p-open").checked || p.open_day) && (!$("p-indoor").checked || p.indoor) &&
+    (!$("p-free").checked || p.free) &&
+    (!term || p.name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").includes(term)));
+  $("p-count").textContent = `${rows.length}/${PLACES.length} điểm`;
+  for (const p of rows) {
+    const c = el("article", "card place"); c.id = "poi-" + p.id;
+    c.append(el("h3", null, p.name));
+    const bd = el("div", "badges");
+    if (p.status) bd.append(el("span", "b " + (p.open_now ? "ok" : "warn"), p.status));
+    bd.append(el("span", "b", p.indoor ? "Trong nhà" : "Ngoài trời"));
+    if (p.free) bd.append(el("span", "b ok", "Vào tự do"));
+    if (p.confidence === "low") bd.append(el("span", "b warn", "Giờ chưa chắc"));
+    c.append(bd, el("div", null, "Giờ mở: " + p.hours), el("div", null, p.free ? ("Vào tự do" + (p.ticket ? " · " + p.ticket : "")) : "Vé: " + p.ticket),
+      el("div", "muted", `${p.district} · nên ở ~${p.visit_minutes} phút`));
+    const det = el("details"); det.append(el("summary", null, "Chi tiết"));
+    if (p.notes) det.append(el("p", null, p.notes));
+    const hrs = Object.keys(p.crowd || {}).map(Number).sort((a, b) => a - b);
+    if (hrs.length && hrs.some(h => p.crowd[h] > 0)) {
+      det.append(el("div", "muted", "Mức đông theo giờ (BestTime, % so với giờ đông nhất tuần):"));
+      const cr = el("div", "crowd"); cr.setAttribute("role", "img");
+      cr.setAttribute("aria-label", hrs.map(h => `${h}h ${p.crowd[h]}%`).join(", "));
+      for (const h of hrs) { const i = el("i"); i.style.height = Math.max(1, p.crowd[h]) + "%"; i.title = `${h}h: ${p.crowd[h]}%`; cr.append(i); }
+      const ax = el("div", "crowd-x"); ax.append(el("span", null, hrs[0] + "h"), el("span", null, hrs[hrs.length - 1] + "h"));
+      det.append(cr, ax);
+    } else det.append(el("p", "muted", "Chưa có dữ liệu mức đông."));
+    for (const s of p.sources || []) {
+      if (!/^https?:\/\//.test(s)) continue;
+      const a = el("a", null, s); a.href = s; a.target = "_blank"; a.rel = "noopener noreferrer"; const d = el("div"); d.append(a); det.append(d);
+    }
+    c.append(det);
+    const rb = el("div", "row-btns");
+    const addB = el("button", "btn ghost", "Thêm vào lịch"); addB.type = "button";
+    addB.onclick = () => { stops.push({kind: "visit", poi_id: p.id, minutes: p.visit_minutes}); renderStops(); addB.textContent = "Đã thêm ✓"; };
+    const askB = el("button", "btn ghost", "Hỏi bot"); askB.type = "button";
+    askB.onclick = () => { showTab("chat"); q.value = `${p.name} có gì đáng xem?`; q.focus(); };
+    rb.append(addB, askB); c.append(rb); g.append(c);
+    if (p.id === focusId) { c.classList.add("hl"); det.open = true; setTimeout(() => c.scrollIntoView({behavior: "smooth", block: "center"}), 50); }
+  }
+}
+for (const id of ["p-open", "p-indoor", "p-free"]) $(id).onchange = () => renderPlaces();
+$("p-q").oninput = () => renderPlaces();
+$("p-date").onchange = () => loadPlaces();
+
+// ---------- Thời tiết (không AI; chung bộ nhớ với chat) ----------
+async function loadWeather() {
+  if (!$("w-date").value) $("w-date").value = today();
+  $("w-text").textContent = "Đang lấy…"; $("w-table").hidden = true;
+  try {
+    const j = await getJSON(`/api/weather?lang=vi&session=${encodeURIComponent(session)}&place=${encodeURIComponent($("w-place").value)}&date=${encodeURIComponent($("w-date").value)}`);
+    $("w-text").textContent = j.text;
+    const tb = $("w-table").tBodies[0]; tb.replaceChildren();
+    for (const h of j.hourly || []) {
+      const tr = el("tr"); tr.append(el("td", null, h.h), el("td", null, h.temp + "°C"), el("td", null, (h.rain_prob ?? "?") + "%"), el("td", null, h.desc));
+      tb.append(tr);
+    }
+    $("w-table").hidden = !(j.hourly || []).length;
+  } catch (e) { $("w-text").textContent = e.message; }
+}
+$("w-form").onsubmit = (ev) => { ev.preventDefault(); loadWeather(); };
+
+// ---------- Tự xếp lịch (không AI) / Nhờ AI chọn điểm ----------
+function fillAddSelect() {
+  const s = $("s-add"); s.replaceChildren();
+  for (const p of PLACES) { const o = el("option", null, p.name); o.value = p.id; s.append(o); }
+}
+const nameOf = (id) => (PLACES.find(p => p.id === id) || {}).name || id;
+function renderStops() {
+  const ul = $("s-list"); ul.replaceChildren();
+  if (!stops.length) ul.append(el("li", "muted", "Chưa có điểm nào. Thêm từ danh sách dưới, hoặc từ tab Điểm tham quan."));
+  stops.forEach((s, i) => {
+    const li = el("li"); li.append(el("span", "n", `${i + 1}. ${s.kind === "meal" ? "Bữa ăn / nghỉ" : nameOf(s.poi_id)}`));
+    const m = el("input"); m.type = "number"; m.min = 15; m.max = 300; m.step = 15; m.value = s.minutes; m.setAttribute("aria-label", "Số phút");
+    m.onchange = () => { s.minutes = Number(m.value) || 60; };
+    li.append(m, el("span", "muted", "phút"));
+    const mk = (t, lab, fn) => { const b = el("button", "icon", t); b.type = "button"; b.title = lab; b.setAttribute("aria-label", lab); b.onclick = fn; return b; };
+    li.append(mk("↑", "Lên", () => { if (i) { [stops[i - 1], stops[i]] = [stops[i], stops[i - 1]]; renderStops(); } }),
+      mk("↓", "Xuống", () => { if (i < stops.length - 1) { [stops[i + 1], stops[i]] = [stops[i], stops[i + 1]]; renderStops(); } }),
+      mk("✕", "Xoá", () => { stops.splice(i, 1); renderStops(); }));
+    ul.append(li);
+  });
+}
+$("s-add-btn").onclick = () => { const id = $("s-add").value; if (!id) return; const p = PLACES.find(x => x.id === id); stops.push({kind: "visit", poi_id: id, minutes: p ? p.visit_minutes : 60}); renderStops(); };
+$("s-meal").onclick = () => { stops.push({kind: "meal", minutes: 60}); renderStops(); };
+function formBody() {
+  const num = (id) => $(id).value === "" ? null : Number($(id).value);
+  const budget = num("s-budget");
+  return {lang: "vi", session, date: $("s-date").value || today(), start: $("s-start").value, end: $("s-end").value,
+    people: num("s-people") || 1, children: num("s-children") || 0, budget_vnd: budget ? budget * 1000 : null,
+    max_walk_km: num("s-walk"), preferences: $("s-pref").value, stops,
+    must_include: stops.filter(s => s.kind === "visit").map(s => s.poi_id)};
+}
+async function runSchedule() {
+  if (!stops.length) { $("s-out").textContent = "Chưa có điểm nào trong lịch."; return; }
+  $("s-out").textContent = "Đang xếp…";
+  try { const j = await post("/api/schedule", formBody()); $("s-out").textContent = j.text + "\n\n(0 lần gọi AI)"; }
+  catch (e) { $("s-out").textContent = e.message; }
+}
+$("s-run").onclick = runSchedule;
+$("s-ai").onclick = async () => {
+  const box = $("s-out"); box.replaceChildren(); const p = pending(box); $("s-ai").disabled = true;
+  try {
+    const j = await post("/api/plan", formBody()); p.stop();
+    box.textContent = j.text + `\n\n(${j.llm_calls} lần gọi AI – các điểm đã chọn được giữ làm "phải đi")`;
+    if (j.stops && j.stops.length) { stops = j.stops; renderStops(); }
+  } catch (e) { p.stop(); box.textContent = e.message; }
+  $("s-ai").disabled = false;
+};
+
+$("s-date").value = today(); $("w-date").value = today(); $("w-date").min = today();
+$("w-date").max = new Date(Date.now() + 7 * 3600e3 + 6 * 864e5).toISOString().slice(0, 10);  // dự báo tối đa 7 ngày (tính cả hôm nay)
+renderStops(); initApp(); loadPlaces();
+getJSON("/api/areas?q=&all=1").then(j => { for (const x of j.areas || []) { const o = el("option"); o.value = x.name; o.label = x.label; $("w-areas").append(o); } }).catch(() => {});
 </script>
 </body>
 </html>

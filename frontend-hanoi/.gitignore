@@ -1,0 +1,4 @@
+*.log
+__pycache__/
+.media-tools/
+assets/*-source.mp4

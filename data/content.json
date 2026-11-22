@@ -1,0 +1,177 @@
+{
+  "_meta": {
+    "note": "Nội dung web ngoài 9 điểm tham quan: ẩm thực, sự kiện, thông tin hữu ích. MỖI mục phải có sources (link) và checked_at; không có nguồn thì không đưa vào. Codex tra (zz_chat), Claude tích hợp.",
+    "schema": {
+      "food": "{id, name, dish, address, district, price_range, hours, note, sources[], checked_at}",
+      "events": "{id, name, start, end, venue, district, price, note, sources[], checked_at}",
+      "info": "{id, group (khẩn cấp | giao thông | tiện ích), title, value, note, sources[], checked_at}"
+    }
+  },
+  "food": [
+    {
+      "id": "banh_mi_25",
+      "name": "Bánh Mì 25",
+      "dish": "Bánh mì",
+      "address": "25 Hàng Cá, Hoàn Kiếm, Hà Nội",
+      "district": "Hoàn Kiếm",
+      "price_range": "30.000–40.000đ",
+      "hours": "07:00–21:00",
+      "note": "",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/restaurant/banh-mi-25-hoan-kiem"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "pho_bat_dan",
+      "name": "Phở Gia Truyền Bát Đàn",
+      "dish": "Phở bò",
+      "address": "49 Bát Đàn, Hoàn Kiếm, Hà Nội",
+      "district": "Hoàn Kiếm",
+      "price_range": null,
+      "hours": "06:00–10:00, 18:00–20:30",
+      "note": "Nguồn chưa ghi giá.",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/restaurant/pho-gia-truyen"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "cha_ca_thang_long",
+      "name": "Chả Cá Thăng Long",
+      "dish": "Chả cá",
+      "address": null,
+      "district": "Hoàn Kiếm",
+      "price_range": null,
+      "hours": "10:00–22:00",
+      "note": "Địa chỉ trên nguồn chưa thống nhất (tiêu đề ghi 6B Đường Thành, nội dung ghi 2D) – xác nhận cơ sở trước khi đến. Nguồn chưa ghi giá.",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/restaurant/cha-ca-thang-long"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "pho_ga_cham",
+      "name": "Phở Gà Châm",
+      "dish": "Phở gà",
+      "address": "64–68 Yên Ninh, Ba Đình, Hà Nội",
+      "district": "Ba Đình",
+      "price_range": "80.000–160.000đ/bát (tham khảo)",
+      "hours": "06:00–14:00",
+      "note": "",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/restaurant/pho-ga-cham-yen-ninh-street"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "home_hanoi",
+      "name": "HOME Hanoi",
+      "dish": "Món Việt",
+      "address": "34 Châu Long, Trúc Bạch, Hà Nội",
+      "district": "Ba Đình",
+      "price_range": null,
+      "hours": "Cả ngày (theo nguồn, không có giờ cụ thể)",
+      "note": "Nên đặt bàn trước. Nguồn chưa ghi giá cụ thể.",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/restaurant/home-hanoi-vietnamese-restaurant-ba-dinh"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "cau_go",
+      "name": "Cầu Gỗ",
+      "dish": "Món Việt",
+      "address": null,
+      "district": null,
+      "price_range": null,
+      "hours": "10:00–22:00",
+      "note": "Nguồn chưa ghi số nhà và giá – đang chờ bổ sung.",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/restaurant/cau-go"
+      ],
+      "checked_at": "2026-11-22"
+    }
+  ],
+  "events": [
+    {
+      "id": "thiet_ke_sang_tao_2026",
+      "name": "Lễ hội Thiết kế Sáng tạo Hà Nội 2026",
+      "start": "2026-11-13",
+      "end": "2026-11-28",
+      "venue": "Nhiều điểm quanh Hồ Gươm, Chợ Đồng Xuân",
+      "district": "Hoàn Kiếm",
+      "price": "Miễn phí",
+      "note": "",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/event/le-hoi-thiet-ke-sang-tao-ha-noi-2026"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "pavilion_art_hanoi_2026",
+      "name": "Pavilion Nghệ thuật Art Hanoi 2026",
+      "start": "2026-11-14",
+      "end": "2026-11-28",
+      "hours": "09:00–19:00",
+      "venue": "Quảng trường Sáng tạo phía Đông hồ",
+      "district": null,
+      "price": null,
+      "note": "Nguồn chưa xác nhận giá vé.",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/event/pavilion-nghe-thuat-art-hanoi-2026"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "firebeat_2026",
+      "name": "Hanoi Firebeat World Festival 2026",
+      "start": "2026-11-27",
+      "end": "2026-11-29",
+      "venue": "Sân Nam VEC",
+      "district": null,
+      "price": "200.000–600.000đ (tham khảo)",
+      "note": "Giá lấy từ trang chủ nguồn, chỉ để tham khảo.",
+      "sources": [
+        "https://hanoigo.hanoi.gov.vn/event/hanoi-firebeat-world-festival-2026"
+      ],
+      "checked_at": "2026-11-22"
+    }
+  ],
+  "info": [
+    {
+      "id": "bus_airport",
+      "group": "giao thông",
+      "title": "Xe buýt sân bay",
+      "value": "Tuyến 86: Ga Hà Nội – Nội Bài; tuyến 68 kết nối trung tâm và sân bay",
+      "note": "Xem lộ trình, giờ chạy và giá hiện hành trước khi đi; chưa xác nhận giá.",
+      "sources": [
+        "https://transerco.com.vn/vi/san-pham-dich-vu/van-tai-hanh-khach-cong-cong-bang-xe-buyt.html",
+        "https://transerco.com.vn/vi/xi-nghiep-bus-yen-vien/xi-nghiep-xe-buyt-yen-vien.html"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "bus_hotline",
+      "group": "tiện ích",
+      "title": "Hỗ trợ xe buýt",
+      "value": "1900 1296",
+      "note": "",
+      "sources": [
+        "https://transerco.com.vn/vi/san-pham-dich-vu/van-tai-hanh-khach-cong-cong-bang-xe-buyt.html"
+      ],
+      "checked_at": "2026-11-22"
+    },
+    {
+      "id": "bus_eticket",
+      "group": "giao thông",
+      "title": "Vé điện tử xe buýt",
+      "value": "Toàn hệ thống buýt trợ giá dùng vé điện tử liên thông; vé tháng giấy hết giá trị từ 01/07/2026",
+      "note": "Chưa xác nhận tuyến buýt sân bay có cùng chính sách.",
+      "sources": [
+        "https://transerco.com.vn/vi/tin-buyt/trien-khai-ve-dien-tu-lien-thong-doi-voi-toan-bo-he-thong-vthkcc-bang-xe-buyt-co-tro-gia-tu-ngay-2562026.html"
+      ],
+      "checked_at": "2026-11-22"
+    }
+  ]
+}

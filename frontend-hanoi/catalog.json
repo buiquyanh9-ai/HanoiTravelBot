@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-11-22",
+  "places": {
+    "lang_bac": {
+      "image": "assets/hanoigo-6.jpg",
+      "source": "https://hanoigo.hanoi.gov.vn/place/lang-chu-tich-ho-chi-minh-va-quang-truong-ba-dinh-ctv-nvs1mv"
+    },
+    "van_mieu": {},
+    "hoang_thanh": {},
+    "bt_dan_toc_hoc": {},
+    "vuon_thu": {
+      "image": "assets/hanoigo-7.jpg",
+      "source": "https://hanoigo.hanoi.gov.vn/destination/vuon-thu-ha-noi-phuong-giang-vo"
+    },
+    "hoa_lo": {
+      "image": "assets/hanoigo-8.jpg",
+      "source": "https://hanoigo.hanoi.gov.vn/place/nha-tu-hoa-lo-6vlhk"
+    },
+    "bt_lich_su": {
+      "image": "assets/history-museum.jpg",
+      "image_credit": {
+        "source": "https://commons.wikimedia.org/wiki/File:Vietnam_National_Museum_of_History,_Hanoi,_Vietnam.jpg",
+        "author": "Alistair Morrenger",
+        "license": "Public domain"
+      }
+    },
+    "ho_guom": {},
+    "pho_co": {}
+  },
+  "food_images": {
+    "https://hanoigo.hanoi.gov.vn/restaurant/pho-ga-cham-yen-ninh-street": "assets/food-pho_ga_cham.jpg",
+    "https://hanoigo.hanoi.gov.vn/restaurant/home-hanoi-vietnamese-restaurant-ba-dinh": "assets/food-home_hanoi.jpg",
+    "https://hanoigo.hanoi.gov.vn/restaurant/cau-go": "assets/food-cau_go.jpg"
+  }
+}

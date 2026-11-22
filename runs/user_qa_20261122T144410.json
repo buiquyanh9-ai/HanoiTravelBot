@@ -1,0 +1,162 @@
+[
+  {
+    "id": "U1 ngân sách nhóm",
+    "ok": true,
+    "turns": [
+      "ngày 24/11 nhóm 3 người, tổng ngân sách 150k, đi từ 8h tới 12h, thích lịch sử"
+    ],
+    "answers": [
+      "Lịch trình Thứ Ba 24/11/2026:\n• 08:00-09:00  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00)\n\nLăng Chủ tịch Hồ Chí Minh được xếp trước vì chỉ mở buổi sáng và có thể đông do dự báo 93%. Nên mang ô vì khả năng mưa cao.\n\nChi phí ước tính cho 3 người: 0đ. Đi bộ khoảng 0.8 km (đi dạo bên trong các điểm; giữa các điểm đi taxi).\n\nLưu ý:\n  - Bỏ bớt Di tích Nhà tù Hỏa Lò để vừa ngân sách.\n  - Bỏ bớt Ăn trưa để vừa ngân sách.\n  - Lăng Chủ tịch Hồ Chí Minh (ngoài trời) lúc 8h: dự báo 93% mưa.\n  - Lịch kết thúc lúc 09:00, sớm hơn khung giờ của bạn (08:00-12:00): không còn điểm phù hợp đủ giờ mở. Hồ Gươm và phố cổ mở cả ngày nếu bạn muốn dạo thêm.\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 14:30; AQI 92 (trung bình) – WAQI – trạm Hà Nội/Chi cục BVMT, Vietnam (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U2 nhiều lượt: bỏ điểm",
+    "ok": true,
+    "turns": [
+      "Thứ Bảy này đi Văn Miếu và Hỏa Lò, từ 8h đến 12h nhé",
+      "Bỏ Hỏa Lò đi"
+    ],
+    "answers": [
+      "Lịch trình Thứ Bảy 28/11/2026:\n• 08:00-09:15  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 70.000đ; HSSV trường Việt Nam có thẻ 35.000đ; dưới 16 tuổi miễn phí (trang chính thức); đông ~50% (vừa))\n• 09:27-10:42  Di tích Nhà tù Hỏa Lò (mở 08:00-17:00; vé: Người lớn 50.000đ; HSSV có thẻ trường Việt Nam 25.000đ; dưới 16 tuổi miễn phí (trang chính thức); đông ~55% (vừa))  ← taxi 12'\n\nLịch trình được sắp xếp để bạn có thể tham quan Văn Miếu - Quốc Tử Giám trước, vì điểm này có thể đông nhưng không quá đông. Bạn nên đi giày thoải mái vì sẽ có một chút di chuyển trong Nhà tù Hỏa Lò.\n\nChi phí ước tính cho 1 người: 144.000đ (vé 120.000đ + đi lại 24.000đ). Đi bộ khoảng 0.9 km (đi dạo bên trong các điểm; giữa các điểm đi taxi).\n\nLưu ý:\n  - Lịch kết thúc lúc 10:42, sớm hơn khung giờ của bạn (08:00-12:00): không còn điểm phù hợp đủ giờ mở. Hồ Gươm và phố cổ mở cả ngày nếu bạn muốn dạo thêm.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu – Quốc Tử Giám ra mắt hệ thống sơ đồ, tờ gấp (2026-11-03) https://vov.vn/du-lich/van-mieu-quoc-tu-giam-ra-mat-he-thong-so-do-to-gap-tham-quan-chuan-quoc-te-post1346928.vov\n  - [Văn Miếu - Quốc Tử Giám] Dấu ấn hợp tác Việt Nam-Pháp hướng tới 950 năm Văn Miếu-Quốc Tử Giám (2026-11-03) https://nhandan.vn/dau-an-hop-tac-viet-nam-phap-huong-toi-950-nam-van-mieu-quoc-tu-giam-post999932.html\n  - [Di tích Nhà tù Hỏa Lò] Bên trong không gian lần đầu mở đón khách của Nhà tù Hỏa Lò - Báo VnExpress Du lịch (2026-11-17) https://vnexpress.net/ben-trong-khong-gian-lan-dau-mo-don-khach-cua-nha-tu-hoa-lo-5145394.html\n  - [Di tích Nhà tù Hỏa Lò] Di tích Nhà tù Hỏa Lò ra chuyên đề Giữ trọn lòng son (2026-11-18) https://vov.vn/van-hoa/di-san/di-tich-nha-tu-hoa-lo-gioi-thieu-chuyen-de-giu-tron-long-son-post1351187.vov\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 14:30; AQI 92 (trung bình) – WAQI – trạm Hà Nội/Chi cục BVMT, Vietnam (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính.",
+      "Lịch trình Thứ Bảy 28/11/2026:\n• 08:00-09:15  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 70.000đ; HSSV trường Việt Nam có thẻ 35.000đ; dưới 16 tuổi miễn phí (trang chính thức); đông ~50% (vừa))\n• 09:27-10:27  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:30)  ← taxi 12'\n\nBạn nên đi taxi để tiết kiệm thời gian di chuyển giữa các điểm.\n\nChi phí ước tính cho 1 người: 90.000đ (vé 70.000đ + đi lại 20.000đ). Đi bộ khoảng 1.4 km (đi dạo bên trong các điểm; giữa các điểm đi taxi).\n\nLưu ý:\n  - Lịch kết thúc lúc 10:27, sớm hơn khung giờ của bạn (08:00-12:00): không còn điểm phù hợp đủ giờ mở. Hồ Gươm và phố cổ mở cả ngày nếu bạn muốn dạo thêm.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu – Quốc Tử Giám ra mắt hệ thống sơ đồ, tờ gấp (2026-11-03) https://vov.vn/du-lich/van-mieu-quoc-tu-giam-ra-mat-he-thong-so-do-to-gap-tham-quan-chuan-quoc-te-post1346928.vov\n  - [Văn Miếu - Quốc Tử Giám] Dấu ấn hợp tác Việt Nam-Pháp hướng tới 950 năm Văn Miếu-Quốc Tử Giám (2026-11-03) https://nhandan.vn/dau-an-hop-tac-viet-nam-phap-huong-toi-950-nam-van-mieu-quoc-tu-giam-post999932.html\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 14:30; AQI 92 (trung bình) – WAQI – trạm Hà Nội/Chi cục BVMT, Vietnam (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U3 nhiều lượt: thêm người",
+    "ok": true,
+    "turns": [
+      "ngày 24/11 8h-12h đi Văn Miếu và Hoàng thành",
+      "Thêm 2 người nữa, tổng 3 người"
+    ],
+    "answers": [
+      "Lịch trình Thứ Ba 24/11/2026:\n• 08:00-09:00  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00)\n• 09:13-10:28  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 70.000đ; HSSV trường Việt Nam có thẻ 35.000đ; dưới 16 tuổi miễn phí (trang chính thức); đông ~45% (vừa))  ← taxi 13'\n• 10:38-12:00  Hoàng thành Thăng Long (mở 08:00-17:00; vé: Người lớn 100.000đ (từ 01/01/2025); HSSV từ 16 tuổi có thẻ trường Việt Nam 50.000đ; dưới 16 tuổi miễn phí khi có giấy tờ (không có giấy tờ: cao dưới 1,3m); đông ~50% (vừa))  ← taxi 10'\n\nBạn nên mang ô vì khả năng mưa cao.\n\nChi phí ước tính cho 1 người: 216.000đ (vé 170.000đ + đi lại 46.000đ). Đi bộ khoảng 2.3 km (đi dạo bên trong các điểm; giữa các điểm đi taxi).\n\nLưu ý:\n  - Lăng Chủ tịch Hồ Chí Minh (ngoài trời) lúc 8h: dự báo 93% mưa.\n  - Văn Miếu - Quốc Tử Giám (ngoài trời) lúc 9h: dự báo 85% mưa.\n  - Hoàng thành Thăng Long (ngoài trời) lúc 10h: dự báo 78% mưa.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu – Quốc Tử Giám ra mắt hệ thống sơ đồ, tờ gấp (2026-11-03) https://vov.vn/du-lich/van-mieu-quoc-tu-giam-ra-mat-he-thong-so-do-to-gap-tham-quan-chuan-quoc-te-post1346928.vov\n  - [Văn Miếu - Quốc Tử Giám] Dấu ấn hợp tác Việt Nam-Pháp hướng tới 950 năm Văn Miếu-Quốc Tử Giám (2026-11-03) https://nhandan.vn/dau-an-hop-tac-viet-nam-phap-huong-toi-950-nam-van-mieu-quoc-tu-giam-post999932.html\n  - [Hoàng thành Thăng Long] Bản đồ đi chơi 0 đồng ở Hà Nội dịp lễ 24/11: 5 bảo tàng lớn, Di sản Hoàng thành Thăng Long cùng chuỗi lễ hội bên hồ Gươm (2026-11-22) https://m.cafef.vn/ban-do-di-choi-0-dong-o-ha-noi-dip-le-24-11-5-bao-tang-lon-di-san-hoang-thanh-thang-long-cung-chuoi-le-hoi-ben-ho-guom-188261121221420165.chn\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 14:30; AQI 92 (trung bình) – WAQI – trạm Hà Nội/Chi cục BVMT, Vietnam (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính.",
+      "Lịch trình Thứ Ba 24/11/2026:\n• 08:00-09:00  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00)\n• 09:13-10:28  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 70.000đ; HSSV trường Việt Nam có thẻ 35.000đ; dưới 16 tuổi miễn phí (trang chính thức); đông ~45% (vừa))  ← taxi 13'\n• 10:38-12:00  Hoàng thành Thăng Long (mở 08:00-17:00; vé: Người lớn 100.000đ (từ 01/01/2025); HSSV từ 16 tuổi có thẻ trường Việt Nam 50.000đ; dưới 16 tuổi miễn phí khi có giấy tờ (không có giấy tờ: cao dưới 1,3m); đông ~50% (vừa))  ← taxi 10'\n\nLịch trình được sắp xếp để bạn có thể tham quan Lăng Chủ tịch Hồ Chí Minh trước khi điểm này đóng cửa lúc 11:00, sau đó là Văn Miếu - Quốc Tử Giám và Hoàng thành Thăng Long gần nhau. Bạn nên mang ô vì khả năng mưa cao.\n\nChi phí ước tính cho 3 người: 556.000đ (vé 510.000đ + đi lại 46.000đ). Đi bộ khoảng 2.3 km (đi dạo bên trong các điểm; giữa các điểm đi taxi).\n\nLưu ý:\n  - Lăng Chủ tịch Hồ Chí Minh (ngoài trời) lúc 8h: dự báo 93% mưa.\n  - Văn Miếu - Quốc Tử Giám (ngoài trời) lúc 9h: dự báo 85% mưa.\n  - Hoàng thành Thăng Long (ngoài trời) lúc 10h: dự báo 78% mưa.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu – Quốc Tử Giám ra mắt hệ thống sơ đồ, tờ gấp (2026-11-03) https://vov.vn/du-lich/van-mieu-quoc-tu-giam-ra-mat-he-thong-so-do-to-gap-tham-quan-chuan-quoc-te-post1346928.vov\n  - [Văn Miếu - Quốc Tử Giám] Dấu ấn hợp tác Việt Nam-Pháp hướng tới 950 năm Văn Miếu-Quốc Tử Giám (2026-11-03) https://nhandan.vn/dau-an-hop-tac-viet-nam-phap-huong-toi-950-nam-van-mieu-quoc-tu-giam-post999932.html\n  - [Hoàng thành Thăng Long] Bản đồ đi chơi 0 đồng ở Hà Nội dịp lễ 24/11: 5 bảo tàng lớn, Di sản Hoàng thành Thăng Long cùng chuỗi lễ hội bên hồ Gươm (2026-11-22) https://m.cafef.vn/ban-do-di-choi-0-dong-o-ha-noi-dip-le-24-11-5-bao-tang-lon-di-san-hoang-thanh-thang-long-cung-chuoi-le-hoi-ben-ho-guom-188261121221420165.chn\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 14:30; AQI 92 (trung bình) – WAQI – trạm Hà Nội/Chi cục BVMT, Vietnam (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U4 ngày không tồn tại",
+    "ok": true,
+    "turns": [
+      "Ngày 31/02 đi Văn Miếu được không?"
+    ],
+    "answers": [
+      "Ngày 31/02 không tồn tại. Bạn kiểm tra lại ngày giúp mình (ví dụ 28/02 hoặc 01/03)."
+    ]
+  },
+  {
+    "id": "U5 ngày đã qua",
+    "ok": true,
+    "turns": [
+      "Lên lịch ngày 01/01/2026 đi Hỏa Lò"
+    ],
+    "answers": [
+      "Ngày 01/01/2026 đã qua. Mình chỉ lên lịch cho hôm nay hoặc các ngày tới."
+    ]
+  },
+  {
+    "id": "U6 không đoán vị trí",
+    "ok": true,
+    "turns": [
+      "Gần đây có chỗ nào chơi không?"
+    ],
+    "answers": [
+      "Bạn đang ở khu nào (ví dụ Hồ Gươm, Văn Miếu, Lăng Bác)? Mình không tự lấy vị trí của bạn."
+    ]
+  },
+  {
+    "id": "U7 thời tiết nơi khác, quá xa",
+    "ok": true,
+    "turns": [
+      "Thời tiết ở Ba Vì 90 ngày nữa thế nào?"
+    ],
+    "answers": [
+      "Chưa có dự báo cho 20/02/2027: mình chỉ dự báo tối đa 7 ngày tới (tính cả hôm nay). Mình không đoán thời tiết xa hơn."
+    ]
+  },
+  {
+    "id": "U8 thời tiết nơi khác, ngày mai",
+    "ok": true,
+    "turns": [
+      "Ngày mai thời tiết ở Ba Vì thế nào?"
+    ],
+    "answers": [
+      "Dự báo huyện Ba Vì Thứ Hai 23/11/2026 – Open-Meteo (ước tính mô hình)\n• 17.9–26.6°C, mưa max 8%, 0 mm\n• 08h 20.3°C mưa 0%; 10h 23.6°C mưa 0%; 12h 25.5°C mưa 0%; 14h 26.6°C mưa 0%; 16h 26.0°C mưa 0%; 18h 23.6°C mưa 0%; 20h 22.5°C mưa 2%\n• AQI: chỉ có cho hôm nay (không dự báo)"
+    ]
+  },
+  {
+    "id": "U9 không đặt vé",
+    "ok": true,
+    "turns": [
+      "Đặt giúp mình 2 vé vào Hoàng thành chiều nay"
+    ],
+    "answers": [
+      "Mình không đặt vé, đặt bàn hay thanh toán được. Bạn mua vé tại quầy hoặc kênh chính thức của điểm tham quan; mình có thể cho giờ mở cửa và giá vé tham khảo."
+    ]
+  },
+  {
+    "id": "U10 nhóm có trẻ em",
+    "ok": true,
+    "turns": [
+      "ngày 24/11 8h-12h gia đình 4 người gồm 2 bé 10 tuổi đi Văn Miếu và Hoàng thành"
+    ],
+    "answers": [
+      "Lịch trình Thứ Ba 24/11/2026:\n• 08:00-09:00  Lăng Chủ tịch Hồ Chí Minh (mở 08:00-11:00)\n• 09:13-10:28  Văn Miếu - Quốc Tử Giám (mở 08:00-17:00; vé: Người lớn 70.000đ; HSSV trường Việt Nam có thẻ 35.000đ; dưới 16 tuổi miễn phí (trang chính thức); đông ~45% (vừa))  ← taxi 13'\n• 10:38-12:00  Hoàng thành Thăng Long (mở 08:00-17:00; vé: Người lớn 100.000đ (từ 01/01/2025); HSSV từ 16 tuổi có thẻ trường Việt Nam 50.000đ; dưới 16 tuổi miễn phí khi có giấy tờ (không có giấy tờ: cao dưới 1,3m); đông ~50% (vừa))  ← taxi 10'\n\nBạn nên mang ô vì khả năng mưa cao.\n\nChi phí ước tính cho 4 người: 386.000đ (vé 340.000đ + đi lại 46.000đ). Đi bộ khoảng 2.3 km (đi dạo bên trong các điểm; giữa các điểm đi taxi).\n\nLưu ý:\n  - Lăng Chủ tịch Hồ Chí Minh (ngoài trời) lúc 8h: dự báo 93% mưa.\n  - Văn Miếu - Quốc Tử Giám (ngoài trời) lúc 9h: dự báo 85% mưa.\n  - Hoàng thành Thăng Long (ngoài trời) lúc 10h: dự báo 78% mưa.\n  - Văn Miếu - Quốc Tử Giám: đã tính vé dưới 16 tuổi miễn phí – mang giấy tờ chứng minh tuổi.\n  - Hoàng thành Thăng Long: đã tính vé dưới 16 tuổi (có giấy tờ; không có giấy tờ thì cao dưới 1,3m) miễn phí – mang giấy tờ chứng minh tuổi.\n\nTin gần đây cần tự kiểm (tìm qua Tavily):\n  - [Văn Miếu - Quốc Tử Giám] Văn Miếu – Quốc Tử Giám ra mắt hệ thống sơ đồ, tờ gấp (2026-11-03) https://vov.vn/du-lich/van-mieu-quoc-tu-giam-ra-mat-he-thong-so-do-to-gap-tham-quan-chuan-quoc-te-post1346928.vov\n  - [Văn Miếu - Quốc Tử Giám] Dấu ấn hợp tác Việt Nam-Pháp hướng tới 950 năm Văn Miếu-Quốc Tử Giám (2026-11-03) https://nhandan.vn/dau-an-hop-tac-viet-nam-phap-huong-toi-950-nam-van-mieu-quoc-tu-giam-post999932.html\n  - [Hoàng thành Thăng Long] Bản đồ đi chơi 0 đồng ở Hà Nội dịp lễ 24/11: 5 bảo tàng lớn, Di sản Hoàng thành Thăng Long cùng chuỗi lễ hội bên hồ Gươm (2026-11-22) https://m.cafef.vn/ban-do-di-choi-0-dong-o-ha-noi-dip-le-24-11-5-bao-tang-lon-di-san-hoang-thanh-thang-long-cung-chuoi-le-hoi-ben-ho-guom-188261121221420165.chn\n\nDữ liệu: thời tiết Open-Meteo (ước tính mô hình) lúc 14:30; AQI 92 (trung bình) – WAQI – trạm Hà Nội/Chi cục BVMT, Vietnam (đo thật); mức đông: BestTime; thời gian đi: TomTom, giao thông dự báo; chi phí taxi/ăn uống: ước tính."
+    ]
+  },
+  {
+    "id": "U11 đầu vào lỗi",
+    "ok": true,
+    "turns": [
+      "???!!! 🙃🙃",
+      "asdkjh qweoiu zxcmnb"
+    ],
+    "answers": [
+      "Mình chỉ hỗ trợ du lịch Hà Nội: giờ mở cửa, thời tiết, thông tin điểm tham quan và lên lịch trình.",
+      "Mình chỉ hỗ trợ du lịch Hà Nội: giờ mở cửa, thời tiết, thông tin điểm tham quan và lên lịch trình."
+    ]
+  },
+  {
+    "id": "U12 tiếng Anh nhiều lượt",
+    "ok": true,
+    "turns": [
+      "Plan for 24/11 8am-12pm, I like museums",
+      "Remove the zoo and add Hoa Lo"
+    ],
+    "answers": [
+      "Itinerary for Tuesday 24/11/2026:\n• 08:00-09:00  Ho Chi Minh Mausoleum (open 08:00-11:00)\n• 09:13-10:28  Temple of Literature (open 08:00-17:00; ticket: Adults 70,000 VND; students with a Vietnamese school card 35,000 VND; under 16 free (official site); crowd ~45% (moderate))  ← taxi 13'\n\nBe prepared for rain as the chance of rain is high, and wear comfortable shoes for walking.\n\nEstimated cost for 1 person: 93,000 VND (tickets 70,000 + transport 23,000). About 1.4 km of walking (inside the sites; taxi between them).\n\nNotes:\n  - Ho Chi Minh Mausoleum (outdoor) at 8:00: 93% chance of rain.\n  - Temple of Literature (outdoor) at 9:00: 85% chance of rain.\n  - The plan ends at 10:28, before your 08:00-12:00 window ends: no other suitable site has enough opening time left. Hoan Kiem Lake and the Old Quarter are open all day if you want to stroll.\n\nData: weather Open-Meteo (model estimate) at 14:30; AQI 92 – WAQI station (measured); crowd level: BestTime; travel time: TomTom predicted traffic; taxi/food cost: estimates.",
+      "Itinerary for Tuesday 24/11/2026:\n• 08:00-09:15  Hoa Lo Prison Relic (open 08:00-17:00; ticket: Adults 50,000 VND; students with a Vietnamese school card 25,000 VND; under 16 free (official site); crowd ~30% (quiet))\n• 09:32-10:32  Ho Chi Minh Mausoleum (open 08:00-11:00)  ← taxi 17'\n\nThe schedule prioritizes Hoa Lo Prison Relic first since it opens in the morning and is indoors, while Ho Chi Minh Mausoleum is visited next as it is outdoors and may be crowded. Given the high chance of rain, it's advisable to bring an umbrella.\n\nEstimated cost for 1 person: 89,000 VND (tickets 50,000 + transport 39,000). About 1.1 km of walking (inside the sites; taxi between them).\n\nNotes:\n  - Ho Chi Minh Mausoleum (outdoor) at 9:00: 85% chance of rain.\n  - The plan ends at 10:32, before your 08:00-12:00 window ends: no other suitable site has enough opening time left. Hoan Kiem Lake and the Old Quarter are open all day if you want to stroll.\n\nRecent news to check yourself (via Tavily):\n  - [Hoa Lo Prison Relic] Bên trong không gian lần đầu mở đón khách của Nhà tù Hỏa Lò - Báo VnExpress Du lịch (2026-11-17) https://vnexpress.net/ben-trong-khong-gian-lan-dau-mo-don-khach-cua-nha-tu-hoa-lo-5145394.html\n  - [Hoa Lo Prison Relic] Di tích Nhà tù Hỏa Lò ra chuyên đề Giữ trọn lòng son (2026-11-18) https://vov.vn/van-hoa/di-san/di-tich-nha-tu-hoa-lo-gioi-thieu-chuyen-de-giu-tron-long-son-post1351187.vov\n\nData: weather Open-Meteo (model estimate) at 14:30; AQI 92 – WAQI station (measured); crowd level: BestTime; travel time: TomTom predicted traffic; taxi/food cost: estimates."
+    ]
+  },
+  {
+    "id": "U13 thời tiết hỏi tiếp cùng nơi",
+    "ok": true,
+    "turns": [
+      "Ngày mai thời tiết ở Ba Vì thế nào?",
+      "còn ngày kia thì sao?"
+    ],
+    "answers": [
+      "Dự báo huyện Ba Vì Thứ Hai 23/11/2026 – Open-Meteo (ước tính mô hình)\n• 17.9–26.6°C, mưa max 8%, 0 mm\n• 08h 20.3°C mưa 0%; 10h 23.6°C mưa 0%; 12h 25.5°C mưa 0%; 14h 26.6°C mưa 0%; 16h 26.0°C mưa 0%; 18h 23.6°C mưa 0%; 20h 22.5°C mưa 2%\n• AQI: chỉ có cho hôm nay (không dự báo)",
+      "Dự báo huyện Ba Vì Thứ Ba 24/11/2026 – Open-Meteo (ước tính mô hình)\n• 18.9–22.4°C, mưa max 91%, 12.3 mm\n• 08h 20.5°C mưa 91%; 10h 20.6°C mưa 86%; 12h 20.0°C mưa 84%; 14h 21.0°C mưa 62%; 16h 20.8°C mưa 24%; 18h 19.7°C mưa 11%; 20h 19.2°C mưa 5%\n• AQI: chỉ có cho hôm nay (không dự báo)\n(Dùng lại dữ liệu thời tiết đã lấy lúc 14:44 cho nơi này, không gọi lại API.)"
+    ]
+  },
+  {
+    "id": "U14 hỏi về ứng dụng",
+    "ok": true,
+    "turns": [
+      "Ứng dụng này có những chức năng gì?"
+    ],
+    "answers": [
+      "Ứng dụng có các phần sau:\n• Trò chuyện (dùng AI): Hỏi tự nhiên: lên lịch, giờ mở cửa, thời tiết. AI hiểu ý, còn giờ giấc và chi phí do code tính.\n• Điểm tham quan (không dùng AI, trả lời tức thì): 9 điểm: giờ mở cửa theo ngày, đang mở hay không, giá vé, độ tin cậy, nguồn, mức đông theo giờ.\n• Thời tiết (không dùng AI, trả lời tức thì): Dự báo thời tiết các quận/huyện ở Hà Nội theo giờ, tối đa 7 ngày (mặc định Hoàn Kiếm); AQI chỉ có cho hôm nay.\n• Tự xếp lịch (không dùng AI, trả lời tức thì): Bạn chọn điểm và thứ tự; code tính giờ (chờ mở cửa, thời gian đi), chi phí, quãng đi bộ và kiểm lỗi – không dùng AI. Muốn AI chọn giúp thì bấm \"Nhờ AI chọn điểm\".\n\nMình không làm được:\n  - Không đặt vé, đặt bàn hay thanh toán.\n  - Chỉ có 9 điểm tham quan trong nội thành Hà Nội.\n  - Không tự lấy vị trí của bạn.\n  - Thời tiết chỉ cho Hà Nội, tối đa 7 ngày."
+    ]
+  },
+  {
+    "id": "U15 tra danh mục",
+    "ok": true,
+    "turns": [
+      "Những điểm nào trong nhà?"
+    ],
+    "answers": [
+      "3/9 điểm khớp (trong nhà), giờ mở Chủ nhật 22/11:\n• Bảo tàng Dân tộc học Việt Nam – mở 08:30-17:30; vé 40.000đ; trong nhà\n• Di tích Nhà tù Hỏa Lò – mở 08:00-17:00; vé 50.000đ; trong nhà\n• Bảo tàng Lịch sử Quốc gia – mở 08:00-12:00, 13:30-17:00; vé 40.000đ; trong nhà\n\nGiá là vé người lớn, dùng để tính ngân sách; chi tiết từng điểm ở tab Điểm tham quan."
+    ]
+  }
+]

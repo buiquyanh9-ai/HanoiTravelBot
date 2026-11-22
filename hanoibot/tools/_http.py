@@ -59,6 +59,15 @@ def cached(key: str, ttl_s: int, fetch: Callable[[], dict]) -> dict:
         return {"_error": redact(str(e)), "_stale": True, "_fetched_at": None}
 
 
+def peek(key: str) -> dict | None:
+    """Đọc bản đã cache (bất kể TTL) mà KHÔNG gọi mạng – cho các tab giao diện hiển thị tức thì."""
+    path = CACHE_DIR / (hashlib.sha1(key.encode()).hexdigest()[:16] + ".json")
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
 _SECRET_PARAM = re.compile(r"((?:api_key_private|api_key|key|token|apikey)=)[^&\s'\"]+", re.I)
 _SECRET_TOKEN = re.compile(r"\b(pri_[0-9a-f]{12,}|pub_[0-9a-f]{12,}|sk-or-v1-[0-9a-f]{12,}|tvly-[\w-]{8,}|fc-[0-9a-f]{12,}|AIza[\w-]{20,})")
 

@@ -20,16 +20,48 @@ T = {
     "notes": {"vi": "Lưu ý:", "en": "Notes:"},
     "still_bad": {"vi": "⚠ Bộ kiểm tra vẫn còn lỗi sau khi sửa – KHÔNG nên dùng nguyên lịch này:",
                   "en": "⚠ The checker still found problems after repair – do NOT use this itinerary as is:"},
-    "totals": {"vi": "Chi phí ước tính cho {people} người: {total}đ (vé {tickets}đ + đi lại {transport}đ + ăn uống {food}đ). Đi bộ khoảng {walk} km.",
-               "en": "Estimated cost for {people} person(s): {total} VND (tickets {tickets} + transport {transport} + food {food}). About {walk} km of walking."},
+    "totals": {"vi": "Chi phí ước tính cho {people} người: {total}đ{parts}. Đi bộ khoảng {walk} km{walk_note}.",
+               "en": "Estimated cost for {people_en}: {total} VND{parts}. About {walk} km of walking{walk_note}."},
+    "walk_onsite_only": {"vi": " (đi dạo bên trong các điểm; giữa các điểm đi taxi)",
+                         "en": " (inside the sites; taxi between them)"},
+    "walk_split": {"vi": " ({onsite} km bên trong các điểm + {legs} km đi bộ giữa các điểm)",
+                   "en": " ({onsite} km inside the sites + {legs} km walking between them)"},
+    "date_note": {"vi": "Mình hiểu \"{phrase}\" là {d}. Nếu bạn muốn {alt}, nhắn lại nhé.",
+                  "en": "I took \"{phrase}\" as {d}. If you meant {alt}, just tell me."},
+    "clarify_plan": {"vi": "Bạn cho mình thêm vài thông tin để lên lịch sát hơn nhé:\n"
+                           "• Đi ngày nào, khung giờ nào? (ví dụ: chiều mai 14h-18h)\n"
+                           "• Mấy người, có trẻ em hay người lớn tuổi không?\n"
+                           "• Ngân sách khoảng bao nhiêu? Thích gì: lịch sử, bảo tàng, ăn uống, đi dạo?\n"
+                           "Nếu muốn mình tự chọn, cứ nhắn \"tùy bạn\" – mình sẽ xếp lịch hôm nay cho 1 người.",
+                     "en": "A few details will help me plan better:\n"
+                           "• Which day and time window? (e.g. tomorrow 14:00-18:00)\n"
+                           "• How many people – any kids or elderly?\n"
+                           "• Rough budget? Interests: history, museums, food, strolling?\n"
+                           "If you'd like me to just pick, reply \"anything\" and I'll plan today for one person."},
     "data": {"vi": "Dữ liệu: thời tiết {w} lúc {wt}; AQI {aqi} ({lvl}) – {asrc}; mức đông: {crowd}; thời gian đi: {trf}; chi phí taxi/ăn uống: ước tính.",
              "en": "Data: weather {w} at {wt}; AQI {aqi} – {asrc}; crowd level: {crowd}; travel time: {trf}; taxi/food cost: estimates."},
     "no_crowd": {"vi": "chưa có nguồn (thiếu key BestTime)", "en": "no source yet (BestTime key missing)"},
     "news": {"vi": "Tin gần đây cần tự kiểm (tìm qua Tavily):", "en": "Recent news to check yourself (via Tavily):"},
-    "hours_title": {"vi": "Giờ mở cửa {day} {date} (bảng dữ liệu kiểm ngày 21/11/2026):",
-                    "en": "Opening hours on {day} {date} (table checked on 21 Nov 2026):"},
+    "info_title": {"vi": "Thông tin tham quan, giờ mở {day} {date} (bảng dữ liệu kiểm ngày 22/11/2026):",
+                   "en": "Visitor info, hours on {day} {date} (table checked on 22 Nov 2026):"},
+    "hours_title": {"vi": "Giờ mở cửa {day} {date} (bảng dữ liệu kiểm ngày 22/11/2026):",
+                    "en": "Opening hours on {day} {date} (table checked on 22 Nov 2026):"},
     "open_now": {"vi": " – ĐANG MỞ", "en": " – OPEN NOW"},
     "closed_now": {"vi": " – đang đóng", "en": " – closed now"},
+    "manual_bad": {"vi": "⚠ Lịch bạn xếp chưa đạt các ràng buộc sau – sửa thứ tự, số phút hoặc bớt điểm:",
+                   "en": "⚠ Your plan breaks these constraints – change the order, minutes or remove a stop:"},
+    "window_passed": {"vi": "Khung giờ {a}-{b} hôm nay đã qua (bây giờ là {now}). Bạn muốn đi phần còn lại của hôm nay hay một ngày khác, ví dụ \"ngày mai {a}-{b}\"?",
+                      "en": "The {a}-{b} window today has already passed (it's {now} now). Do you want the rest of today, or another day, e.g. \"tomorrow {a}-{b}\"?"},
+    "wx_reused": {"vi": "(Dùng lại dữ liệu thời tiết đã lấy lúc {t} cho nơi này, không gọi lại API.)",
+                  "en": "(Reused the weather data fetched at {t} for this place; no new API call.)"},
+    "not_yet_open": {"vi": " – chưa mở (mở lúc {t})", "en": " – not open yet (opens {t})"},
+    "closed_for_day": {"vi": " – đã hết giờ mở hôm nay", "en": " – closed for the rest of today"},
+    "closed_today": {"vi": " – hôm nay đóng cửa", "en": " – closed today"},
+    "on_break": {"vi": " – đang nghỉ trưa, mở lại lúc {t}", "en": " – on break, reopens {t}"},
+    "ends_early_more": {"vi": "Lịch kết thúc lúc {e}, còn trống tới {end}. Vẫn còn mở trong khoảng này: {places} – nhắn \"thêm …\" để mình xếp vào.",
+                        "en": "The plan ends at {e}, leaving time until {end}. Still open then: {places} – say \"add …\" and I'll fit it in."},
+    "ends_early": {"vi": "Lịch kết thúc lúc {e}, sớm hơn khung giờ của bạn ({w}): không còn điểm phù hợp đủ giờ mở. Hồ Gươm và phố cổ mở cả ngày nếu bạn muốn dạo thêm.",
+                   "en": "The plan ends at {e}, before your {w} window ends: no other suitable site has enough opening time left. Hoan Kiem Lake and the Old Quarter are open all day if you want to stroll."},
     "conf": {"vi": "độ tin cậy", "en": "confidence"},
     "source": {"vi": "Nguồn", "en": "Source"},
     "other": {"vi": "Mình chỉ hỗ trợ du lịch Hà Nội: giờ mở cửa, thời tiết, thông tin điểm tham quan và lên lịch trình.",
@@ -48,8 +80,10 @@ T = {
                       "en": "Where are you now (e.g. Hoan Kiem Lake, Temple of Literature)? I don't access your location."},
     "no_booking": {"vi": "Mình không đặt vé, đặt bàn hay thanh toán được. Bạn mua vé tại quầy hoặc kênh chính thức của điểm tham quan; mình có thể cho giờ mở cửa và giá vé tham khảo.",
                    "en": "I can't book, reserve or pay for anything. Please buy tickets at the venue or its official channel; I can give opening hours and reference prices."},
-    "weather_far": {"vi": "Chưa có dự báo cho {d}: dự báo chỉ có tối đa 16 ngày tới. Mình không đoán thời tiết xa hơn.",
-                    "en": "No forecast for {d} yet: forecasts only cover the next 16 days. I won't guess beyond that."},
+    "weather_far": {"vi": "Chưa có dự báo cho {d}: mình chỉ dự báo tối đa {n} ngày tới (tính cả hôm nay). Mình không đoán thời tiết xa hơn.",
+                    "en": "No forecast for {d} yet: I only forecast up to {n} days ahead (including today). I won't guess beyond that."},
+    "place_not_hanoi": {"vi": "Mình chỉ dự báo thời tiết cho các quận/huyện ở Hà Nội, không tìm thấy “{p}” trong Hà Nội. Bạn thử: {s}.",
+                        "en": "I only forecast for districts of Hanoi and couldn't find “{p}” in Hanoi. Try: {s}."},
     "place_not_found": {"vi": "Mình không tìm thấy địa danh \"{p}\" ở Việt Nam. Bạn ghi rõ hơn (ví dụ: Ba Vì, Hà Nội)?",
                         "en": "I couldn't find \"{p}\" in Vietnam. Could you be more specific?"},
     "internal": {"vi": "Xin lỗi, có lỗi khi xử lý câu này. Bạn thử diễn đạt lại hoặc hỏi ngắn hơn nhé.",
@@ -79,7 +113,8 @@ def detect_lang(text: str) -> str:
     q = f" {fold(text)} "
     vi_words = [" di ", " dau ", " may gio ", " hom nay ", " ngay mai ", " khong ", " minh ", " lich trinh ", " co mo "]
     en_words = [" the ", " what ", " where ", " when ", " open", " visit", " plan", " itinerary", " weather", " is ",
-                " can ", " my ", " today", " tomorrow", " museum", " please"]
+                " can ", " my ", " today", " tomorrow", " museum", " please", " which ", " are ", " places", " how ",
+                " free", " indoor", " ticket", " does ", " do i ", " app "]
     vi = sum(w in q for w in vi_words)
     en = sum(w in q for w in en_words)
     return "en" if en > vi else "vi"

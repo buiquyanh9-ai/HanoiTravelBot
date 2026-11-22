@@ -48,11 +48,11 @@ def hourly_for_date(weather: dict, iso_date: str) -> list[dict]:
     return [h for h in weather.get("hourly", []) if h["time"].startswith(iso_date)]
 
 
-FORECAST_DAYS = 16  # Open-Meteo cho tối đa 16 ngày; xa hơn thì bot nói không có dự báo, không đoán
+FORECAST_DAYS = 7  # chỉ dùng 7 ngày (hôm nay + 6): xa hơn độ tin cậy dự báo thấp; bot nói không có dự báo, không đoán
 
 
 def geocode(place: str) -> dict | None:
-    """Tìm toạ độ địa danh ở Việt Nam (Open-Meteo Geocoding, miễn phí). Ưu tiên kết quả thuộc Hà Nội."""
+    """Tìm toạ độ địa danh THUỘC HÀ NỘI (Open-Meteo Geocoding, miễn phí). Nơi ngoài Hà Nội -> None."""
     def fetch() -> dict:
         j = get_json("https://geocoding-api.open-meteo.com/v1/search",
                      params={"name": place, "count": 10, "language": "vi", "countryCode": "VN"})
@@ -62,7 +62,7 @@ def geocode(place: str) -> dict | None:
     if not res:
         return None
     hn = [r for r in res if "Hà Nội" in (r.get("admin1") or "") or "Hanoi" in (r.get("admin1") or "")]
-    return (hn or res)[0]
+    return hn[0] if hn else None
 
 
 def daily_for_date(weather: dict, iso_date: str) -> dict | None:
